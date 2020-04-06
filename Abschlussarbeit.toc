@@ -1,0 +1,52 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {ngerman}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {I}Abkürzungsverzeichnis}{VI}{section.I}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Einleitung}{1}{section.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Motivation}{1}{subsection.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2}Ueberblick}{1}{subsection.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Architektur}{2}{section.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}UML-Diagramm}{2}{subsection.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Brettspiel KI Algorithmus}{2}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Imlementierung}{2}{section.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Mobile Anbindung}{2}{subsection.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.1.1}Auswahl der Verbindungsmöglichkeiten}{2}{subsubsection.4.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Brettspiel KI}{2}{subsection.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Fazit und Ausblick}{3}{section.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}\LaTeX -Elemente}{4}{section.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1}\LaTeX -Distributionen nach Betriebssystemen}{4}{subsection.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.1.1}\LaTeX -Distributionen}{4}{subsubsection.6.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.1.2}\LaTeX -Editoren}{4}{subsubsection.6.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2}Bilder}{4}{subsection.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3}Tabellen}{5}{subsection.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.4}Auflistung}{6}{subsection.6.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.5}Listings}{6}{subsection.6.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.6}Selbstgestaltete Abbildungen}{6}{subsection.6.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.7}Tipps}{6}{subsection.6.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Anhang}{I}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\vspace {-0.5em}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A}Domändenmodell}{I}{appendix.A}%
