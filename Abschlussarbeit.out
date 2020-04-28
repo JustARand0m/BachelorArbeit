@@ -1,24 +1,47 @@
 \BOOKMARK [1][-]{section.I}{Abk\374rzungsverzeichnis}{}% 1
 \BOOKMARK [1][-]{section.1}{Einleitung}{}% 2
 \BOOKMARK [2][-]{subsection.1.1}{Motivation}{section.1}% 3
-\BOOKMARK [2][-]{subsection.1.2}{Ueberblick}{section.1}% 4
-\BOOKMARK [1][-]{section.2}{Architektur}{}% 5
-\BOOKMARK [2][-]{subsection.2.1}{UML-Diagramm}{section.2}% 6
-\BOOKMARK [1][-]{section.3}{Brettspiel KI Algorithmus}{}% 7
-\BOOKMARK [1][-]{section.4}{Imlementierung}{}% 8
-\BOOKMARK [2][-]{subsection.4.1}{Mobile Anbindung}{section.4}% 9
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Auswahl der Verbindungsm\366glichkeiten}{subsection.4.1}% 10
-\BOOKMARK [2][-]{subsection.4.2}{Brettspiel KI}{section.4}% 11
-\BOOKMARK [1][-]{section.5}{Fazit und Ausblick}{}% 12
-\BOOKMARK [1][-]{section.6}{LaTeX-Elemente}{}% 13
-\BOOKMARK [2][-]{subsection.6.1}{LaTeX-Distributionen nach Betriebssystemen}{section.6}% 14
-\BOOKMARK [3][-]{subsubsection.6.1.1}{LaTeX-Distributionen}{subsection.6.1}% 15
-\BOOKMARK [3][-]{subsubsection.6.1.2}{LaTeX-Editoren}{subsection.6.1}% 16
-\BOOKMARK [2][-]{subsection.6.2}{Bilder}{section.6}% 17
-\BOOKMARK [2][-]{subsection.6.3}{Tabellen}{section.6}% 18
-\BOOKMARK [2][-]{subsection.6.4}{Auflistung}{section.6}% 19
-\BOOKMARK [2][-]{subsection.6.5}{Listings}{section.6}% 20
-\BOOKMARK [2][-]{subsection.6.6}{Selbstgestaltete Abbildungen}{section.6}% 21
-\BOOKMARK [2][-]{subsection.6.7}{Tipps}{section.6}% 22
-\BOOKMARK [1][-]{section*.4}{Anhang}{}% 23
-\BOOKMARK [1][-]{appendix.A}{Dom\344ndenmodell}{}% 24
+\BOOKMARK [2][-]{subsection.1.2}{Zielsetzung}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.3}{Aufgabenstellung}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.4}{Struktur dieser Arbeit}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Grundlagen}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Minimax}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Alpha-Beta K\374rzung}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Monte Carlo Tree Search}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Anforderungsanalyse}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Anwendungsszenario}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{Anforderungen an die Software}{section.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Nichtfunktionale Anforderungen}{subsection.3.2}% 14
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Funktionale Anforderungen}{subsection.3.2}% 15
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Zusammenfassung der Anforderungen}{subsection.3.2}% 16
+\BOOKMARK [1][-]{section.4}{Brettspiele}{}% 17
+\BOOKMARK [2][-]{subsection.4.1}{Dame}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.2}{M\374hle}{section.4}% 19
+\BOOKMARK [1][-]{section.5}{Imlementierung}{}% 20
+\BOOKMARK [2][-]{subsection.5.1}{Softwarearchitektur}{section.5}% 21
+\BOOKMARK [2][-]{subsection.5.2}{Verwendete Komunkationsprotokolle}{section.5}% 22
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Bluetooth}{subsection.5.2}% 23
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Websockets}{subsection.5.2}% 24
+\BOOKMARK [3][-]{subsubsection.5.2.3}{TCP}{subsection.5.2}% 25
+\BOOKMARK [2][-]{subsection.5.3}{Gameserver}{section.5}% 26
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Programmstruktur}{subsection.5.3}% 27
+\BOOKMARK [2][-]{subsection.5.4}{Graphische Oberfl\344che}{section.5}% 28
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Gegebene React Anwendung}{subsection.5.4}% 29
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Erweiterungen}{subsection.5.4}% 30
+\BOOKMARK [2][-]{subsection.5.5}{KI Client}{section.5}% 31
+\BOOKMARK [1][-]{section.6}{Testing}{}% 32
+\BOOKMARK [2][-]{subsection.6.1}{Integrationstest}{section.6}% 33
+\BOOKMARK [2][-]{subsection.6.2}{Ergebnisse}{section.6}% 34
+\BOOKMARK [1][-]{section.7}{Fazit und Ausblick}{}% 35
+\BOOKMARK [1][-]{section.8}{LaTeX-Elemente}{}% 36
+\BOOKMARK [2][-]{subsection.8.1}{LaTeX-Distributionen nach Betriebssystemen}{section.8}% 37
+\BOOKMARK [3][-]{subsubsection.8.1.1}{LaTeX-Distributionen}{subsection.8.1}% 38
+\BOOKMARK [3][-]{subsubsection.8.1.2}{LaTeX-Editoren}{subsection.8.1}% 39
+\BOOKMARK [2][-]{subsection.8.2}{Bilder}{section.8}% 40
+\BOOKMARK [2][-]{subsection.8.3}{Tabellen}{section.8}% 41
+\BOOKMARK [2][-]{subsection.8.4}{Auflistung}{section.8}% 42
+\BOOKMARK [2][-]{subsection.8.5}{Listings}{section.8}% 43
+\BOOKMARK [2][-]{subsection.8.6}{Selbstgestaltete Abbildungen}{section.8}% 44
+\BOOKMARK [2][-]{subsection.8.7}{Tipps}{section.8}% 45
+\BOOKMARK [1][-]{section*.2}{Anhang}{}% 46
+\BOOKMARK [1][-]{appendix.A}{Dom\344ndenmodell}{}% 47
