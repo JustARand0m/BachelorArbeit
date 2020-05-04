@@ -15,11 +15,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2}Grundlagen}{1}{section.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1}Minimax}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}Brettspiele}{1}{subsection.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Alpha-Beta Kürzung}{1}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.1.1}Dame}{1}{subsubsection.2.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Monte Carlo Tree Search}{1}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.2}Minimax}{1}{subsection.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Alpha-Beta Kürzung}{1}{subsection.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.4}Monte Carlo Tree Search}{1}{subsection.2.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Anforderungsanalyse}{1}{section.3}%
 \defcounter {refsection}{0}\relax 
@@ -33,66 +37,48 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.2.3}Zusammenfassung der Anforderungen}{1}{subsubsection.3.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Brettspiele}{1}{section.4}%
+\contentsline {section}{\numberline {4}Architektur}{2}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Dame}{1}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.1}Überblick}{2}{subsection.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Mühle}{1}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.2}Gameserver}{2}{subsection.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Imlementierung}{2}{section.5}%
+\contentsline {subsection}{\numberline {4.3}Graphische Oberfläche}{2}{subsection.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Softwarearchitektur}{2}{subsection.5.1}%
+\contentsline {subsection}{\numberline {4.4}KI Client}{2}{subsection.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Verwendete Komunkationsprotokolle}{2}{subsection.5.2}%
+\contentsline {section}{\numberline {5}Hardware}{2}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.1}Bluetooth}{2}{subsubsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.1}Raspberry Pi}{2}{subsection.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.2}Websockets}{2}{subsubsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2}Touch Monitor}{2}{subsection.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.3}TCP}{2}{subsubsection.5.2.3}%
+\contentsline {section}{\numberline {6}Imlementierung}{2}{section.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Gameserver}{2}{subsection.5.3}%
+\contentsline {subsection}{\numberline {6.1}Eingesetzte Sofwarekomponenten}{2}{subsection.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.1}Programmstruktur}{2}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Programmiersprachen und Frameworks}{2}{subsubsection.6.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}Graphische Oberfläche}{2}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {6.1.2}Datentransferprotokolle}{2}{subsubsection.6.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.4.1}Gegebene React Anwendung}{2}{subsubsection.5.4.1}%
+\contentsline {subsection}{\numberline {6.2}Gameserver}{2}{subsection.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.4.2}Erweiterungen}{2}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Netzwerkspezifikation des Gameservers}{2}{subsubsection.6.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5}KI Client}{2}{subsection.5.5}%
+\contentsline {subsection}{\numberline {6.3}Graphische Oberfläche}{2}{subsection.6.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Testing}{2}{section.6}%
+\contentsline {subsubsection}{\numberline {6.3.1}Gegebene React Anwendung}{2}{subsubsection.6.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1}Integrationstest}{2}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Erweiterungen}{2}{subsubsection.6.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}Ergebnisse}{2}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.4}KI Client}{2}{subsection.6.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Fazit und Ausblick}{3}{section.7}%
+\contentsline {subsubsection}{\numberline {6.4.1}Vergleich der KI Algorithmen}{2}{subsubsection.6.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}\LaTeX -Elemente}{4}{section.8}%
+\contentsline {section}{\numberline {7}Testing}{2}{section.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.1}\LaTeX -Distributionen nach Betriebssystemen}{4}{subsection.8.1}%
+\contentsline {subsection}{\numberline {7.1}Integrationstest}{2}{subsection.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {8.1.1}\LaTeX -Distributionen}{4}{subsubsection.8.1.1}%
+\contentsline {subsection}{\numberline {7.2}Ergebnisse}{2}{subsection.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {8.1.2}\LaTeX -Editoren}{4}{subsubsection.8.1.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.2}Bilder}{4}{subsection.8.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.3}Tabellen}{5}{subsection.8.3}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.4}Auflistung}{6}{subsection.8.4}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.5}Listings}{6}{subsection.8.5}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.6}Selbstgestaltete Abbildungen}{6}{subsection.8.6}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.7}Tipps}{6}{subsection.8.7}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{Anhang}{I}{section*.2}%
-\defcounter {refsection}{0}\relax 
-\vspace {-0.5em}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A}Domändenmodell}{I}{appendix.A}%
+\contentsline {section}{\numberline {8}Fazit und Ausblick}{3}{section.8}%
