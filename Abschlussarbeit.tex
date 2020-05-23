@@ -112,17 +112,127 @@
 % Kapitel: Einleitung
 % ----------------------------------------------------------------------------------
 \section{Einleitung}
+Das Thema dieser Arbeit ist die Implementierung einer Künstlichen Intelligenz für diverse
+Brettspiele. Dabei soll die resultierende Software auf einem von einem Raspberry Pi gesteuerten 
+Touch-Bildschirm laufen, durch welchen ein Benutzer die Künstliche Intelligenz herausfordern kann.
+Außerdem gibt es die Möglichkeit sich mit der Hardware über ein mobiles Endgerät wie einem 
+Smartphone zu verbinden, um die KI oder den Spieler, der den Touch-Bildschirm bedient 
+herauszufodern.
+
 \subsection{Motivation}
-\subsection{Zielsetzung}
+Das Feld der Künstliche Intelligenz ist momentan eines der sich am schnellsten 
+entwickelten Felder der Informatik. Dabei spielt die Spieltheorie schon seit Anfang eine 
+große Rolle. So bieten klassische Brettspiele wie z. B. Schach, Dame oder Mühle nicht nur 
+eine klar definierte Abstraktion von Problemen der realen Welt, sondern sie können auch von
+dem Großteil der Bevölkerung verstanden und gespielt werden. Das Meistern einer dieser 
+Brettspiele wird auch oft mit hohem Grad an Intelligenz gleichgesetzt. Viele Algorithmen,
+die in der Spieltheorie entwickelt wurden, haben sich auch Erfolgreich auf andere Felder
+der Informatik übertragen lassen. Ebenso hat sich die Art wie Brettspiele gespielt werden, 
+durch das Verwenden von Künstlicher Intelligenz auch verändert, da die KI Züge in Betracht 
+zieht die auf den ersten Blick recht ungewöhnlich und Nachteilhaft aussehen, sich aber als 
+extrem Stark herausstellen. Diese Arbeit versucht eine Künstliche Intelligenz für 
+Brettspiele wie Dame zu implementieren.
+
 \subsection{Aufgabenstellung}
+Im Rahmen der Bachelorarbeit, soll eine Künstliche Intelligenz entwickelt werden, welche 
+Brettspiele wie Dame spielen kann. Gegeben ist eine Software, bei welcher man in der Lage ist
+das Spiel ReversiXT (Reversi Extreme) gegen eine KI, sowie sich selbst zu spielen. Diese 
+Software soll um einem Game Server, die KI und das neue Spiel in der GUI erweitert werden.
+Außerdem soll ein Benutzer in der Lage sein sich mit seinem Smarthphone mit der Hardware zu 
+verbinden und neue, sowie die alte KI herausfordern zu können.
+
 \subsection{Struktur dieser Arbeit}
+Die Arbeit ist folgendermaßen aufgebaut: \\
+Kapitel 2 befasst sich mit den Grundlagen zu Dame, sowie den verwendeten 
+Künstliche Intelligenz Algorithmen. Dabei wird zu Dame auch die Grundregeln der
+verwendeten Variante erklärt. Bei den KI Algorithmen handelt es sich um die Algorithmen, die in 
+der Arbeit verwendet und miteinander verglichen werden. \\
+In Kapitel 3 werden die Anforderungen, welche gefordert sind vorgestellt.
 
 \section{Grundlagen}
-\subsection{Brettspiele}
-\subsubsection{Dame}
+Dieses Kapitel gibt einen Überblick über die theoretischen Grundlagen, die für das Verständnis 
+dieser Arbeit notwendig sind. Zunächst werden die Grundregeln des behandelten Brettspieles 
+vorgestellt. Darauf folgt eine Erklärung der Künstlichen Intelligenz Algorithmen, welche für 
+folgenden Kapitel von großer Relevanz sind.
+
+%\subsection{Brettspiele}
+
+\subsection{Dame}
+Dame ist eines der ältesten Brettspiele, wobei erste Varianten 3000 v. Chr. im Irakischen Ur
+entdeckt wurden. In der heutigen Zeit werden verschiedene Varianten desselben Spieles weltweit
+gespielt. So wird in vielen englischsprachigen Ländern eine andere Version gespielt als im Rest
+der Welt, diese ist auch als internationale Dame bekannt. Unterschiede sind z. B. bei diesen Varianten,
+dass bei Internationaler Dame, Damen beliebig viele Felder in alle Richtungen springen dürfen, 
+in anderen Varianten jedoch nur 1 Feld. Da die Regeln der internationalen Dame
+weiter verbreitet sind und auch im Vereinssport praktiziert werden, wird sich diese Arbeit im folgenden
+auf diese Regeln fokussieren.
+
+\subsubsection{Internationale Dame}
+In dieser Variante des Spieles wird auf einem 10×10 Brett mit Schachbrett-Muster gespielt, 
+siehe \ref{fig:checkersboard}. Die Spielsteine
+sind Scheibenförmig und in zwei Farben vorhanden, meist schwarz und weiß und dürfen nur auf den dunklen
+Feldern des Schachbrettes bewegt werden. Es gibt zwei Arten von Spielsteine, normale Spielsteine, welche
+nur in Richtung des Gegners bewegt werden dürfen, aber Rückwerts schlagen dürfen und Damen, welche
+in alle Richtungen beliebig viele Felder fahren und schlagen dürfen. Allgemein herrscht Schlagzwang,
+was bedeutet, dass falls ein Spieler die Möglichkeit hat zu schlagen, er auch schlagen muss.
+Ein normaler Spielstein wir zur Dame, falls er in die hinterste Reihe des Gegners kommt.
+Ziel des Spieles ist es entweder alle Steine des Gegners zu schlagen, oder den Gegner in eine Situation
+zu bekommen, in dem er keine Züge mehr machen kann. 
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.5\linewidth]{pics/checkersboard.png}
+	\captionof{figure}[DameSpielfeld]{ Das 10x10 Spielfeld aus der Anwendung }
+	\label{fig:checkersboard}
+\end{minipage}
+
 \subsection{Minimax}
-\subsection{Alpha-Beta Kürzung}
-\subsection{Monte Carlo Tree Search}
+Der Minimax Algorithmus wird verwendet um einen optimalen Spielzug, in Spielen mit perfekter Information,
+zu finden. Allgemein wird eine Bewertungsfunktion verwendet, welche einen Zustand des Spieles bewertet und 
+einen Integer Wert zurückgibt. Sehr niedrige Werte (negative) sind gut für Spieler A und sehr hohe Werte 
+(positive) sehr gut für Spieler B. Um nun mehrere mögliche Zustände des Spieles zu berechnen und dann miteinander 
+vergleichen zu können wird ein Suchbaum verwendet, siehe \ref{fig:minimax}. Der Algorithmus beginnt bei den untersten Blättern und geht
+nach oben bis zur Wurzel. Auf jeder Ebene wird versucht, je nach dem welcher Spieler an der Reihe ist den Knoten zu
+maximieren oder zu minimieren. Der Wert welcher der Wurzel zugewiesen wird ist auch der Spielzug der als nächstes
+gespielt wird. 
+
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.5\linewidth]{pics/minimax.png}
+	\captionof{figure}[minimax]{ Beispiel eines Minimax Suchbaumes }
+	\label{fig:minimax}
+\end{minipage}
+
+\subsection{Alpha-Beta Pruning}
+Das Alpha-Beta Pruning ist eine Optimierung zum Minimax Algorithmus. Die Idee des Algorithmus ist, 
+dass manche Zweige des Suchbaums nicht untersucht werden müssen, da für den anderen Spieler diese
+Züge nicht in Frage kämen. Hierbei ist $\alpha$ der Wert für den Spieler der für den die niedrigen Werte 
+besser sind und $\beta$ für den anderen Spieler. Für jedem Knoten, je nach dem ob er ein maximierender
+oder ein minimierender Knoten ist, wird nun überprüft ob ein Kind-Knoten welcher einen neuen Wert
+erhalten hat, nicht mehr vom Knoten beachtet werden muss. Z. B. der zu beachtende Knoten ist ein minimierender Knoten und 
+hat aus seinem Linken Zweig eine 8 bekommen. Der rechte Kind-Knoten ist ein maximierender Knoten und
+hat von seinen Kindern eine 9 bekommen, er wird nun egal welche weiteren Werte er von seinen anderen 
+Kindern noch bekommt, seinen Wert nicht mehr nach unter 8 ändern. Dadurch kann man den rechten Zweig 
+komplett ignorieren. 
+
+\subsection{Monte Carlo Tree Search (MCTS)}
+Der Monte Carlo Tree Search Algorithmus, ist ein heuristischer Algorithmus, bei welchem von einem
+Zustand eines Spieles zufällig endliche viele Simulationen durchgeführt werden. Ein Vorteil des 
+MCTS-Algorithmus gegenüber Minimax ist, dass erst am Ende eines Durchlaufes eine Bewertungsfunktion
+benötigt wird. Allgemin besteht der Algorithmus aus vier Schritten:
+\begin{itemize}
+    \item \textit{Selektion}: Versucht wird einen Zustand zu finden der noch erweiterbar ist, also
+        einen Zustand zu finden der kein Endzustand ist und noch nicht besuchte Züge hat.
+    \item \textit{Expansion}: Der Spielbaum zufällig wird um einen noch nicht besuchten Zug erweitert.
+    \item \textit{Simulation}: Von dem gewählten Knoten aus wird nun ein Spiel zufällig bis zum Ende 
+        simuliert. 
+    \item \textit{Backpropagation}: Das Ergebnis der Simulation wird den vorhergehenden Knoten mitgeteilt
+        und diese werden mit diesem Aktualisiert
+\end{itemize}
+%todo -> UCT wert berechnung
 
 \section{Anforderungsanalyse}
 \subsection{Anwendungsszenario}
