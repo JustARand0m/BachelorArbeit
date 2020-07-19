@@ -7,34 +7,38 @@
 \BOOKMARK [2][-]{subsection.2.1}{Dame}{section.2}% 7
 \BOOKMARK [3][-]{subsubsection.2.1.1}{Internationale Dame}{subsection.2.1}% 8
 \BOOKMARK [2][-]{subsection.2.2}{Minimax}{section.2}% 9
-\BOOKMARK [2][-]{subsection.2.3}{Alpha-Beta Pruning}{section.2}% 10
-\BOOKMARK [2][-]{subsection.2.4}{Monte Carlo Tree Search \(MCTS\)}{section.2}% 11
-\BOOKMARK [1][-]{section.3}{Anforderungsanalyse}{}% 12
-\BOOKMARK [2][-]{subsection.3.1}{Anwendungsszenario}{section.3}% 13
-\BOOKMARK [2][-]{subsection.3.2}{Anforderungen an die Software}{section.3}% 14
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Nichtfunktionale Anforderungen}{subsection.3.2}% 15
-\BOOKMARK [3][-]{subsubsection.3.2.2}{Funktionale Anforderungen}{subsection.3.2}% 16
-\BOOKMARK [3][-]{subsubsection.3.2.3}{Zusammenfassung der Anforderungen}{subsection.3.2}% 17
-\BOOKMARK [1][-]{section.4}{Architektur}{}% 18
-\BOOKMARK [2][-]{subsection.4.1}{\334berblick}{section.4}% 19
-\BOOKMARK [2][-]{subsection.4.2}{Gameserver}{section.4}% 20
-\BOOKMARK [2][-]{subsection.4.3}{Graphische Oberfl\344che}{section.4}% 21
-\BOOKMARK [2][-]{subsection.4.4}{KI Client}{section.4}% 22
-\BOOKMARK [1][-]{section.5}{Hardware}{}% 23
-\BOOKMARK [2][-]{subsection.5.1}{Raspberry Pi}{section.5}% 24
-\BOOKMARK [2][-]{subsection.5.2}{Touch Monitor}{section.5}% 25
-\BOOKMARK [1][-]{section.6}{Imlementierung}{}% 26
-\BOOKMARK [2][-]{subsection.6.1}{Eingesetzte Sofwarekomponenten}{section.6}% 27
-\BOOKMARK [3][-]{subsubsection.6.1.1}{Programmiersprachen und Frameworks}{subsection.6.1}% 28
-\BOOKMARK [3][-]{subsubsection.6.1.2}{Datentransferprotokolle}{subsection.6.1}% 29
-\BOOKMARK [2][-]{subsection.6.2}{Gameserver}{section.6}% 30
-\BOOKMARK [3][-]{subsubsection.6.2.1}{Netzwerkspezifikation des Gameservers}{subsection.6.2}% 31
-\BOOKMARK [2][-]{subsection.6.3}{Graphische Oberfl\344che}{section.6}% 32
-\BOOKMARK [3][-]{subsubsection.6.3.1}{Gegebene React Anwendung}{subsection.6.3}% 33
-\BOOKMARK [3][-]{subsubsection.6.3.2}{Erweiterungen}{subsection.6.3}% 34
-\BOOKMARK [2][-]{subsection.6.4}{KI Client}{section.6}% 35
-\BOOKMARK [3][-]{subsubsection.6.4.1}{Vergleich der KI Algorithmen}{subsection.6.4}% 36
-\BOOKMARK [1][-]{section.7}{Testing}{}% 37
-\BOOKMARK [2][-]{subsection.7.1}{Integrationstest}{section.7}% 38
-\BOOKMARK [2][-]{subsection.7.2}{Ergebnisse}{section.7}% 39
-\BOOKMARK [1][-]{section.8}{Fazit und Ausblick}{}% 40
+\BOOKMARK [2][-]{subsection.2.3}{Iterative Deepening}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.4}{Alpha-Beta Pruning}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.5}{Zugsortierung}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.6}{Monte Carlo Tree Search \(MCTS\)}{section.2}% 13
+\BOOKMARK [1][-]{section.3}{Anforderungsanalyse}{}% 14
+\BOOKMARK [2][-]{subsection.3.1}{Anwendungsszenario}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.2}{Anforderungen an die Software}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Funktionale Anforderungen}{subsection.3.2}% 17
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Nichtfunktionale Anforderungen}{subsection.3.2}% 18
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Zusammenfassung der Anforderungen}{subsection.3.2}% 19
+\BOOKMARK [1][-]{section.4}{Architektur der Software}{}% 20
+\BOOKMARK [2][-]{subsection.4.1}{\334berblick}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.2}{Gameserver}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.3}{ReversiXT GUI}{section.4}% 23
+\BOOKMARK [2][-]{subsection.4.4}{KI Client}{section.4}% 24
+\BOOKMARK [1][-]{section.5}{Hardware}{}% 25
+\BOOKMARK [2][-]{subsection.5.1}{Raspberry Pi}{section.5}% 26
+\BOOKMARK [2][-]{subsection.5.2}{Touch Monitor}{section.5}% 27
+\BOOKMARK [1][-]{section.6}{Imlementierung}{}% 28
+\BOOKMARK [2][-]{subsection.6.1}{Eingesetzte Sofwarekomponenten}{section.6}% 29
+\BOOKMARK [3][-]{subsubsection.6.1.1}{Programmiersprachen und Frameworks}{subsection.6.1}% 30
+\BOOKMARK [3][-]{subsubsection.6.1.2}{Datentransferprotokolle}{subsection.6.1}% 31
+\BOOKMARK [2][-]{subsection.6.2}{Gameserver}{section.6}% 32
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Netzwerkspezifikation des Gameservers}{subsection.6.2}% 33
+\BOOKMARK [2][-]{subsection.6.3}{Graphische Oberfl\344che}{section.6}% 34
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Gegebene React Anwendung}{subsection.6.3}% 35
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Erweiterungen}{subsection.6.3}% 36
+\BOOKMARK [2][-]{subsection.6.4}{KI Client}{section.6}% 37
+\BOOKMARK [3][-]{subsubsection.6.4.1}{Vergleich der KI Algorithmen}{subsection.6.4}% 38
+\BOOKMARK [1][-]{section.7}{Testing}{}% 39
+\BOOKMARK [2][-]{subsection.7.1}{Integrationstest}{section.7}% 40
+\BOOKMARK [2][-]{subsection.7.2}{Ergebnisse}{section.7}% 41
+\BOOKMARK [1][-]{section.8}{Fazit und Ausblick}{}% 42
+\BOOKMARK [1][-]{section*.2}{Anhang}{}% 43
+\BOOKMARK [1][-]{appendix.A}{Dom\344ndenmodell}{}% 44
