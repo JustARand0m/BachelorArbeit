@@ -227,12 +227,12 @@ rechte Zweig komplett ignoriert werden kann. \cite{KuenstlicheIntelligenzNorvig}
 
 \subsection{Zugsortierung}
 Zugsortierung ist eine Verbesserung der Alpha-Beta Suche.
-Da Alpha-Beta Pruning abhängig von der Reihenfolge in der die Zustände untersucht werden ist, ist es sinnvoll
-die Nachfolger zu wählen, die die besten Werte erbringen. Den Besten Nachfolger findet man, in dem man eine
+Da Alpha-Beta Pruning abhängig von der Reihenfolge, in der die Zustände untersucht werden ist, ist es sinnvoll
+die Nachfolger zu wählen, die die besten Werte erbringen. Den besten Nachfolger findet man, in dem man eine
 weitere Bewertungsfunktion einbaut, welche nicht so genau wie die Bewertungsfunktion am Ende sein muss. 
-Wenn ein Knoten also alle möglichen Nachfolgerzüge als Kinder bekommt, werden auf diese die vereinfachte Bewertungsfunktion
-angewandt und, je nach Ergebnis der Funktion werden die Nachfolger sortiert. Dadruch dass der Beste Zug nun
-sehr weit am Anfang steht, ist es sehr warscheinlich das die anderen Züge durch Alpha-Beta Pruning ignoriert werden.
+Wenn ein Knoten also alle möglichen Nachfolgezüge als Kinder bekommt, werden auf diese die vereinfachte Bewertungsfunktion
+angewandt und, je nach Ergebnis der Funktion werden die Nachfolger sortiert. Dadruch, dass der beste Zug nun
+sehr weit am Anfang steht, ist es sehr wahrscheinlich das die anderen Züge durch Alpha-Beta Pruning ignoriert werden.
 \cite{KuenstlicheIntelligenzNorvig}
 
 \subsection{Monte Carlo Tree Search (MCTS)}
@@ -268,52 +268,52 @@ Für die Balanzierung der beiden Ziele gibt es den Parameter $c$ \cite{DeepLeari
 In diesem Kapitel wird zuerst ein beispielhaftes Szenario gezeigt, bei welchem die Software eingesetzt werden soll.
 Anschließend werden anhand dieser Szenarios Anforderungen definiert, die von der Software erfüllt werden müssen.
 \subsection{Anwendungsszenario}
-Will ein Benutzer gegen den KI Client spielen, kann er über das Menü auf dem Touch Monitor den KI Algorithmus auswählen und diesen herrausfordern.
+Will ein Benutzer gegen den KI Client spielen, kann er über das Menü auf dem Touch Monitor den KI Algorithmus auswählen und diesen herausfordern.
 Dazu kann er, falls er mit seinem Smarthphone spielen will einen QR-Code auf dem Monitor aufrufen, diesen einscannen und dann das Spiel beginnen.
 Andernfalls kann der Benutzer auch direkt am Monitor das Spiel starten und auf diesen mittels Touch Züge ausführen.
 Die KI Algorithmen welche auf dem KI Client implementiert sind haben eine ELO Zahl hinterlegt, welche Auskunft über die Spielstärke gibt.
-Fühlt sich der Benutzer also über oder unterfordert kann er den geeigneten Gegner auswählen. Gibt es mehrere Benutzer welche 
+Fühlt sich der Benutzer also über oder unterfordert, kann er den geeigneten Gegner auswählen. Gibt es mehrere Benutzer welche 
 gegen einander spielen wollen, haben diese die Möglichkeit entweder abwechselnd auf dem Monitor, oder beide mittels QR-Code über ihr Smartphone ein Spiel zu starten.
-Will ein Benutzer zwei KI's beim spielen beobachten, so kann er diese am Monitor auswählen und diese gegeneinander Antreten lassen.
+Will ein Benutzer zwei KI's beim Spielen beobachten, so kann er diese am Monitor auswählen und diese gegeneinander Antreten lassen.
 \subsection{Anforderungen an die Software}
 Aus dem oben beschriebenen Anwendungsszenario lassen sich konkrete Anforderungen ableiten, die für die Software von Relevanz sind.
 Hierbei wird zwischen funktionalen und nicht funktionalen Anforderungen unterschieden \cite{RequirementEngenieering}.
 \subsubsection{Funktionale Anforderungen}
 \begin{itemize}
-    \item \textbf{/F10/} \textit{Menü zum Auswählen des Spieles:} Die Graphische Oberfläche soll dem Benutzer die Möglichkeit geben das ein Spiel auszuwählen.
+    \item \textbf{/F10/} \textit{Menü zum Auswählen des Spieles:} Die Grafische Oberfläche soll dem Benutzer die Möglichkeit geben, das ein Spiel auszuwählen.
         Dazu soll es ein Menü geben welches die möglichen Spiele, wie z.B. Reversi oder Dame zur Auswahl stellt.
-    \item \textbf{/F11/} \textit{Auswählbares Menü für verschiedene KI Algorithmen:} Die Applikation muss ein leicht bedienbares Graphisches Interface bieten,
-        bei welchem verschiedene künstliche Intelligenz Algorithmuen ausgewählt und herrausgefordert und werden können.
+    \item \textbf{/F11/} \textit{Auswählbares Menü für verschiedene KI Algorithmen:} Die Applikation muss ein leicht bedienbares Grafisches Interface bieten,
+        bei welchem verschiedene künstliche Intelligenz Algorithmen ausgewählt und herausgefordert und werden können.
     \item \textbf{/F12/} \textit{QR-Code fürs verbinden mit dem Smartphone:} Um einen unkomplizierten Verbindungsaufbau vom Raspberry mit dem Smarthphone zu 
-        gewährleisten, soll es eine Menü-Option geben, bei der ein QR-Code angezeigt wird. Nach dem scannen des QR-Codes soll eine Verbindung
-        Aufgebaut werden, welche bis zum Beenden bestehen bleibt.
+        gewährleisten, soll es eine Menü-Option geben, bei der ein QR-Code angezeigt wird. Nach dem Scannen des QR-Codes soll eine Verbindung
+        aufgebaut werden, welche bis zum Beenden bestehen bleibt.
     \item \textbf{/F13/} \textit{Varaible Zeiteinstellung im Menü:} Dem Benutzer soll es möglich sein über das Menü eine Zeit einstellen zu können, 
         welche jeder Spieler im Spiel zur Verfügung für seine Züge hat. Als Spieler können entweder Benutzer oder KI Clients agieren.
     \item \textbf{/F20/} \textit{Benutzer soll Züge ausführen können:} Der Benutzer soll in der Lage sein, Züge gegen die KI spielen zu können. Dazu soll er entweder
         direkt über den Touch-Monitor oder über das Smartphone eine Eingabemöglichkeit haben. Diese soll den Momentanzustand des Spielbrettes zeigen,
         wodurch der Benutzer eine Entscheidung für seinen nächsten Zug treffen und diese über eine Touch-Berührung ausführen kann.
     \item \textbf{/F21/} \textit{Benutzer sollen gegen andere Benutzer spielen können:} Für mehrere Benutzer soll es möglich sein, gegeneinander spielen zu können. Dazu sollen sie 
-        entweder den Touch-Monitor verwenden indem sie abwechselnd Züge ausführen, oder beide jeweils ein Smarthphone.
-    \item \textbf{/F22/} \textit{Der Benutzer kann KI's gegeneinander spielen lassen:} Der Benutzer soll in der Lage sein zwei KI-Algorithemen auswählen zu können
-        um diese gegeneinander spielen zu lassen. Damit man dieses Spiel sehen zu kann, sollen alle Züge die 
+        entweder den Touch-Monitor verwenden, indem sie abwechselnd Züge ausführen, oder beide jeweils ein Smarthphone.
+    \item \textbf{/F22/} \textit{Der Benutzer kann KI's gegeneinander spielen lassen:} Der Benutzer soll in der Lage sein zwei KI-Algorithemen auszuwählen
+        und diese gegeneinander spielen zu lassen. Damit man dieses Spiel sehe kann, sollen alle Züge die 
         von beiden getätigt werden auf dem Spielbrett des Touch-Monitors angezeigt werden.
-    \item \textbf{/F30/} \textit{Eine ELO Zahl soll die Spielstärke der Algorithmen angeben:} Damit der Benutzer eine für sich angemessene Herrausforderung findet,
+    \item \textbf{/F30/} \textit{Eine ELO Zahl soll die Spielstärke der Algorithmen angeben:} Damit der Benutzer eine für sich angemessene Herausforderung findet,
         sollen schwächere und stärkere KI-Algorithmen in der GUI gekennzeichnet werden. Um eine genaue Kennzahl für die Stärke zu erhalten, werden die ELO Zahlen durch
-        Simulationen berechnet. Diese Simulationen sind Spiele der Algorithemen untereinander.
+        Simulationen berechnet. Diese Simulationen sind Spiele der Algorithmen untereinander.
    
 \end{itemize}
 \subsubsection{Nichtfunktionale Anforderungen}
 \begin{itemize}
     \item \textbf{/Q10/} \textit{Robustheit der Smarthphone Verbindung:} Nach der Verbindung mit dem Smarthphone (mittels QR-Code /F12/) muss sichergestellt sein, dass die Verbindung nicht ohne
-        Grund abbricht, sondern erst wenn z.B. die Distanz zwischen Smartphone und Pi zu groß ist. Desweitern soll nach einem Verbindungsabbruch, 
-        das Spiel nicht abbgebrochen werden, sondern es soll eine Möglichkeit zum wiederverbinden bestehen.
+        Grund abbricht, sondern erst, wenn z.B. die Distanz zwischen Smartphone und Pi zu groß ist. Des weitern soll nach einem Verbindungsabbruch, 
+        das Spiel nicht abgebrochen werden, sondern es soll eine Möglichkeit zum Wiederverbinden bestehen.
     \item \textbf{/Q20/} \textit{ELO Zahlen sollen Stärke wiederspiegeln:} Die durch die Simulationen errechnete ELO Zahl von /F30/ soll auch in etwa dem Stärkegrad der Algorithmen entsprechen.
         Hat ein Algorithmus die sehr viel mehr ELO muss er auch dementsprechend stärker sein.
     \item \textbf{/Q30/} \textit{Zeiteinstellung soll von der KI Berücksichtigt werden:} Die Zeiteinstellung von /F13/ soll vom KI Client als Berechnungsdauer genutzt werden.
         Dieser soll dabei seine Rechenzeit so gut wie möglich an die Zeiteinstellung anpassen.
     \item \textbf{/Q40/} \textit{Reaktionszeit des Touch-Interfaces:} Das Berühren des Touch-Monitors soll zur sofortigen Ausführung des Befehls der Software führen.
     \item \textbf{/Q50/} \textit{Mobile Responsiveness:} Das Spielfeld soll auf egal welchem verbundenen Smarthphone gleich skaliert aussehen. 
-        Das verwenden von Tablets, oder das Drehen des Gerätes soll keinen Einfluss auf die Darstellung des Spielbrettes haben.
+        Das Verwenden von Tablets, oder das Drehen des Gerätes soll keinen Einfluss auf die Darstellung des Spielbrettes haben.
 \end{itemize}
 \subsubsection{Zusammenfassung der Anforderungen}
 Die Identifizierten Funktionalen und Nichtfunktionalen Anforderungen werden in der Tabelle \ref{tab:Anforderungen} zusammengefasst. 
