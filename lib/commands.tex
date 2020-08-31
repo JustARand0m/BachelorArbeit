@@ -27,6 +27,7 @@
 	\def\studentStudiengang{#3}%
 }
 
+
 \newcommandx{\MyTitelseite}[8][]{
 \thispagestyle{empty}
 \includegraphics[scale=0.2]{pics/oth-logo.png}\hfill
@@ -79,4 +80,127 @@
 	\end{tabular} 
 \end{center}
 \pagebreak
+}
+
+\newsavebox\mybox
+\savebox\mybox{%
+  \tikz{
+    \draw[ultra thick,red] (-4pt,-4pt) -- (4pt,4pt);
+    \draw[ultra thick,red] (-4pt,4pt) -- (4pt,-4pt);
+  }%
+}  
+
+\newcommand{\TopAlign}[1]{\adjustbox{valign=t}{#1}}
+\newcolumntype{T}{>{\collectcell{\TopAlign}}c<{\endcollectcell}}
+
+
+
+\forestset{
+  upsideTria/.style={
+    node format={
+      \noexpand\node [
+      draw,
+      shape=regular polygon,
+      regular polygon sides=3,
+      inner sep=0pt,
+      outer sep=0pt,
+      \forestoption{node options},
+      anchor=\forestoption{anchor}
+      ]
+      (\forestoption{name}) {\foresteoption{content format}};
+    },
+    child anchor=parent,
+  },
+  downsideTria/.style={
+     node format={
+      \noexpand\node [
+      draw,
+      shape=regular polygon,
+      regular polygon sides=3,
+      shape border rotate=180,
+	  inner sep=0pt,
+      outer sep=0pt,
+      \forestoption{node options},
+      anchor=\forestoption{anchor}
+      ]
+      (\forestoption{name}) {\foresteoption{content format}};
+    },
+    child anchor=parent, 
+  },
+  downsideTriaTerm/.style={
+     node format={
+      \noexpand\node [
+      draw,
+      shape=regular polygon,
+      regular polygon sides=3,
+      shape border rotate=180,
+	  inner sep=0pt,
+	  outer sep=0pt,
+	  fill=green,
+      \forestoption{node options},
+      anchor=\forestoption{anchor}
+      ]
+      (\forestoption{name}) {\foresteoption{content format}};
+    },
+    child anchor=parent, 
+  },
+  upsideTriaTerm/.style={
+    node format={
+      \noexpand\node [
+      draw,
+      shape=regular polygon,
+      regular polygon sides=3,
+      inner sep=0pt,
+      outer sep=0pt,
+	  fill=green,
+      \forestoption{node options},
+      anchor=\forestoption{anchor}
+      ]
+      (\forestoption{name}) {\foresteoption{content format}};
+    },
+    child anchor=parent,
+  },
+  upsideTriaYellow/.style={
+    node format={
+      \noexpand\node [
+      draw,
+      shape=regular polygon,
+      regular polygon sides=3,
+      inner sep=0pt,
+      outer sep=0pt,
+	  fill=yellow,
+      \forestoption{node options},
+      anchor=\forestoption{anchor}
+      ]
+      (\forestoption{name}) {\foresteoption{content format}};
+    },
+    child anchor=parent,
+  },
+  downsideTriaYellow/.style={
+     node format={
+      \noexpand\node [
+      draw,
+      shape=regular polygon,
+      regular polygon sides=3,
+      shape border rotate=180,
+	  inner sep=0pt,
+	  outer sep=0pt,
+	  fill=yellow,
+      \forestoption{node options},
+      anchor=\forestoption{anchor}
+      ]
+      (\forestoption{name}) {\foresteoption{content format}};
+    },
+	child anchor=parent,
+  }
+}
+
+\tikzset{
+myedge/.style={
+  decoration={
+   markings,
+   mark=at position 0.5 with \node {\usebox\mybox};
+  },
+  postaction=decorate
+  }
 }

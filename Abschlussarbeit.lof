@@ -3,4 +3,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {1}{\ignorespaces DameSpielfeld}}{3}{figure.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2}{\ignorespaces minimax}}{3}{figure.2}% 
+\contentsline {figure}{\numberline {2}{\ignorespaces Minimax-Baum mit Spielfeldzustand als Knoten\relax }}{4}{figure.caption.1}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3}{\ignorespaces Minimax-Baum mit Bewertung der Stellungen\relax }}{5}{figure.caption.2}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4}{\ignorespaces Ablauf des Iterativen Deepenings\relax }}{6}{figure.caption.3}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5}{\ignorespaces Gewinn durch Alpha-Beta Pruning\relax }}{7}{figure.caption.4}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6}{\ignorespaces Beispiel einer Zugsortierung\relax }}{8}{figure.caption.5}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {7}{\ignorespaces Minimax-Baum mit Bewertung der Stellungen\relax }}{9}{figure.caption.6}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {8}{\ignorespaces SequenceDiagram}}{11}{figure.8}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {9}{\ignorespaces ClassDiagram}}{13}{figure.9}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {10}{\ignorespaces ReversiXTGUI}}{15}{figure.10}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {11}{\ignorespaces KIClient}}{17}{figure.11}% 
