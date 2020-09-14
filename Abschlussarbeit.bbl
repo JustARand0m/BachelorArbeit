@@ -17,6 +17,19 @@
 \endgroup
 
 \datalist[entry]{anyt/global//global/global}
+  \entry{C++Node}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Cno}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{note}{Node C++ Addons}
+    \field{title}{\texttt{C++Node}}
+    \verb{url}
+    \verb https://nodejs.org/api/addons.html
+    \endverb
+  \endentry
+
   \entry{DraughtsHistory}{online}{}
     \keyw{online}
     \field{labeltitlesource}{title}
@@ -116,6 +129,61 @@
     }
     \field{type}{techreport}
     \field{year}{1982}
+  \endentry
+
+  \entry{Node}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Nod}
+    \field{extraalpha}{1}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{note}{Node}
+    \field{title}{\texttt{Node}}
+    \verb{url}
+    \verb https://nodejs.org
+    \endverb
+  \endentry
+
+  \entry{NodeC++Performance}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Nod}
+    \field{extraalpha}{2}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{note}{Node C++ Performance}
+    \field{title}{\texttt{NodeC++Performance}}
+    \verb{url}
+    \verb https://medium.com/the-node-js-collection/speed-up-your-node-js-app-w
+    \verb ith-native-addons-5e76a06f4a40
+    \endverb
+  \endentry
+
+  \entry{RaspberryPi}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Ras}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{note}{Raspberry Pi}
+    \field{title}{\texttt{Raspberry}}
+    \verb{url}
+    \verb https://www.raspberrypi.org/
+    \endverb
+  \endentry
+
+  \entry{React.js}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Rea}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{note}{React.js}
+    \field{title}{\texttt{Reactjs}}
+    \verb{url}
+    \verb https://reactjs.org/
+    \endverb
   \endentry
 
   \entry{KuenstlicheIntelligenzNorvig}{book}{}

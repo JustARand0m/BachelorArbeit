@@ -151,6 +151,7 @@ In Kapitel 3 werden die Anforderungen, welche gefordert sind, vorgestellt.
 
 \pagebreak
 \section{Grundlagen}
+\label{chap:Grundlagen}
 Dieses Kapitel gibt einen Überblick über die theoretischen Grundlagen, die für das Verständnis 
 dieser Arbeit notwendig sind. Zunächst werden die Grundregeln des behandelten Brettspieles 
 vorgestellt. Darauf folgt eine Erklärung der künstlichen Intelligenz Algorithmen, welche für 
@@ -188,10 +189,11 @@ zu zwingen, in der er keine Züge mehr machen kann. \cite{InternationalCheckersR
 \end{minipage}
 
 \subsection{Minimax}
+\label{chap:Minimax}
 Der Minimax Algorithmus wird verwendet, um einen optimalen Spielzug in Spielen mit perfekter Information, bei zwei Spielern
-zu finden. Dazu wird ein eine Baumstruktur verwendet, welche den Zustand des Spielbrettes als Knoten hat, siehe Abbildung \ref{fig:minimax}.
+zu finden. Dazu wird eine Baumstruktur verwendet, welche den Zustand des Spielbrettes als Knoten hat, siehe Abbildung \ref{fig:minimax}.
 Alle Züge, die von einer Stellung aus möglich sind, werden in den Kindknoten des jeweiligen Knotens gespeichert.
-Der Wurzelknoten beschreibt den momentanen Zustand des, Spieles bei dem der Algorithmus aufgerufen wird. Die Blattknoten am Ende des Baumes
+Der Wurzelknoten beschreibt den momentanen Zustand des Spieles bei dem der Algorithmus aufgerufen wird. Die Blattknoten am Ende des Baumes
 entsprechen entweder einer Stellung in der das Spiel beendet wurde, oder der Stellung bei einer Tiefe, bei der der Algorithmus 
 aufgehört hat zu suchen. Die Angabe einer Tiefe ist nötig,
 da Spiele wie Schach oder Dame einen extrem großen Suchbaum zur Folge hätten und das Suchen eines Endzustandes in diesen sehr viel Zeit
@@ -207,8 +209,8 @@ mit einer Bewertungsfunktion bewertet:
     \item Spielende: +40 für Weiß und -40 für Schwarz
 \end{itemize} 
 Ein Dreieck mit der lange Seite nach unten, steht für eine Maximierung der Kindknotenwerte, das andere Dreieck für eine
-Minimierung. Die Bewertungen in den Endzuständen werden nach oben durchgereicht und je nachdem ob der Elternknoten ein Maximierer oder ein
-Minimierer ist bekommt er einen neuen Wert zugewiesen.
+Minimierung. Die Bewertungen in den Endzuständen werden nach oben durchgereicht und je nachdem, ob der Elternknoten ein Maximierer oder ein
+Minimierer ist, bekommt er einen neuen Wert zugewiesen.
 Im Beispiel kann man sehen, dass egal welche Züge gewählt werden es immer zu einem Materialverlust von Weiß kommt. Würde Weiß
 die zweite Option wählen, so ist das Spiel nach dem Nächsten Zug von Schwarz schon entschieden und Weiß verliert. 
 
@@ -293,7 +295,8 @@ die zweite Option wählen, so ist das Spiel nach dem Nächsten Zug von Schwarz s
 %\end{minipage}
 
 \subsection{Iterative Deepening}
-In komplexeren Spielen wie Go, Schach oder Dame ist es wegen dem Rechenaufwand sehr schwer den kompletten Baum von Minimax bis zu den
+\label{chap:IterativeDeepening}
+In komplexeren Spielen wie Go, Schach oder Dame ist es wegen des Rechenaufwands sehr schwer, den kompletten Baum von Minimax bis zu den
 Endzuständen aufzubauen. Deswegen wird in diesen Spielen der Baum nur bis zu einer gewissen Tiefe aufgebaut. Da es aber bei einer gleichen
 Tiefe für verschiedene Stellungen zu unterschiedlichen Dauern der Suche kommen kann, ist es problematisch eine fixe Suchtiefe anzugeben, 
 vor allem wenn mit Zeitlimits gearbeitet wird. Iterative Deepening hilft hierbei, der Ablauf des Algorithmus ist wie folgt:
@@ -302,7 +305,7 @@ Mal bis zu einer Tiefe von zwei. Dieses verwerfen und neu starteten wird so oft 
 Der letzte aufgebaute Baum, bevor neugestartet wird, wird zwischengespeichert und falls Minimax bis zum Ablauf des Zeitlimits nicht fertig ist,
 wird die momentane Berechnung verworfen und der letzte gespeicherte Baum verwendet. Ein Nachteil dieser Methode ist, dass 
 der Rechenaufwand der ersten Tiefen verschwendet wird, da diese Ergebnisse verworfen werden. Jedoch beeinflusst diese 
-verschwendete Rechenzeit nicht die Asymptotische Laufzeit des Algorithmus, da die meiste Arbeit in der untersten Tiefe der 
+verschwendete Rechenzeit nicht die asymptotische Laufzeit des Algorithmus, da die meiste Arbeit in der untersten Tiefe der 
 Suche gebraucht wird. \cite{IterativeDeepening}.
 
 \begin{figure}[H]
@@ -355,6 +358,7 @@ Suche gebraucht wird. \cite{IterativeDeepening}.
 \end{figure}
 
 \subsection{Alpha-Beta Pruning}
+\label{chap:alphaBeta}
 Das Alpha-Beta Pruning ist eine Optimierung zum Minimax Algorithmus. Die Idee des Algorithmus ist, 
 dass manche Zweige des Suchbaums nicht untersucht werden müssen, da für den anderen Spieler diese
 Züge nicht in Frage kommen. Hierbei ist $\alpha$ der Wert für den Spieler, für den die niedrigen Werte 
@@ -370,7 +374,7 @@ Wenn man Abbildung \ref{fig:minimax} und \ref{fig:value} als Beispiel nimmt und 
 so kann der Zweig mit dem Wert 42 ignoriert werden, siehe Abbildung \ref{fig:AlphaBeta}. Der gelbe Knoten bekommt eine -1 
 durch seinen linken Zweig vorübergehend zugewiesen. Da der Knoten des Rechten Zweiges ein Maximierer ist, also immer den Wert des
 Kindknotens mit dem höchsten Wert nimmt, und dieser bereits einen Knoten mit dem Wert 42 gefunden hat, wird sein Wert 
-definitiv mindestens 42 sein. Der restliche Rechte Zweig des gelben Knotens kann nun ignoriert werden, da der linke Zweig mit
+definitiv mindestens 42 sein. Der restliche rechte Zweig des gelben Knotens kann nun ignoriert werden, da der linke Zweig mit
 -1 definitiv kleiner sein wird.
 
 \begin{figure}[H]
@@ -406,13 +410,14 @@ definitiv mindestens 42 sein. Der restliche Rechte Zweig des gelben Knotens kann
 \end{figure}
 
 \subsection{Zugsortierung}
-Zugsortierung ist ein Zusatz zur Alpha-Beta Suche.
-Da Alpha-Beta Pruning abhängig von der Reihenfolge, in der die Zustände untersucht werden ist, ist es sinnvoll
-die Nachfolger zu wählen, die die besten Werte erbringen. Den besten Nachfolger findet man, in dem man eine
-weitere Bewertungsfunktion einbaut, welche nicht so genau wie die Bewertungsfunktion an den Terminalknoten sein muss. 
+\label{chap:Zugsortierung}
+Zugsortierung ist eine Erweiterung zur Alpha-Beta Suche.
+Da Alpha-Beta Pruning abhängig von der Reihenfolge, in der die Zustände untersucht werden, ist es sinnvoll
+die Nachfolger zu wählen, welche die besten Werte erbringen. Den besten Nachfolger findet man, in dem man eine
+weitere Bewertungsfunktion einbaut, die nicht so genau wie die Bewertungsfunktion an den Terminalknoten sein muss. 
 Wenn ein Knoten also alle möglichen Nachfolgezüge als Kinder bekommt, werden auf diese die vereinfachte Bewertungsfunktion
-angewandt und, je nach Ergebnis der Funktion werden die Nachfolger sortiert. Dadruch, dass der beste Zug nun
-sehr weit am Anfang steht, ist es sehr wahrscheinlich das die anderen Züge durch Alpha-Beta Pruning ignoriert werden.
+angewandt und je nach Ergebnis der Funktion werden die Nachfolger sortiert. Dadurch, dass der beste Zug nun
+sehr weit am Anfang steht, ist es sehr wahrscheinlich, dass die anderen Züge durch Alpha-Beta Pruning ignoriert werden.
 \cite{KuenstlicheIntelligenzNorvig}
 
 Auf der Linken Seite der Abbildung \ref{fig:Sorting} kann man erkennen, dass Alpha-Beta Pruning keinen Effekt 
@@ -481,6 +486,7 @@ ignoriert werden. Bei der Bewertungsfunktion könnte man die bedrohte Figuren al
 \end{figure}
 
 \subsection{Monte Carlo Tree Search (MCTS)}
+\label{chap:MCTS}
 Der Monte Carlo Tree Search Algorithmus, ist ein heuristischer Algorithmus, bei welchem von einem
 Zustand eines Spieles zufällig endlich viele Simulationen durchgeführt werden. Die Simulation endet, wenn
 ein Ergebnis des simulierten Spieles feststeht. Das Wiederholen der Simulationen aus verschiedenen Knoten
@@ -497,16 +503,16 @@ benötigt wird. Allgemin besteht der Algorithmus aus vier Schritten:
     \item \textit{Backpropagation}: Das Ergebnis der Simulation wird den vorhergehenden Knoten mitgeteilt
         und diese werden mit diesem aktualisiert.
 \end{itemize}
-Da man im Normalfall nicht beliebig viel Zeit hat alle Möglichkeiten zu simulieren, versucht man die limitierte Zeit
-so gut wie möglich zu nutzen und die richten Knoten zum Expandieren zu wählen. Dazu wird der \textit{upper confidence bound for trees} (UCT) verwendet.
+Da man im Normalfall nicht beliebig viel Zeit hat, alle Möglichkeiten zu simulieren, versucht man die limitierte Zeit
+so gut wie möglich zu nutzen, um die richten Knoten zum Expandieren zu wählen. Dazu wird der \textit{upper confidence bound for trees} (UCT) verwendet.
 Die UCT Formel lautet:
 \begin{align}
 	w + c \sqrt{\frac{\log{N}}{n}}
 \end{align}
 Wobei $w$ die prozentuale Anzahl an Gewinnen des Knotens, $N$ die Anzahl der gesamten Expansionen und $n$ die Expansionen nur an dem 
 betrachteten Knoten sind. Die Aufgabe der UCT Formel ist das Erreichen von zwei im Konflikt stehenden Zielen. Das erste Ziel ist es die Knoten die bisher die 
-höchsten Chancen auf den Gewinn haben tiefer zu simulieren, um eine bessere Genauigkeit des besten Zuges zu haben.
-Das zweite Ziel ist Knoten, die noch nicht sehr oft besucht worden sind genauer zu untersuchen, da diese vielversprechender sein könnten als gedacht.
+höchsten Chancen auf den Gewinn haben, tiefer zu simulieren, um eine bessere Genauigkeit des besten Zuges zu haben.
+Das zweite Ziel ist, Knoten die noch nicht sehr oft besucht worden sind genauer zu untersuchen, da diese vielversprechender sein könnten als gedacht.
 Für die Balancierung der beiden Ziele gibt es den Parameter $c$ \cite{DeepLearingGo}.
 
 Als Beispiel wird die zuvor verwendete Stellung aus \ref{fig:minimax} benutzt, aus welcher der MCTS-Baum in Abbildung \ref{fig:MCTSTree} entsteht.
@@ -661,61 +667,49 @@ Dieses Kapitel setzt sich mit der Softwarearchitktur auseinander.
 %Die ReversiXT GUI, über welche der User Spiele starten und KI's auswählen kann und dem KI Client, welcher eine künstliche Intelligenz für Dame ist, 
 %sind die beiden Clients die sich mit dem Server verbinden.
 \subsection{Überblick}
-Um für eine bessere Modularität und Erweiterbarkeit zu sorgen, ist die Software auf drei Teile aufgeteilt.
-Der Gameserver hält die Spielelogik und den Zustand des Spieles.  Über die ReversiXT Graphische Oberfläche kann man über den Gameserver 
-gegen die Dame KI des KI Clients spielen. Der KI Client ist eine Dame künstliche Intelligenz, welche sich mit dem Gameserver verbindet
-und die berechneten Züge an diesen sendet. 
+Um für eine bessere Modularität und Erweiterbarkeit zu sorgen, ist die Software auf drei Teile aufgeteilt:
+\begin{itemize}
+    \item Gameserver
+    \item ReversiXT GUI
+    \item KI-Client
+\end{itemize}
+Der Gameserver hält die Spielelogik und den Zustand des Spieles. Er prüft gespielte Züge auf ihre Gülgitkeit 
+und entscheidet ob ein Spiel entschieden ist. Er ist außerdem für die Spielzeitverwaltung und die Reihenfolge, in 
+der Spieler an der Reihe sind verantwortlich. Die ReversiXT Graphische Oberfläche (GUI) ist das Bedienelement für 
+den Endnutzer, um Spiele gegen verschiedene KI's oder andere Nutzer starten zu können. 
+Die künstliche Intelligenz Logik befindet sich im KI-Client, er berechnet abhängig vom Spielfeld und Algorithmus
+den nächsten Zug den die KI für den besten hält.
 
 
 
 \subsection{Kommunikation der Komponenten}
 \label{chap:Ablauf}
-Ein Spiel kann nur über die GUI der Applikation gestartet werden, dabei entstehen verschiedene Szenarien, abhängig davon
-was der User vor dem Spiel einstellt:
+Da die Applikation mit mehreren Spielmodi ausgestattet ist, ändert sich die Kommunikation und welche Komponente gestartet werden muss, abhängig vom Modus.
+Die verfügbaren Spielmodi sind:
 \begin{itemize}
     \item Benutzer gegen Benutzer
     \item Benutzer gegen KI
     \item KI gegen KI
 \end{itemize}
 Egal welche Option gewählt wird, der Gameserver wird immer gestartet, da dieser die Züge überprüft und Sieg oder Niederlage auswertet.
-Bei Benutzer gegen Benutzer wird die KI Komponente der Software nicht gestartet, es Kommuniziert die GUI-Komponente direkt mit Gameserver.
-Wird Benutzer gegen KI gewählt, wird eine KI Komponente gestartet. Der Gameserver verbindet sich dann mit dieser und der GUI und verteilt
-abwechselnd Zugaufforderungen an beide. Wird sich für zwei KI Clients die gegeneinander spielen entschieden, so werden auch zwei gestartet.
+Bei Benutzer gegen Benutzer wird die KI Komponente der Software nicht gestartet, es kommuniziert die GUI-Komponente direkt mit Gameserver.
+Wird sich für zwei KI Clients die gegeneinander spielen entschieden, so werden auch zwei gestartet.
 Die Kommunikation findet nur mehr von Gameserver mit den beiden KI-Clients statt, jedoch hat die GUI-Komponente eine Man-in-the-Middle-Funktion
 wodurch sie die Kommunikation abhört und die gespielten Züge darstellen kann.
 
-\subsubsection{Kommunikations Ablauf Benutzer gegen Benutzer}
+Abbildung \ref{fig:UserVsUserSequenceDiagram} stellt ein UML Sequenzdiagramm dar, bei welchem ein Benutzer gegen die KI spielt.
+Zuerst startet der Benutzer über die GUI mit dem Spielmodus ein Spiel, dadurch wird der Gameserver gestartet, sowie ein
+Gameclient. Würde man stattdessen KI gegen KI als Parameter mitsenden würden zwei Gameclients gestartet werden. 
+Der Gameserver wartet wärenddessen bis zwei Spieler bei ihm registriert haben. Ist die Registrierung abgeschlossen, werden Züge
+abwechselnd von den Clients angefordert, bis ein Spieler gewonnen hat.
 
 \vspace{1em}
 \begin{minipage}{\linewidth}
 	\centering
-	\includegraphics[width=0.83\linewidth]{pics/KommunikationSequenceDiagram.png}
-	\captionof{figure}[SequenceDiagram]{ Das UML Sequenzdiagramm der Kommunikation}
-	\label{fig:KommunicationSequenceDiagram}
+	\includegraphics[width=0.83\linewidth]{pics/UserVsAiCommunication.png}
+	\captionof{figure}[SequenceDiagram]{ Das UML Sequenzdiagramm der Kommunikation von KI gegen Benutzer}
+	\label{fig:UserVsUserSequenceDiagram}
 \end{minipage}
-
-
-
-\subsubsection{Kommunikationsprotokoll}
-Im Abschnitt \ref{chap:Ablauf} wird eine Kommunikation zwischen dem Gameserver und seinen Clients beschrieben, bei welcher der 
-Server nur Anfragen eines festgelegten Protokolles Akzeptiert. Das Protokoll für den Server orientiert sich stark nach dem Protokoll
-des Reversi-Gameservers. 
-%Nachdem ein Spiel gestartet wurde, sendet der Gameserver den Initialzustand des Spielbrettes an die Clients und
-%eine Zugaufforderung an den Spieler der den ersten Zug ziehen darf. Der Client sendet daraufhin eine Zugantwort.
-%Dieser Zug wird auf Richtigkeit überprüft und falls er in Ordnung ist auf das Spielfeld angewendet. 
-%Der Server schickt je nachdem welcher Client an der Reihe ist Zugaufforderungen und die Clients erwiedern diese mit Zugantworten.
-%Das Spiel endet, falls ein Client einen ungültigen Zug schickt, oder ein Endzustand des Spieles (Gewinn, Verlust, Unentschieden) 
-%erreicht wird. Nachdem das Spiel endet, beendet der Server die Kommunikation mit den Clients mit einer Nachricht und Beendet sich selbst
-%
-\begin{table}[H]
-    \centering
-    \begin{tabular} {|c|c|c|}
-        \hline
-        Typ (8-Bit-Integer) & Länge der Nachricht n (32-Bit-Integer) & Nachricht (n Bytes) \\
-        \hline
-    \end{tabular}
-\end{table}
-
 
 \subsection{Gameserver}
 Als Gameserver wird der Teil der Software betrachtet, welcher für das einhalten der Spielregeln und die Verwaltung der Spielfeldzustandes, 
@@ -731,7 +725,6 @@ als eigenes Paket festgelegt werden, was zu einer Möglichkeit führt den Gamese
 Die Board-Klasse beeinhaltet das Spielbrett, welches beim start des Servers übergeben wird. Die AllPossibleMoves-Klasse ist 
 verantwortlich alle möglichen Züge die in einer Stellung möglich sind dazustellen. Beide Klassen sind unabhängig von
 der Implementierung des Spieles über das GamesRules-Interface.
-
 
 Abbildung \ref{fig:GameServerClassDiagram} zeigt den Aufbau als UML-Klassendiagramm, dabei sind Dame und Mühle as Spiele über das
 GameRules Interface als Pakete Beispielhaft gezeigt. 
@@ -791,27 +784,264 @@ dabei das Protokoll von diesem einhalten.
 \end{minipage}
 
 
+\pagebreak
 \section{Hardware}
-Dieses Kapitel handelt von der verwendeten Hardware auf der die Software zum läuft. 
-Die Software wird auf einem Raspberry Pi, welcher an einem Touch Monitor anschlossen ist ausgeführt.
+Dieses Kapitel handelt von der verwendeten Hardware für welche die Software erstellt worden ist. 
+Die Ursprüngliche Idee des Projektes ist, einen Vorzeigegegenstand für Messen, wie den Tag der Informatik, zu haben.
+Um dies zu realisieren, besteht das Projekt aus einen Touchscreen, welcher in einem Tischförmigen Gerüst verankert 
+und mit einen Raspberry Pi verbunden ist.
+
 \subsection{Raspberry Pi}
+Die Software wird auf einen Raspberry Pi Model 3 ausgeführt. Bei dem Betriebssystemen handelt es sich hierbei um 
+Raspbian, ein auf Debian Basiertes Linux Betriebssystem. \cite{RaspberryPi} Da die Software auch mit anderen Betriebssystem
+kompatibel ist, könnte man den Pi durch ein beliebig anderes Gerät ersetzen, dass entweder Linux oder Windows unterstüzt.
+Der Raspberry Pi ist jedoch anhand seiner Kosten und Größe perfekt für das Projekt, da er in das Gerüst passt.
+
 \subsection{Touch Monitor}
+Die Bedienung der Benutzerobefläche erfolgt hauptsächlich mit dem Touchscreen, jedoch kann die Software auch auf normalen Monitoren ausgeführt werden.
+Der Touch Monitor ist ...% todo Tochscreengröße einfügen und Marke
+Eingaben können entweder durch Berührung des Touchscreens mit dem Finger, oder mit einer klassischen Computermaus ausgeführt werden.
+Für Texteingabe, kann entweder das integrierte Softwarekeyboard, oder eine normale Tastatur verwendet werden.
 
+%todo bild der Hardware
+
+
+\pagebreak
 \section{Implementierung}
-\subsection{Eingesetzte Sofwarekomponenten}
-\subsubsection{Programmiersprachen und Frameworks}
-\subsubsection{Datentransferprotokolle}
-\subsection{Gameserver}
-\subsubsection{Netzwerkspezifikation des Gameservers}
-\subsection{Graphische Oberfläche}
-\subsubsection{Gegebene React Anwendung}
-\subsubsection{Erweiterungen}
-\subsection{KI Client}
-\subsubsection{Vergleich der KI Algorithmen}
 
-\section{Testing}
-\subsection{Integrationstest}
-\subsection{Ergebnisse}
+\subsection{Programmiersprachen und Frameworks}
+Da die Software aus Mehreren individuellen Applikationen besteht, werden auch verschiedenste Programmiersprachen und Frameworks for diese Verwendet.
+Im Folgenden werden alle Programmiersprachen und Frameworks die Verwendung finden erklärt.
+
+\subsubsection{React.js}
+Um die Software so kompatibel wie möglich zu gestalten, basiert die Software auf Webtechnologie. Dies bedeutet, jedes Endgerät, welches einen neuren 
+Internetbrowser unterstüzt kann die Software zu einem Teil ausführen. Da eine Webseite in reinen Javascript, HTML und CSS zu schreiben viel Aufwand benötigt, 
+wird ein Framework wie React.js verwendet. Bei React handelt es sich um eine Javascript Library zum erstellen von Benutzeroberflächen.
+Die Vorteile von React zu reinem Javascript sind:
+\begin{itemize}
+    \item Einfach Dynamische Websiten zu entwickeln
+    \item Wiederverwertbare Komponenten
+    \item Methoden und Markup gehören zusammen
+    \item Funktionale Programmierung mit pure functions
+\end{itemize}
+Vorallem das erleichterte Erstellen von Dynamischen Websiten ist Vorteilhaft, da die Benutzerobefläche wärend ein Spiel gespielt wird, dynamisch gehalten werden muss.
+Im klassischen Javascript muss das Document Object Model (DOM), mühsam verändert werden. Diese DOM-Manipulationen sind sehr Fehleranfällig und können Memoryleaks
+verursachen. React sitzt hingegen zwischen Komponenten und dem DOM und übernimmt die komplette DOM-Manipulation.
+Das Verwenden von Komponenten ist auch Vorteilhaft, da zum Beispiel einzelne Spielfiguren als Komponenten festgelegt werden können 
+und so Code mehrfach eingespart werden kann. \cite{React.js}.
+
+\subsubsection{Node.js}
+Der Gameserver, der Gameclient und die Serverlogik der GUI, sind mit Node.js implementiert. 
+Node.js ist eine asynchrone ereignisgesteueretes Javascript-Laufzeitumgebung, welche Javascript-Code außerhalb des Webbrowsers ausführen kann.
+Node.js wird hauptsächlich zur Programmierung von Netzwerkanwendungen, wie Webservern verwendet. Da einen Großteil der Anwendung die
+Kommunikation der einzelnen Komponenten ausmacht, ist Node.js perfekt für dieses Szenario. 
+Ein weiterer Vorteil von Node ist, dass Node.js unabhängig vom Betriebssystem ist. Dies bedeutet, kann die V8 Javascript-Laufzeitumgebung
+auf dem Betriebssystem ausgeführt werden, so kann man auch die Node-Applikation dort zum laufen bringen.
+\cite{Node}
+
+\subsubsection{Typescript}
+Node.js wir eigentlich in reinem Javascript geschrieben, jedoch leidet Javascript daraunter, dass es keine Typisierung hat und sich somit leicht Fehler 
+einschleichen können. Typescript ist eine auf Javascript basierende Programmiersprache, welche statische Typisierung unterstützt. 
+Ähnlich wie bei C und C++ ist valider Javascript-Code auch valider Typescript code wodurch Typescript eine Obermenge von Javascript ist.
+Nachdem Typescript-Code geschrieben wird, kann er in reines Javascript kompiliert werden. 
+Der Gameserver und der Gameclient sind in Typescript geschrieben um Fehler durch die Typsicherheit zu verhindern. 
+
+\subsubsection{C/C++ Node Addons}
+Da Javascript eine im Vergleich sehr langsame Programmiersprache ist, wäre es sinnvoll den künstliche Intelligenz Teil der Applikation, welcher für die 
+Berechnung der nächsten Züge verantwortlich ist, in einer Performanteren Sprache welche auch Memorymanagement bietet, wie C oder C++ zu schreiben. 
+Node.js bietet hierfür die Möglichkeit an
+Module mittles C++ zu implementieren und von deren Geschwindigkeit zu profitieren \cite{NodeC++Performance}. Ein C++ Node Addon wird zu Maschinencode kompiliert, welcher von der
+normalen Node-Anwendung, über eine Javascript-Funktion ausgeführt werden kann. Der Vorteil hierbei zum reinen C++ ist, dass der Code in der V8 
+Laufzeitumgebung ausgeführt wird, was ihn Plattformunabhängig macht. \cite{C++Node}
+
+%todo grafik die Laufzeitverbesserung zeigt
+
+\subsection{Kommunikation}
+in \ref{chap:Ablauf} ist bereits auf die Kommunikationsstruktur geschildert, im folgenden wird die genauere Implementierung beschrieben
+
+\subsubsection{Verwendete Technolgie}
+Da der Gameserver, der Gameclient und die GUI eigenständige Prozesse sind, die nach bedarf gestartet und getstoppt werden, brauchen sie eine 
+Möglichkeit Nachrichten auszutauschen. Dafür werden die von Node.js bereitgestellten TCP-Sockets verwendet. Der Vorteil von TCP-Sockets 
+gegenüber zum Beispiel UDP, ist dass aufrechterhalten einer Verbindung. So muss sich der Client oder die GUI nur einmal zum Server verbinden 
+und kann im Laufe eines gesamten Spieles diese Verbindung nutzen. Ist ein Spiel zu Ende, kann die TCP-Verbindung gekappt und die 
+Sockets gescholossen werden. Da die GUI in zwei Softwarepakete getrennt ist siehe \ref{fig:ReversiXTGUIClassDiagram}, der React.js Webapp und einem Node.js Server, verwenden 
+diese Pakete auch eine eigen Netzwerkverbindung. Hierfür wird die Javascript library Socket.io verwendet, welche auf basis von Websockets basiert.
+
+\subsubsection{Kommunikationsprotokoll des Gameservers}
+Im Abschnitt \ref{chap:Ablauf} wird eine Kommunikation zwischen dem Gameserver und seinen Clients beschrieben, bei welcher der 
+Server nur Anfragen eines festgelegten Protokolles Akzeptiert. Das Protokoll für den Server orientiert sich stark nach dem Protokoll
+des Reversi-Gameservers und ist nur in einigen stellen erweitert worden.
+%Nachdem ein Spiel gestartet wurde, sendet der Gameserver den Initialzustand des Spielbrettes an die Clients und
+%eine Zugaufforderung an den Spieler der den ersten Zug ziehen darf. Der Client sendet daraufhin eine Zugantwort.
+%Dieser Zug wird auf Richtigkeit überprüft und falls er in Ordnung ist auf das Spielfeld angewendet. 
+%Der Server schickt je nachdem welcher Client an der Reihe ist Zugaufforderungen und die Clients erwiedern diese mit Zugantworten.
+%Das Spiel endet, falls ein Client einen ungültigen Zug schickt, oder ein Endzustand des Spieles (Gewinn, Verlust, Unentschieden) 
+%erreicht wird. Nachdem das Spiel endet, beendet der Server die Kommunikation mit den Clients mit einer Nachricht und Beendet sich selbst
+%
+\begin{table}[H]
+    \centering
+    \begin{tabular} {|c|c|c|}
+        \hline
+        Typ (8-Bit-Integer) & Länge der Nachricht n (32-Bit-Integer) & Nachricht (n Bytes) \\
+        \hline
+    \end{tabular}
+	\captionof{figure}{Der Aufbau einer Nachricht}
+    \label{fig:Nachritenaufbau}
+\end{table}
+
+in Abbildung \ref{fig:Nachritenaufbau} ist der Aufbau einer Nachricht dargestellt. Es gibt ingesamt neun verschiedene Nachrichtentypen, dazu gehören 
+neues Spiel starten, Zugaufforderung, Spiel Ende und viele weitere. Die meisten Nachrichten von einen gewissen Typ haben immer die selbe Länge, es gibt jedoch
+Ausnahmen, wie die Spielbrettnachricht, bei welcher ein 10x10 oder 8x8 Damenspielbrett gewählt werden kann. Die Nachricht selber entspricht dann den eigentlichen 
+Daten, die übertragen werden, wie zum Beispiel, den Feldern welche besetzt sind beim Spielfeld, oder das Ursprungsfeld und das Zielfeld bei einer Zugantwort. 
+
+\subsection{Verwendete KI-Algorithmen}
+In Kapitel \ref{chap:Grundlagen} wurden einige künstliche Intelligenz Algorithemen beschrieben, welche auch im Dame-Spiel der Applikation implementiert sind.
+Die Applikation bietet vier Algorithemen zur Auswahl an, gegen die der Spieler antreten kann, siehe \ref{fig:Auswahlmenue}. 
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/AlgorithmeninderApplikation.png}
+	\captionof{figure}[Auswahlmenü]{ Das Auswahlmenü für ein Damespiel }
+	\label{fig:Auswahlmenue}
+\end{minipage}
+
+Diese Algorithemen sind: Minimax, Alpha-Beta-Pruning, Zugsortierung und MCTS.
+Aus Abbildung \ref{fig:KIClientClassDiagram}
+kann man entnehmen, dass es zwei Hauptalgorithmen in dem Paket CheckersAiLogik gibt, Minimax und MCTS. Diese Aufteilung kann vorgenommen werden,
+da Alpha-Beta-Pruning und Zugsortierung auf Minimax basieren.
+
+
+\subsubsection{Minimax}
+Der Minimax-Algorithmus wird im wie in \ref{chap:Minimax} erklärt, durch einen Baum repräsentiert. Dadurch, dass jeder Knoten einen Spielbrettzustand
+repräsentiert und durch den Algorithmus einen Wert zugewiesen bekommen, hat die Applikation eine MinimaxNode-Klasse.
+Diese Klasse ist hauptsächlich für das Speichern der Informationen zuständig, welche dann einfach von der eigentlichen Minimax-Klasse zur Berechnung
+verwendet werden können. Damit ein vollständiger Baum aufgebaut werden kann, enthält die Minimax-Node-Klasse ein Array mit Zeigern auf allen 
+Kindknoten, was eine Vorwärtstraversierung des Baumes erlaubt. 
+Um eine Berechnung zu starten, braucht die start-Funktion ein Spielbrett, den Spieler der an der Reihe ist, eine
+Tiefe bis zu der berechnet werden soll und oder ein Zeitlimit. Ist ein Zeitlimit angegeben, so benutzt die start-Funktion Iterative Deepening, siehe
+\ref{chap:IterativeDeepening}, dadurch kann die Berechnung so gut wie Möglich die komplette Zeit ausnutzen. Ist kein Zeitlimit angegeben, 
+so wird spezifizierte Tiefe dem Minimax übergeben und dieser rechnet so lang bis er diese erreicht. Wird Minimax mit Iterative Deepening gestartet, so
+wird ein Zeitwert zum Anfang gespeichert. Dieser Zeitwert wird wärend der Berechnung von Minimax mit dem momentanen Zeitwert verglichen, ist die 
+Differenz größer oder gleich des Zeitslimits, wird ein mittels einer C++ Exception die Momentane Berechnung abgebrochen und nachdem der zurückkehren in 
+den Catch-Block der letzte komplett berechnete Zug verwendet. 
+Wird Minimax gestartet, holt sich der Algorithmus mittels der Verwendung der Funktion AddAllChildren, alle Kinderspielbretter. Diese 
+definieren sich aus allen möglichen Zügen die von einer Stellung aus möglich sind, siehe Kapitel \ref{chap:Moves}. Der Vorgang wird 
+rekursiv wiederholt, bis die geforderte Tiefe erreicht wird und die Bewertungsfunktion aufgerufen wird. Die Ergenisse werden dann rekursiv rückwärts in 
+den MinimaxNodes des Baumes eingetragen.
+
+Um mit Minimax den besten Zug berechnen zu können wird eine gute Bewertungsfunktion 
+benötigt, die verwendete hat folgende Eigenschaften:
+\begin{itemize}
+    \item Normale Figur: +1 für Weiß und -1 für Schwarz
+    \item Dame: +3 für Weiß und -3 für Schwarz
+    \item Spielende: +40 für Weiß und -40 für Schwarz
+\end{itemize} 
+Erweiterungsmöglichkeiten wären, Bedrohte Figuren, sowie Figuren in der Spielmitte und in den Grundreihen mit in die Berechnung miteinfließen zu lassen.
+Der Vorteil einer einfachen Bewertungsfunktion ist das einsparen von Berechnungszeit.
+
+Dadurch, dass Alpha-Beta-Pruning und Zugsortierung Erweiterungen von Minimax sind, können diese beiden Algorithmen mit in die Minimax-Klasse gepackt
+und über Übergabeparameter des Konstruktors an- und ausgeschalten werden. 
+
+
+\subsubsection{MCTS}
+Der MCTS-Algorithmus ist ein auf Simulation basierender Algorithmus, er ist in Kapietel \ref{chap:MCTS} erklärt worden.
+Ähnlich wie beim Minimax-Algorithmus verwendet der MCTS-Algorithmus auch einen Baum mit Knoten welche den Spielbrettzustand halten.
+Der Unterschied liegt hierbei bei den Informationen, die ein Konten hält. Eine MCTSnode hält die Anzahl an verlorenen und gewonnen Spielen,
+die aus der Simulation hervorgehen. Jeder Knoten hat ein Array mit Zeigern auf seine Kinderknoten, dadruch entseht die bekannte Baumstruktur.
+Im Gegensatz zur MinimaxNode, werden nicht bei einer Iteration alle Kinder eines Knoten mit AddAllChildren hinzugefügt, sondern mittels des 
+UCTS-Ergbnisse, wird der beste Kandidat gewählt. Für den Parameter $c$ wird zwei gewählt, da in vielen gelungen anderen Spielen die Zahl zwei 
+zu guten erfolgen geführt hat. Da der MCTS nicht unendlich lange simulieren soll, braucht er ein Zeitlimit oder eine Anzahl an Simulationen
+nach welchen er die Simulation abbrechen und das Ergebnis zurückliefern soll. Die Zeitüberprüfung wird ähnlich wie bei Minimax gehalten,
+ist der Zeitpunkt zum abbruch gekommen wird eine C++ Exception geworfen, was zum Stop der Simulation führt. 
+Um die Simulation Ausführen zu können werden die Methoden, welche in \ref{chap:Moves} beschrieben sind verwendet.
+Das Ergebnis des MCTS ist der Kindknoten, welcher den besten Wert nach den Simulationen hat, dieser wird auch vom Algorihtmus zurückgegeben.
+
+
+
+\subsection{GUI Dame Erweiterung}
+
+\subsection{Zugüberprüfung und Spielfeld}
+\label{chap:Moves}
+
+\section{Testing und Simulation}
+\subsection{Simulation}
+Da die Software mehrere KI-Algorithemen beeinhaltet und diese unterschiedlich stark sind, werden Simulationen verwendet um die erwartete Stärke der Algorithemen
+zu bestätigen. Im laufe der Simulationen spielt jede KI gegen die anderen KI's. Um die Ergebnisse in Form von Stärke festzuhalten, bekommt jeder Algorithmus ahnhand
+seiner Performance eine ELO-Zahl zugewisen.
+
+\subsubsection{ELO}
+Das Elo System ist eine Kennzahl für die relative Spielstärke die ein Spieler in einem Nullsummenspiel hat. ELO wird hauptsächlich in Schach und Go verwendet,
+findet aber auch immer mehr Anwendung in anderen Sportarten wie Tischtennis oder auch in Computerspielen. Bei der Berechnung von Elo wird ein Spiel von zwei 
+Spielern untersucht, dabei ist die Elozahl der Spieler die erwartete Spielstärke. Demnach wird von einem Spieler mit höherer Elo-Zahl als sein Gegener
+vielmehr ein Gewinn erwartet. Dementsprechend verhält sich auch die Eloänderung nach dem Spiel. Verliert ein Spieler A mit einer höheren Elo gegen einen
+Spieler B mit gerigerer Elo, so verliert A viel Punkte und B bekommt viel Punkte dazu. Gewinnt jeoch A, so bekommt er nur sehr wenig Punkte hinzu und B verliert 
+nur sehr wenig. \\ Die in der Applikation verwendete Elo Zahl wird wie folgt berechnet:
+
+\begin{align}
+    R_1 = 10^{\frac{E_1}{400}} \\ 
+    R_2 = 10^{\frac{E_2}{400}} \\
+    F_1 = \frac{R_1}{R_1+R_2} \\ 
+    F_2 = \frac{R_2}{R_1+R_2} \\
+    E_{neu1} = E_1 + k \cdot (S_1 - F_1) \\ 
+    E_{neu2} = E_2 + k \cdot (S_2 - F_1)  
+\end{align}
+
+Dabei entspricht:
+\begin{conditions}
+    E     &  Elo Zahl \\   
+    F     &  Warscheinlichkeit das der Spieler gewinnt \\
+    k     &  K-Faktor \\
+    S     &  Sieg oder Niederlage (1 oder 0)
+\end{conditions}
+
+Der K-Faktor gibt eine Aussage darüber wie stark sich ein Spiel auf die Eloänderung auswirkt. In der Applikation wurde ein K-Faktor von 30 verwendet, da 
+dieser auch in Turnierschach für Spieler unter 2100 Elo verwendet wird.
+
+\subsubsection{Aufbau der Simulationsoftware}
+Für die Simulation wurde eine Eigene Software geschrieben, welche unabhängig von der ReversiXT GUI arbeitet. 
+Es werden lediglich der Gameserver und der Gameclient benötigt. Um eine Simulation zu starten muss eine Anzahl durchläufen angeben werden, je nach dem
+wie viele Spiele ausgeführt werden sollen. Startet man ein Spiel wird der Gameserver und zwei Gameclients mit zufällig sich unterscheidenden Algorithmen gestartet.
+Wird ein Spiel abgeschlossen wird das Ergbnis in einer Datei gespeichert und die Elo aktualisiert.
+
+\subsubsection{Interpretation der Ergebnisse}
+Die vier implementierten Algorithemen der Applikation sind:
+\begin{itemize}
+    \item MCTS
+    \item Minimax 
+    \item Alpha-Beta Pruning
+    \item Alpha-Beta mit Zugsortierung 
+\end{itemize}
+Man könnte erwarten dass Alpha-Beta mit Zugsortierung die höchste Elozahl, Alpha-Beta Pruning die zweithöchste, Minimax die dritthöchste und MCTS die geringste Elo-
+Zahl erhalten würden. Diese Annahme lässt sich durch die Simulation bestätigen.
+
+%todo -> Bild mit werten einfügen
+
+\subsection{Testing}
+Um die Stabilität der Software, zu verbessern, sind Tests für die anfälligen Softwarekomponenten erstellt worden, durch welche gröbere Fehler vermieden werden können.
+Die GUI ist weniger Fehleranfällig, da in ihr lediglich Informationen dargestellt werden. Die Kritischen Softwareteile sind der Gameserver und der Gameclient, 
+in welchen das Dame Spiel ausgeführt und neue Züge berechnet werden. Ein Fehler dort wäre verherend, da die Software nicht in einen Korrekten Zustand zurückgeführt
+werden kann.
+
+\subsubsection{Gameserver}
+Im Gameserver ist der Zustand des Spieles und die Überprüfung der gespielten Züge. Diese Überprüfung darf auch in Spezialfällen nicht fehlschlagen, so muss z.B. ein
+Spieler in Schlagzwang immer das Schlagen einer Figur ausführen, oder ein Spieler kann nicht noch einmal schlagen, wenn er mit einem Zug bei dem geschlagen worden ist,
+eine Dame erhält. Um dies zu überprüfen, gibt es Tests, die Spezielle Spielsituationen als Eingabe bekommen und prüfen ob die Software den Zug als Gültig/Ungültig
+anerkennt. Die Situationen sind entweder Spezialfälle die aus den Damenregeln hervorgehen, oder Standartstellungen bei denen eigentlich kein Fehler auftreten dürfte.
+Die Testsoftware verwendet das Testing Framework Chai, welches zum testen von Node Anwendungen verwendet wird. 
+Dabei werden mehrere Testfällte beschrieben, diese werden dann über asserts oder expects von Chai ausgewertet. Diese Auswertung verläuft automatisiert,
+dass heißt wird die Software neu von Typescript in Javascript kompiliert, werden auch die Testfälle ausgeführt.
+
+\subsubsection{Gameclient}
+Das Testen des Gameclients ist sehr wichtig, da kleinste Fehler zu einer enormen Verschlechterung der Performance des KI-Algorithmuses führen.
+Um den Gameclient zu testen, verwendet man ähnlich wie beim Gameserver Szenarien, in denen es schwirig ist den besten Zug zu finden, oder 
+in sehr einfachen Situationen, bei dem der KI-Algorithmus nicht sehr lagen brauchen sollte um den Perfekten Zug ausfindig zu machen.
+Da die KI-Logik des Gameclients in C++ implementiert ist, ist die Testsoftware manuel geschrieben. 
+Was bedeutet, dass es handelt sich um eine unabhängige Applikation, welche einen Gameclient startet und diesem mit Spielsituation und Zugaufforderung füttert.
+Der Client gibt der Testsoftware, dann den nächsten Zug zurück. Das Ergbnis wird mit dem gewünschten Ergbnis verglichen, um zu bestimmen ob ein Fehler 
+oder eine Korrekte Ausgabe getätigt werden muss. In diesem Prinzip startet die Testsoftware den Gameclient mehrfach für verschiedenste Testfällte und
+wertet diese Ergbnisse aus.
+
 
 \pagebreak
 % ----------------------------------------------------------------------------------
