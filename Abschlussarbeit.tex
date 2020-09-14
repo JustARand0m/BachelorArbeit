@@ -894,9 +894,10 @@ neues Spiel starten, Zugaufforderung, Spiel Ende und viele weitere. Die meisten 
 Ausnahmen, wie die Spielbrettnachricht, bei welcher ein 10x10 oder 8x8 Damenspielbrett gewählt werden kann. Die Nachricht selber entspricht dann den eigentlichen 
 Daten, die übertragen werden, wie zum Beispiel, den Feldern welche besetzt sind beim Spielfeld, oder das Ursprungsfeld und das Zielfeld bei einer Zugantwort. 
 
-\subsection{Verwendete KI-Algorithmen}
-In Kapitel \ref{chap:Grundlagen} wurden einige künstliche Intelligenz Algorithemen beschrieben, welche auch im Dame-Spiel der Applikation implementiert sind.
-Die Applikation bietet vier Algorithemen zur Auswahl an, gegen die der Spieler antreten kann, siehe \ref{fig:Auswahlmenue}. 
+\subsection{GUI Dame Erweiterung}
+Da die Anwendung vor der Erweiterung um das Spiel Dame nur Reversi als Spiel hatte, musste ein Extra Menü implementiert werden, über welches man Dame auswählen kann.
+Des weiterem wird ein weiteres Menü benötigt, bei welchem der Algorithmus und die Spielbrettgröße gewählt werden kann, siehe Abbildung \ref{fig:Auswahlmenue}.
+%todo ausfuehrlcher
 
 \vspace{1em}
 \begin{minipage}{\linewidth}
@@ -906,6 +907,9 @@ Die Applikation bietet vier Algorithemen zur Auswahl an, gegen die der Spieler a
 	\label{fig:Auswahlmenue}
 \end{minipage}
 
+\subsection{Verwendete KI-Algorithmen}
+In Kapitel \ref{chap:Grundlagen} wurden einige künstliche Intelligenz Algorithemen beschrieben, welche auch im Dame-Spiel der Applikation implementiert sind.
+Die Applikation bietet vier Algorithemen zur Auswahl an, gegen die der Spieler antreten kann, siehe \ref{fig:Auswahlmenue}. 
 Diese Algorithemen sind: Minimax, Alpha-Beta-Pruning, Zugsortierung und MCTS.
 Aus Abbildung \ref{fig:KIClientClassDiagram}
 kann man entnehmen, dass es zwei Hauptalgorithmen in dem Paket CheckersAiLogik gibt, Minimax und MCTS. Diese Aufteilung kann vorgenommen werden,
@@ -938,10 +942,25 @@ benötigt, die verwendete hat folgende Eigenschaften:
     \item Spielende: +40 für Weiß und -40 für Schwarz
 \end{itemize} 
 Erweiterungsmöglichkeiten wären, Bedrohte Figuren, sowie Figuren in der Spielmitte und in den Grundreihen mit in die Berechnung miteinfließen zu lassen.
-Der Vorteil einer einfachen Bewertungsfunktion ist das einsparen von Berechnungszeit.
+Man muss ich aber immer vor Augen halten, dass eine komplexere Bewertungsfunktion mehr Berechnungszeit benötigt, aber bessere Ergebnisse liefern könnte.
 
+\subsubsection{Minimax Erweiterungen Alpha-Beta-Pruning und Zugsortierung}
 Dadurch, dass Alpha-Beta-Pruning und Zugsortierung Erweiterungen von Minimax sind, können diese beiden Algorithmen mit in die Minimax-Klasse gepackt
-und über Übergabeparameter des Konstruktors an- und ausgeschalten werden. 
+und über Übergabeparameter des Konstruktors an- und ausgeschalten werden. Dadurch hat man weniger Code, kann aber trozdem noch 
+verschieden Algorithmen mit unterschieder Stärke im Menü wählen. Da Minimax rekursiv implementiert ist, kann Alpha-Beta-Pruning sehr elegent mit wenigen 
+Zeilen Code geschrieben werden. In Listing \ref{lst:AlphaBetaCode} sieht man die Einfache Implementierung des Alpha-Beta-Prunings im Maximierer Teil 
+von Minimax. Zuerst wird überprüft ob es sich um reinen Minimax handlet, oder um Alpha-Beta oder Zugsortierung. Danach wird der Alpha Wert mit dem
+Maximum aus dem alten Alpha-Wert und dem durch die Bewertungsfunktion berechneten eval Wert berechnet. Das Codestück im Minimierer hätte an dieser Stelle 
+ein Min anstelle des Max. Das Pruning finden für den fall dass Beta kleiner gleich Alpha ist statt, dadurch wird der Teil dieses Zweiges nicht weiter untersucht.
+\vspace{1em}
+\lstinputlisting[caption=Code der Implementierung des Alpha-Beta-Prunings, label=lst:AlphaBetaCode,basicstyle=\ttfamily\scriptsize]{code/Alpha-Beta.txt}
+
+Um eine Zugsortierung im Minimax zu erreichen, wird im Teil von AddAllChildren des Minimax die Bewertungsfunktion der Zugsortierung aufgerufen.
+Dadurch dass es sich um Array von Zeigern handelt, welche auf die Kindknoten zeigen muss nur dieses Array unter Berücksichtigung der Bewertungsfunktion
+sortiert werden, was durch die Hilfe der Standartbibliotek sehr einfach zu implementieren ist.  
+% todo Bewertungsfunktion erklären%
+Die Verbessung wird nun durch das Aufrufen des Alpha-Beta-Prunings erreicht, siehe Kapitel \ref{chap:Zugsortierung}.
+
 
 
 \subsubsection{MCTS}
@@ -957,12 +976,9 @@ ist der Zeitpunkt zum abbruch gekommen wird eine C++ Exception geworfen, was zum
 Um die Simulation Ausführen zu können werden die Methoden, welche in \ref{chap:Moves} beschrieben sind verwendet.
 Das Ergebnis des MCTS ist der Kindknoten, welcher den besten Wert nach den Simulationen hat, dieser wird auch vom Algorihtmus zurückgegeben.
 
-
-
-\subsection{GUI Dame Erweiterung}
-
 \subsection{Zugüberprüfung und Spielfeld}
 \label{chap:Moves}
+
 
 \section{Testing und Simulation}
 \subsection{Simulation}

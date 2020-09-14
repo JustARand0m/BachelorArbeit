@@ -1,0 +1,6 @@
+if(algType != MINIMAX) {
+    alpha = std::max(alpha, eval);
+    if (beta <= alpha) {
+        break;
+    }
+}
