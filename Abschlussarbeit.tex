@@ -206,7 +206,7 @@ mit einer Bewertungsfunktion bewertet:
 \begin{itemize}
     \item Normale Figur: +1 für Weiß und -1 für Schwarz
     \item Dame: +3 für Weiß und -3 für Schwarz
-    \item Spielende: +40 für Weiß und -40 für Schwarz
+    \item Spielende: $\infty$ für Weiß und $-\infty$ für Schwarz
 \end{itemize} 
 Ein Dreieck mit der lange Seite nach unten, steht für eine Maximierung der Kindknotenwerte, das andere Dreieck für eine
 Minimierung. Die Bewertungen in den Endzuständen werden nach oben durchgereicht und je nachdem, ob der Elternknoten ein Maximierer oder ein
@@ -267,16 +267,16 @@ die zweite Option wählen, so ist das Spiel nach dem Nächsten Zug von Schwarz s
                     [-1, upsideTriaTerm]
                 ]
             ]
-            [42, upsideTria
-                [42, downsideTriaTerm]
+            [$\infty$, upsideTria
+                [$\infty$, downsideTriaTerm]
                 [-1, downsideTria
                     [-1, upsideTriaTerm]
                     [-1, upsideTriaTerm]
                 ]
             ]
         ] 
-        [{\fontsize{9}{8}\selectfont -44}, downsideTria
-            [{\fontsize{9}{8}\selectfont -44}, upsideTriaTerm]
+        [{\fontsize{9}{8}\selectfont $-\infty$}, downsideTria
+            [{\fontsize{9}{8}\selectfont $-\infty$}, upsideTriaTerm]
         ] 
     ]
 \end{forest}
@@ -371,10 +371,10 @@ Ergbnis wie Minimax zur Folge hat.
 \cite{AlphaBeta}
 
 Wenn man Abbildung \ref{fig:minimax} und \ref{fig:value} als Beispiel nimmt und den Alpha-Beta Pruning Algorithmus anwendet,
-so kann der Zweig mit dem Wert 42 ignoriert werden, siehe Abbildung \ref{fig:AlphaBeta}. Der gelbe Knoten bekommt eine -1 
+so kann der Zweig mit dem Wert $\infty$ ignoriert werden, siehe Abbildung \ref{fig:AlphaBeta}. Der gelbe Knoten bekommt eine -1 
 durch seinen linken Zweig vorübergehend zugewiesen. Da der Knoten des Rechten Zweiges ein Maximierer ist, also immer den Wert des
-Kindknotens mit dem höchsten Wert nimmt, und dieser bereits einen Knoten mit dem Wert 42 gefunden hat, wird sein Wert 
-definitiv mindestens 42 sein. Der restliche rechte Zweig des gelben Knotens kann nun ignoriert werden, da der linke Zweig mit
+Kindknotens mit dem höchsten Wert nimmt, und dieser bereits einen Knoten mit dem Wert $\infty$ gefunden hat, wird sein Wert 
+definitiv mindestens $\infty$ sein. Der restliche rechte Zweig des gelben Knotens kann nun ignoriert werden, da der linke Zweig mit
 -1 definitiv kleiner sein wird.
 
 \begin{figure}[H]
@@ -394,13 +394,13 @@ definitiv mindestens 42 sein. Der restliche rechte Zweig des gelben Knotens kann
                     [-1, upsideTriaTerm]
                 ]
             ]
-            [42, upsideTria, edge={myedge}
-                [42, downsideTriaTerm]
+            [$\infty$, upsideTria, edge={myedge}
+                [$\infty$, downsideTriaTerm]
                 [?, downsideTria]
             ]
         ] 
-        [{\fontsize{9}{8}\selectfont -44}, downsideTria
-            [{\fontsize{9}{8}\selectfont -44}, upsideTriaTerm]
+        [{\fontsize{9}{8}\selectfont $-\infty$}, downsideTria
+            [{\fontsize{9}{8}\selectfont $-\infty$}, upsideTriaTerm]
         ] 
     ]
 \end{forest}
@@ -667,18 +667,36 @@ Dieses Kapitel setzt sich mit der Softwarearchitktur auseinander.
 %Die ReversiXT GUI, über welche der User Spiele starten und KI's auswählen kann und dem KI Client, welcher eine künstliche Intelligenz für Dame ist, 
 %sind die beiden Clients die sich mit dem Server verbinden.
 \subsection{Überblick}
-Um für eine bessere Modularität und Erweiterbarkeit zu sorgen, ist die Software auf drei Teile aufgeteilt:
+Um für eine bessere Modularität und Erweiterbarkeit zu sorgen, ist die Software auf drei Teile aufgeteilt, siehe Abbildung \ref{fig:AllClassDiagrams}:
 \begin{itemize}
     \item Gameserver
     \item ReversiXT GUI
-    \item KI-Client
+    \item Gameclient
 \end{itemize}
 Der Gameserver hält die Spielelogik und den Zustand des Spieles. Er prüft gespielte Züge auf ihre Gülgitkeit 
 und entscheidet ob ein Spiel entschieden ist. Er ist außerdem für die Spielzeitverwaltung und die Reihenfolge, in 
 der Spieler an der Reihe sind verantwortlich. Die ReversiXT Graphische Oberfläche (GUI) ist das Bedienelement für 
 den Endnutzer, um Spiele gegen verschiedene KI's oder andere Nutzer starten zu können. 
-Die künstliche Intelligenz Logik befindet sich im KI-Client, er berechnet abhängig vom Spielfeld und Algorithmus
+Die künstliche Intelligenz Logik befindet sich im Gameclient, er berechnet abhängig vom Spielfeld und Algorithmus
 den nächsten Zug den die KI für den besten hält.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/AllClassDiagrams.png}
+	\captionof{figure}[Auswahlmenü]{ Die gesamte Anwendung im UML Klassendiagramm }
+	\label{fig:AllClassDiagrams}
+\end{minipage}
+
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/Komponentendiagram.png}
+	\captionof{figure}[Auswahlmenü]{ Die gesamte Anwendung im UML Komponentendiagram}
+	\label{fig:ComponentDiagram}
+\end{minipage}
+
 
 
 
@@ -711,6 +729,32 @@ abwechselnd von den Clients angefordert, bis ein Spieler gewonnen hat.
 	\label{fig:UserVsUserSequenceDiagram}
 \end{minipage}
 
+\subsection{Dame Spiellogik}
+\label{chap:Spiellogik}
+Die Spiellogik für Dame ist in mehrfach in der Anwendung vorfindbar. Zum einen um Züge im KI-Client zu testen und zum anderen
+für den Gameserver, zur Überprüfungen und Aktualisierung der Züge. In den Abbildungen \ref{fig:KIClientClassDiagram} und \ref{fig:GameServerClassDiagram}
+befindet sich die Spiellogik im Paket "`Checkers"'. Diese Redundanz ist wichitg, da es sich beim Server und Client um eigenständige Prozesse handelt 
+und diese nicht die gleiche Code-Basis haben. Eine Möglichkeit diese Redundanz zu vermeiden wäre, die Validierung in den Gameserver zu verschieben und 
+dem Gameclient zu zwingen, dass jeder Zug von Gameserver validert werden muss. Dies erhöht aber die Netzwerkkommunikation und verlangsamt das finden eines Zuges, 
+durch den daraus entstehenden Overhead. 
+\\
+Die Hauptklassen der Spiellogik sind, die Board-, Move- und Player-Klasse. Dabei hält die Board-Klasse die Information über das aktuelle Spielbrett, sowie 
+Methoden um Spielsteine auf dem Spielbrett zu entfernen, oder zu bewegen. Die Move-Klasse dient zum repräsentieren eines Zuges, sie besteht aus dem 
+Uhrsprungspunk, den Zielpunkt, dem Spieler der den Zug getätigt hat und um welchem Spielstein es sich handelt. 
+\\
+Die Klassen CheckersForceCapture und CheckersAllPossibleMovesChecker, sind Klassen zum finden von aller möglichen Züge die aus einer Stellung heraus gespielt werden
+können. Dabei ist CheckersForceCapture verantwortlich für Züge bei denen ein Spieler gezwungen wird eine Figur zu schlagen und CheckersAllPossibleMovesChecker 
+für alle Züge die keinen Schlagzwang haben. Die Aufteilung in zwei Klassen hat den Hintergrund, dass falls es sich um einen Schlagzwang handelt, braucht 
+die AllPossibleMoves-Klasse nicht erzeugt werden um Züge zu finden. Um einen von der Netzwerkkommunikation eingehenden Zug zu überprüfen, 
+werden die Metheoden der CheckersMoveTypeCheck-Klasse verwendet. Sie vergleichen einen gegebenen Zug, 
+den zum Beispiel der Benuzter getätigt hat, mit den Zügen die aus CheckersForceCapture und CheckersAllPossibleMovesChecker
+hervorgehen. Dieses Vergleichen ist sehr wichitg für den Gameserver, da alle Züge die von den Clients kommen valide sein müssen. Im Gameclient wird das Vergleichen nur 
+als Extravalidierung verwendet um den gesendeten Zug aus dem Gameserver nochmal zu überprüfen und so Fehler zu minimieren.
+\\
+Das Anwenden eines Spielzuges auf das Spielbrett wird mittels der MoveApplier-Klasse im Gameclient und mit der CheckersRules-Klasse im Gameserver 
+getätigt. Beide verfolgen im Prinzip das selbe Ziel, der Unterschied wird im Implementierungskapitel \ref{chap:Moves} erklärt.
+
+
 \subsection{Gameserver}
 Als Gameserver wird der Teil der Software betrachtet, welcher für das einhalten der Spielregeln und die Verwaltung der Spielfeldzustandes, 
 verantwortlich ist. 
@@ -722,9 +766,7 @@ Nachdem ein Client verbunden ist und seine Nachrichten schickt, wird diese dekod
 an den Gamerulbook Teil weitergeleitet. Das Gamerulbook Paket verwaltet den Spielzustand, sowie die Spielregeln des laufenden Spieles.
 Es ist über das GameRules Interface mit dem Serverconnection Paket verbunden. Ein beliebiges Spiel kann mittels dieses Interfaces
 als eigenes Paket festgelegt werden, was zu einer Möglichkeit führt den Gameserver um beliebig viele Spiele erweitern zu können.
-Die Board-Klasse beeinhaltet das Spielbrett, welches beim start des Servers übergeben wird. Die AllPossibleMoves-Klasse ist 
-verantwortlich alle möglichen Züge die in einer Stellung möglich sind dazustellen. Beide Klassen sind unabhängig von
-der Implementierung des Spieles über das GamesRules-Interface.
+Über den weiteren Inhalt des "`Checkers"' Paketes wird in Kapitel \ref{chap:Spiellogik} berichtet.
 
 Abbildung \ref{fig:GameServerClassDiagram} zeigt den Aufbau als UML-Klassendiagramm, dabei sind Dame und Mühle as Spiele über das
 GameRules Interface als Pakete Beispielhaft gezeigt. 
@@ -768,8 +810,9 @@ Der KI Client beinhaltet die Logik der Künstlichen Intelligenz der Applikation.
 Gegenspieler zum User. Der User kann auch ein Spiel bei welchem zwei KI's gegeneinander spielen starten, wodurch zwei KI Clients gestartet werden.
 
 \subsubsection{Softwareaufbau des KI Clients}
-Der KI Client besteht aus drei Paketen, der KI-Logik, der Spielelogik und der Serververbindungslogik, siehe \ref{fig:KIClientClassDiagram}. 
-Die Spielelogik, beeinhaltet ein Momentanzustand des Spielbrettes, sowie Möglichkeiten dieses nach belieben zu modifizieren. Das KI-Paket benutzt diese Logik um 
+Der KI Client besteht aus drei Paketen, der KI-Logik, der Spiellogik und der Serververbindungslogik, siehe \ref{fig:KIClientClassDiagram}. 
+Die Spilelogik, beeinhaltet ein Momentanzustand des Spielbrettes, sowie Möglichkeiten dieses nach belieben zu modifizieren und ist in Kapietel 
+\ref{chap:Spiellogik} erklärt. Das KI-Paket benutzt diese Logik um 
 Züge auf auszuwerten und den bestmöglichen Zug zu wählen. Um verschiedene KI-Algorithmen verwenden zu können wird ein Interface bereit gestellt, wird die Applikation 
 um einen weiteren KI-Algorithmus erweitert, so muss dieser das Interface verwenden. Wird eine Auswertung des Nächsten besten Zuges abeschlossen, so sendet das KI-Paket sein
 Ergebnis an die das Server-Paket. Dieses ist verantwortlich für das Versenden und kodieren der Nachrichten. Nachrichten werden vom KI-Client zum Gameserver geschickt und müssen
@@ -897,6 +940,7 @@ Daten, die übertragen werden, wie zum Beispiel, den Feldern welche besetzt sind
 \subsection{GUI Dame Erweiterung}
 Da die Anwendung vor der Erweiterung um das Spiel Dame nur Reversi als Spiel hatte, musste ein Extra Menü implementiert werden, über welches man Dame auswählen kann.
 Des weiterem wird ein weiteres Menü benötigt, bei welchem der Algorithmus und die Spielbrettgröße gewählt werden kann, siehe Abbildung \ref{fig:Auswahlmenue}.
+Dieses Menü zeigt eine Auswahl für Spielfeldgrößen, 
 %todo ausfuehrlcher
 
 \vspace{1em}
@@ -930,7 +974,7 @@ wird ein Zeitwert zum Anfang gespeichert. Dieser Zeitwert wird wärend der Berec
 Differenz größer oder gleich des Zeitslimits, wird ein mittels einer C++ Exception die Momentane Berechnung abgebrochen und nachdem der zurückkehren in 
 den Catch-Block der letzte komplett berechnete Zug verwendet. 
 Wird Minimax gestartet, holt sich der Algorithmus mittels der Verwendung der Funktion AddAllChildren, alle Kinderspielbretter. Diese 
-definieren sich aus allen möglichen Zügen die von einer Stellung aus möglich sind, siehe Kapitel \ref{chap:Moves}. Der Vorgang wird 
+definieren sich aus allen möglichen Zügen die von einer Stellung aus möglich sind, siehe Kapitel \ref{chap:Spiellogik}. Der Vorgang wird 
 rekursiv wiederholt, bis die geforderte Tiefe erreicht wird und die Bewertungsfunktion aufgerufen wird. Die Ergenisse werden dann rekursiv rückwärts in 
 den MinimaxNodes des Baumes eingetragen.
 
@@ -973,11 +1017,17 @@ UCTS-Ergbnisse, wird der beste Kandidat gewählt. Für den Parameter $c$ wird zw
 zu guten erfolgen geführt hat. Da der MCTS nicht unendlich lange simulieren soll, braucht er ein Zeitlimit oder eine Anzahl an Simulationen
 nach welchen er die Simulation abbrechen und das Ergebnis zurückliefern soll. Die Zeitüberprüfung wird ähnlich wie bei Minimax gehalten,
 ist der Zeitpunkt zum abbruch gekommen wird eine C++ Exception geworfen, was zum Stop der Simulation führt. 
-Um die Simulation Ausführen zu können werden die Methoden, welche in \ref{chap:Moves} beschrieben sind verwendet.
+Um die Simulation Ausführen zu können werden die Methoden, welche in \ref{chap:Spiellogik} beschrieben sind verwendet.
 Das Ergebnis des MCTS ist der Kindknoten, welcher den besten Wert nach den Simulationen hat, dieser wird auch vom Algorihtmus zurückgegeben.
 
-\subsection{Zugüberprüfung und Spielfeld}
+\subsection{Dame Spiellogik}
 \label{chap:Moves}
+Im Kapitel \ref{chap:Moves} ist bereits der Aufbau der Spiellogik erklärt. Die Besonderheit bei der Implementierung ist, dass sich der Gameserver und 
+der Gameclient in der Implementierung des MoveAppliers und CheckersRules unterscheiden. Der Grundliegende Unterschied ist, dass 
+beim Berechenen eines neuen Zuges durch den Gameclient sehr oft die Methode "`move"' aufgerufen werden muss. Da diese Züge nicht von 
+anden Komponenten der Anwendung kommen, müssen sie nicht auf Korrektheit überprüft werden. Eine der Hautpaufgaben des Gameservers ist die 
+Überprüfung und Validierung der eingehenden Züge, diese Validierung kostet aber auch Zeit welche die Berechnung im Gameclient verlangsamen würden 
+und daher im Gameclient bei der Berechnung weggelassen wird.
 
 
 \section{Testing und Simulation}
