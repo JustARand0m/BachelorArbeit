@@ -3,30 +3,40 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {1}{\ignorespaces DameSpielfeld}}{3}{figure.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2}{\ignorespaces Minimax-Baum mit Spielfeldzustand als Knoten\relax }}{4}{figure.caption.1}% 
+\contentsline {figure}{\numberline {2}{\ignorespaces Das Hauptmen\IeC {\"u} der Anwendung\relax }}{3}{figure.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3}{\ignorespaces Minimax-Baum mit Bewertung der Stellungen\relax }}{5}{figure.caption.2}% 
+\contentsline {figure}{\numberline {3}{\ignorespaces Das Auswahlmen\IeC {\"u} eines Reversi Spieles\relax }}{4}{figure.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4}{\ignorespaces Ablauf des Iterativen Deepenings\relax }}{6}{figure.caption.3}% 
+\contentsline {figure}{\numberline {4}{\ignorespaces Ein gestartetes Reversi Spiele \relax }}{4}{figure.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5}{\ignorespaces Gewinn durch Alpha-Beta Pruning\relax }}{7}{figure.caption.4}% 
+\contentsline {figure}{\numberline {5}{\ignorespaces Minimax-Baum mit Spielfeldzustand als Knoten\relax }}{6}{figure.caption.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6}{\ignorespaces Beispiel einer Zugsortierung\relax }}{8}{figure.caption.5}% 
+\contentsline {figure}{\numberline {6}{\ignorespaces Minimax-Baum mit Bewertung der Stellungen\relax }}{6}{figure.caption.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {7}{\ignorespaces Minimax-Baum mit Bewertung der Stellungen\relax }}{9}{figure.caption.6}% 
+\contentsline {figure}{\numberline {7}{\ignorespaces Ablauf des Iterativen Deepenings\relax }}{7}{figure.caption.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {8}{\ignorespaces Auswahlmen\IeC {\"u}}}{11}{figure.8}% 
+\contentsline {figure}{\numberline {8}{\ignorespaces Gewinn durch Alpha-Beta Pruning\relax }}{8}{figure.caption.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9}{\ignorespaces Auswahlmen\IeC {\"u}}}{12}{figure.9}% 
+\contentsline {figure}{\numberline {9}{\ignorespaces Beispiel einer Zugsortierung\relax }}{9}{figure.caption.5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {10}{\ignorespaces SequenceDiagram}}{13}{figure.10}% 
+\contentsline {figure}{\numberline {10}{\ignorespaces Minimax-Baum mit Bewertung der Stellungen\relax }}{10}{figure.caption.6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {11}{\ignorespaces ClassDiagram}}{15}{figure.11}% 
+\contentsline {figure}{\numberline {11}{\ignorespaces Die Anwendung als Verteilungsdiagramm\relax }}{12}{figure.11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12}{\ignorespaces ReversiXTGUI}}{17}{figure.12}% 
+\contentsline {figure}{\numberline {12}{\ignorespaces Auswahlmen\IeC {\"u}}}{13}{figure.12}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {13}{\ignorespaces KIClient}}{19}{figure.13}% 
+\contentsline {figure}{\numberline {13}{\ignorespaces SequenceDiagram}}{14}{figure.13}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {14}{\ignorespaces Der Aufbau einer Nachricht\relax }}{23}{table.caption.7}% 
+\contentsline {figure}{\numberline {14}{\ignorespaces Das Paket Checkers welches die Spiellogik beeinhaltet \relax }}{16}{figure.14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {15}{\ignorespaces Auswahlmen\IeC {\"u}}}{23}{figure.15}% 
+\contentsline {figure}{\numberline {15}{\ignorespaces ClassDiagram}}{17}{figure.15}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {16}{\ignorespaces ReversiXTGUI}}{19}{figure.16}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {17}{\ignorespaces KIClient}}{21}{figure.17}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {18}{\ignorespaces Der Aufbau einer Nachricht\relax }}{25}{table.caption.7}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {19}{\ignorespaces Auswahlmen\IeC {\"u}}}{25}{figure.19}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {20}{\ignorespaces UML Klassendigramm aller Komponenten des Projekts \relax }}{IV}{figure.20}% 

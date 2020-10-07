@@ -130,12 +130,13 @@ die in der Spieltheorie entwickelt wurden, haben sich auch erfolgreich auf ander
 der Informatik übertragen lassen. Ebenso hat sich die Art, wie Brettspiele gespielt werden, 
 durch das Verwenden von künstlicher Intelligenz auch verändert, da die KI Züge in Betracht 
 zieht, die auf den ersten Blick recht ungewöhnlich und nachteilhaft aussehen, sich aber als 
-extrem stark herausstellen. Diese Arbeit versucht eine künstliche Intelligenz für 
-Brettspiele, wie Dame, zu implementieren.
+extrem stark herausstellen. Diese Arbeit versucht eine künstliche Intelligenz für das
+Brettspiele Dame zu implementieren.
 
 \subsection{Aufgabenstellung}
+\label{chap:Aufgabenstellung}
 Im Rahmen der Bachelorarbeit soll eine künstliche Intelligenz entwickelt werden, welche 
-Brettspiele, wie Dame, spielen kann. Gegeben ist eine Software, bei welcher man in der Lage ist,
+das Brettspiele Dame spielen kann. Gegeben ist eine Software, bei welcher man in der Lage ist,
 das Spiel ReversiXT (Reversi Extreme) gegen eine KI, sowie sich selbst zu spielen. Diese 
 Software soll um einen Game Server, die KI und das neue Spiel in der GUI, erweitert werden.
 Außerdem soll ein Benutzer in der Lage sein, sich mit seinem Smarthphone mit der Hardware zu 
@@ -160,13 +161,26 @@ folgenden Kapitel von großer Relevanz sind. \cite{KuenstlicheIntelligenzNorvig}
 %\subsection{Brettspiele}
 \subsection{Dame}
 Dame ist eines der ältesten Brettspiele, wobei erste Varianten 3000 v. Chr. im irakischen Ur
-entdeckt wurden. In der heutigen Zeit werden verschiedene Varianten desselben Spieles weltweit
-gespielt. So wird in vielen englischsprachigen Ländern eine andere Version gespielt als im Rest
-der Welt, was auch als Internationale Dame bekannt ist. Unterschiede sind z. B. bei diesen Varianten,
-dass bei internationaler Dame, Damen beliebig viele Felder in alle Richtungen springen dürfen, 
-in anderen Varianten jedoch nur 1 Feld. Da die Regeln der internationalen Dame
-weiter verbreitet sind und auch im Vereinssport praktiziert werden, wird sich diese Arbeit im folgenden
-auf diese Regeln fokussieren. \cite{DraughtsHistory}
+entdeckt wurden, welche sich jedoch stark vom Moderenen Dame unterscheiden. Das Dame so wie es Heutzutage 
+bekannt ist, stammt vermutlich vom Spiel Alquerque ab. Da damals nicht jeder ein Spielbrett für Alquerque 
+hatte, wurden die verfügbaren Schachbretter mit den Backgammon Steinen verwendet \cite{SpieleDerWelt}.
+Dieses Spiel wurde später mit Regeln wie Schlagzwang erweitert, was zur Entstehung des Heutigen Dame führte.
+Auch in der Heutigen Zeit gibt es noch hunderte Varianten von Dame welche sich Weltweit unterscheiden.
+
+\subsubsection{Varianten des Spieles}
+Das Spiel Dame so wie es im Deutschsprachigen Raum gespielt wird, findet auf einem 8x8 Schachbrett statt. 
+International wird jedoch ein 10x10-Brett und in der Kanadsichen Dame ein 12x12-Brett verwendet. 
+Normalerweise können Figuren nur Diagonal Ziehen, jedoch gibt es 
+auch Abwandlungen des Spieles wie bei Türkischer Dame, bei welcher Spielsteine horizontal und vertikal gezogen werden können.
+Das Spiel Unterscheidet sich des weiteren durch die Fähigkeiten
+des Dame-Spielsteins, welcher in einigen Varianten nur eine Feld in beliebige Richtung ziehen darf, in anderen 
+So viel Felder wie möglich. Die Art wie geschlagen ist bei diesen Varianten ebenso anders, so erlauben
+einige Varianten das Schalgen eines normalen Spielsteines in die Rückwertsrichtung, andere verbieten 
+jedoch diesen Zug. Außerdem gibt es Spielformenen wie Baschni, eine Form der Russischen Dame bei welcher durch schlagen 
+eines Spielesteines, dieser nicht vom Spiel entfernt wird sondern auf den Spielstein der ihn geschlagen hat gesetzt wird. 
+Wird dieser ``Turm'' aus mehreren Spielsteinen geschlagen, so wird nur der oberste Stein entfernt. 
+Bei der Variante, welche für diese Arbeit verwendet wird, handelt es sich um Internationale Dame, da diese 
+Spielvariante im Vereinssport und Internationalen Wettbewerben verwendet wird. \cite{DraughtsHistory}
 
 \subsubsection{Internationale Dame}
 In dieser Variante des Spieles wird auf einem 10x10 Brett mit Schachbrett-Muster gespielt.
@@ -176,6 +190,8 @@ Feldern des Schachbrettes bewegt werden. Es gibt zwei Arten von Spielsteinen. No
 nur in Richtung des Gegners bewegt werden, aber Rückwerts schlagen dürfen, und Damen, welche
 in alle Richtungen beliebig viele Felder fahren und schlagen dürfen. Allgemein herrscht Schlagzwang,
 was bedeutet, dass falls ein Spieler die Möglichkeit hat zu schlagen, er auch schlagen muss.
+Spielsteine die geschlagen wurden, werden aus dem Spiel entfernt und nicht wie bei anderen Varianten 
+auf den Schlagenden Spielstein gestapelt.
 Ein normaler Spielstein wird zur Dame, falls er in die hinterste Reihe des Gegners kommt.
 Ziel des Spieles ist es, entweder alle Steine des Gegners zu schlagen, oder den Gegner in eine Situation
 zu zwingen, in der er keine Züge mehr machen kann. \cite{InternationalCheckersRules}
@@ -188,7 +204,60 @@ zu zwingen, in der er keine Züge mehr machen kann. \cite{InternationalCheckersR
 	\label{fig:checkersboard}
 \end{minipage}
 
-\subsection{Minimax}
+\subsection{Die gegebene ReversiXT Applikation}
+Wie zuvor im Kapitel \ref{chap:Aufgabenstellung} auf Seite \pageref{chap:Aufgabenstellung} erwähnt, ist das Ziel der Arbeit, das Erweiteren
+der ReversiXT Software um das Spiel Dame. Diese Software ist eine auf Webtechnologie basierte Anwendung, welche es dem Benutzer erlaubt
+das Spiel Reversi zu spielen. Startet man die die Anwendung zum ersten mal wird man vom Hauptmenü begrüßt, siehe Abbildung \ref{fig:ReversiMenu}.
+
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/ReversiMenues.png}
+	\captionof{figure}{ Das Hauptmenü der Anwendung}
+	\label{fig:ReversiMenu}
+\end{minipage}
+
+Über dieses Menü kann man entweder den Bildschirmschoner, die Anleitungen, die Videos oder ein Spiel starten. Der Bildschirmschoner 
+zeigt Spiele bei, welchen zwei KIs gegeneinander Spielen, oder Videos welche in der Video Kategorie gespeichert sind. Wird Spielen aufgerufen, 
+so wird man auf eine Seite weitergeleitet, welche ein Auswahlmenü zum starten eines Reversi Spieles bietet, siehe \ref{fig:ReversiGameSelection}.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/ReversiGameSelection.png}
+	\captionof{figure}{ Das Auswahlmenü eines Reversi Spieles}
+	\label{fig:ReversiGameSelection}
+\end{minipage}
+
+In diesem Menü kann der Benutzer aus verschiedenen Karten und Spielern ein Spiel auswählen und starten. Jede Karte hat eine Anzahl an Spieler 
+in Klammern dahinert stehen, so hat ``bomb Test (8p)'' eine Anzahl von 8 Spielern zur Auswahl. Die Auswahl der Spieler unterscheidet hierbei
+zwischen ``Mensch'', den Benutzer und ``Einfache KI'', eine Einfach implementierte Reversi KI. Wird ``Spiel starten'' gedrückt, wird
+ein neues Spiel Reversi gestartet und man wird auf eine Seite, die das Spielbrett darstellt weitergeleitet, siehe Abbildung \ref{fig:ReversiGame}.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/ReversiGame.png}
+	\captionof{figure}{ Ein gestartetes Reversi Spiele }
+	\label{fig:ReversiGame}
+\end{minipage}
+
+Die Seite des Spieles ist unterteilt in ein Informationsmenü, welches informationen zum laufenden Spiel darstellt und dem Spielbrett mit dem
+Momentanzustand des Spieles. Falls der Benutzer an der Reihe ist, kann durch klicken auf das Spielfeld ein neuer Zug ausgeführt werden.
+Des weiteren bietet das Infomenü eine Möglichkeit das Spiel neuzustarten oder zu beenden. 
+Hat ein Spieler gewonnen, wird ein Info-Fenster eingeblendet, welches den Benutzer über den Sieger informiert.
+
+
+\subsection{Künstliche Intelligenz Algorithemen}
+Um ein Brettspiel wie Dame als künstliche Intelligenz abzubilden, gibt es viele mögliche Algorithmen.
+Diese reichen von Maschinelearning bis zu in dieser Arbeit verwendeten Baum-Algorithmen.
+Baum-Algorithemen bei Brettspielen zeichnen sich dadurch aus, dass diese einen Spielbrettzustand als Knoten abbildet.
+Dabei hat jeder Knoten einen oder mehrere Nachfolgerknoten welche wiederum alle Züge, die aus seiner Stellung gespielt werden können, darstellen.
+Die Schwirigkeit hierbei ist die Auswahl des besten Pfades zum Sieg und dabei zu beachten, dass die Algorithmen so wenig wie möglich 
+Rechenzeit dafür brauchen.
+
+\subsubsection{Minimax}
 \label{chap:Minimax}
 Der Minimax Algorithmus wird verwendet, um einen optimalen Spielzug in Spielen mit perfekter Information, bei zwei Spielern
 zu finden. Dazu wird eine Baumstruktur verwendet, welche den Zustand des Spielbrettes als Knoten hat, siehe Abbildung \ref{fig:minimax}.
@@ -294,7 +363,7 @@ die zweite Option wählen, so ist das Spiel nach dem Nächsten Zug von Schwarz s
 %	\label{fig:minimax}
 %\end{minipage}
 
-\subsection{Iterative Deepening}
+\subsubsection{Iterative Deepening}
 \label{chap:IterativeDeepening}
 In komplexeren Spielen wie Go, Schach oder Dame ist es wegen des Rechenaufwands sehr schwer, den kompletten Baum von Minimax bis zu den
 Endzuständen aufzubauen. Deswegen wird in diesen Spielen der Baum nur bis zu einer gewissen Tiefe aufgebaut. Da es aber bei einer gleichen
@@ -357,7 +426,7 @@ Suche gebraucht wird. \cite{IterativeDeepening}.
 \label{fig:IterativeDeepening}
 \end{figure}
 
-\subsection{Alpha-Beta Pruning}
+\subsubsection{Alpha-Beta Pruning}
 \label{chap:alphaBeta}
 Das Alpha-Beta Pruning ist eine Optimierung zum Minimax Algorithmus. Die Idee des Algorithmus ist, 
 dass manche Zweige des Suchbaums nicht untersucht werden müssen, da für den anderen Spieler diese
@@ -409,7 +478,7 @@ definitiv mindestens $\infty$ sein. Der restliche rechte Zweig des gelben Knoten
 \label{fig:AlphaBeta}
 \end{figure}
 
-\subsection{Zugsortierung}
+\subsubsection{Zugsortierung}
 \label{chap:Zugsortierung}
 Zugsortierung ist eine Erweiterung zur Alpha-Beta Suche.
 Da Alpha-Beta Pruning abhängig von der Reihenfolge, in der die Zustände untersucht werden, ist es sinnvoll
@@ -485,7 +554,7 @@ ignoriert werden. Bei der Bewertungsfunktion könnte man die bedrohte Figuren al
 \label{fig:Sorting}
 \end{figure}
 
-\subsection{Monte Carlo Tree Search (MCTS)}
+\subsubsection{Monte Carlo Tree Search (MCTS)}
 \label{chap:MCTS}
 Der Monte Carlo Tree Search Algorithmus, ist ein heuristischer Algorithmus, bei welchem von einem
 Zustand eines Spieles zufällig endlich viele Simulationen durchgeführt werden. Die Simulation endet, wenn
@@ -558,100 +627,7 @@ Gewinnchance für ihn hat.
 \label{fig:MCTSTree}
 \end{figure}
 
-%\section{Anforderungsanalyse}
-%In diesem Kapitel wird zuerst ein beispielhaftes Szenario gezeigt, bei welchem die Software eingesetzt werden soll.
-%Anschließend werden anhand dieser Szenarios Anforderungen definiert, die von der Software erfüllt werden müssen.
-%\subsection{Anwendungsszenario}
-%Will ein Benutzer gegen den KI Client spielen, kann er über das Menü auf dem Touch Monitor den KI Algorithmus auswählen und diesen herausfordern.
-%Dazu kann er, falls er mit seinem Smarthphone spielen will einen QR-Code auf dem Monitor aufrufen, diesen einscannen und dann das Spiel beginnen.
-%Andernfalls kann der Benutzer auch direkt am Monitor das Spiel starten und auf diesen mittels Touch Züge ausführen.
-%Die KI Algorithmen welche auf dem KI Client implementiert sind haben eine ELO Zahl hinterlegt, welche Auskunft über die Spielstärke gibt.
-%Fühlt sich der Benutzer also über oder unterfordert, kann er den geeigneten Gegner auswählen. Gibt es mehrere Benutzer welche 
-%gegen einander spielen wollen, haben diese die Möglichkeit entweder abwechselnd auf dem Monitor, oder beide mittels QR-Code über ihr Smartphone ein Spiel zu starten.
-%Will ein Benutzer zwei KI's beim Spielen beobachten, so kann er diese am Monitor auswählen und diese gegeneinander Antreten lassen.
-%\subsection{Anforderungen an die Software}
-%Aus dem oben beschriebenen Anwendungsszenario lassen sich konkrete Anforderungen ableiten, die für die Software von Relevanz sind.
-%Hierbei wird zwischen funktionalen und nicht funktionalen Anforderungen unterschieden \cite{RequirementEngenieering}.
-%\subsubsection{Funktionale Anforderungen}
-%\begin{itemize}
-%    \item \textbf{/F10/} \textit{Menü zum Auswählen des Spieles:} Die Grafische Oberfläche soll dem Benutzer die Möglichkeit geben, das ein Spiel auszuwählen.
-%        Dazu soll es ein Menü geben welches die möglichen Spiele, wie z.B. Reversi oder Dame zur Auswahl stellt.
-%    \item \textbf{/F11/} \textit{Auswählbares Menü für verschiedene KI Algorithmen:} Die Applikation muss ein leicht bedienbares Grafisches Interface bieten,
-%        bei welchem verschiedene künstliche Intelligenz Algorithmen ausgewählt und herausgefordert und werden können.
-%    \item \textbf{/F12/} \textit{QR-Code fürs verbinden mit dem Smartphone:} Um einen unkomplizierten Verbindungsaufbau vom Raspberry mit dem Smarthphone zu 
-%        gewährleisten, soll es eine Menü-Option geben, bei der ein QR-Code angezeigt wird. Nach dem Scannen des QR-Codes soll eine Verbindung
-%        aufgebaut werden, welche bis zum Beenden bestehen bleibt.
-%    \item \textbf{/F13/} \textit{Varaible Zeiteinstellung im Menü:} Dem Benutzer soll es möglich sein über das Menü eine Zeit einstellen zu können, 
-%        welche jeder Spieler im Spiel zur Verfügung für seine Züge hat. Als Spieler können entweder Benutzer oder KI Clients agieren.
-%    \item \textbf{/F20/} \textit{Benutzer soll Züge ausführen können:} Der Benutzer soll in der Lage sein, Züge gegen die KI spielen zu können. Dazu soll er entweder
-%        direkt über den Touch-Monitor oder über das Smartphone eine Eingabemöglichkeit haben. Diese soll den Momentanzustand des Spielbrettes zeigen,
-%        wodurch der Benutzer eine Entscheidung für seinen nächsten Zug treffen und diese über eine Touch-Berührung ausführen kann.
-%    \item \textbf{/F21/} \textit{Benutzer sollen gegen andere Benutzer spielen können:} Für mehrere Benutzer soll es möglich sein, gegeneinander spielen zu können. Dazu sollen sie 
-%        entweder den Touch-Monitor verwenden, indem sie abwechselnd Züge ausführen, oder beide jeweils ein Smarthphone.
-%    \item \textbf{/F22/} \textit{Der Benutzer kann KI's gegeneinander spielen lassen:} Der Benutzer soll in der Lage sein zwei KI-Algorithemen auszuwählen
-%        und diese gegeneinander spielen zu lassen. Damit man dieses Spiel sehe kann, sollen alle Züge die 
-%        von beiden getätigt werden auf dem Spielbrett des Touch-Monitors angezeigt werden.
-%    \item \textbf{/F30/} \textit{Eine ELO Zahl soll die Spielstärke der Algorithmen angeben:} Damit der Benutzer eine für sich angemessene Herausforderung findet,
-%        sollen schwächere und stärkere KI-Algorithmen in der GUI gekennzeichnet werden. Um eine genaue Kennzahl für die Stärke zu erhalten, werden die ELO Zahlen durch
-%        Simulationen berechnet. Diese Simulationen sind Spiele der Algorithmen untereinander.
-%   
-%\end{itemize}
-%\subsubsection{Nichtfunktionale Anforderungen}
-%\begin{itemize}
-%    \item \textbf{/Q10/} \textit{Robustheit der Smarthphone Verbindung:} Nach der Verbindung mit dem Smarthphone (mittels QR-Code /F12/) muss sichergestellt sein, dass die Verbindung nicht ohne
-%        Grund abbricht, sondern erst, wenn z.B. die Distanz zwischen Smartphone und Pi zu groß ist. Des weitern soll nach einem Verbindungsabbruch, 
-%        das Spiel nicht abgebrochen werden, sondern es soll eine Möglichkeit zum Wiederverbinden bestehen.
-%    \item \textbf{/Q20/} \textit{ELO Zahlen sollen Stärke wiederspiegeln:} Die durch die Simulationen errechnete ELO Zahl von /F30/ soll auch in etwa dem Stärkegrad der Algorithmen entsprechen.
-%        Hat ein Algorithmus die sehr viel mehr ELO muss er auch dementsprechend stärker sein.
-%    \item \textbf{/Q30/} \textit{Zeiteinstellung soll von der KI Berücksichtigt werden:} Die Zeiteinstellung von /F13/ soll vom KI Client als Berechnungsdauer genutzt werden.
-%        Dieser soll dabei seine Rechenzeit so gut wie möglich an die Zeiteinstellung anpassen.
-%    \item \textbf{/Q40/} \textit{Reaktionszeit des Touch-Interfaces:} Das Berühren des Touch-Monitors soll zur sofortigen Ausführung des Befehls der Software führen.
-%    \item \textbf{/Q50/} \textit{Mobile Responsiveness:} Das Spielfeld soll auf egal welchem verbundenen Smarthphone gleich skaliert aussehen. 
-%        Das Verwenden von Tablets, oder das Drehen des Gerätes soll keinen Einfluss auf die Darstellung des Spielbrettes haben.
-%\end{itemize}
-%\subsubsection{Zusammenfassung der Anforderungen}
-%Die Identifizierten Funktionalen und Nichtfunktionalen Anforderungen werden in der Tabelle \ref{tab:Anforderungen} zusammengefasst. 
-%Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Referenziert werden.
-%\vspace{1em}
-%\begin{table}[!h]
-%	\centering
-%	\begin{tabular}{|l|l|l|}
-%		\hline
-%		\textbf{ID} & \textbf{Funktionale Anforderung}\\
-%		\hline
-%		/F10/ & Menü zum Auswählen des Spieles \\
-%		\hline
-%		/F11/ & Auswählbares Menü für verschiedene KI Algorithmen \\
-%		\hline
-%        /F12/ & QR-Code fürs verbinden mit dem Smartphone \\
-%		\hline
-%		/F13/ & Varaible Zeiteinstellung im Menü \\
-%        \hline
-%		/F20/ & Benutzer soll Züge ausführen können \\
-%        \hline
-%		/F21/ & Benutzer sollen gegen andere Benutzer spielen können \\
-%        \hline
-%		/F22/ & Der Benutzer kann KI's gegeneinander spielen lassen \\
-%        \hline
-%		/F30/ & Eine ELO Zahl soll die Spielstärke der Algorithmen angeben \\
-%	
-%		\hline
-%		\textbf{ID} & \textbf{Nichtfunktionale Anforderung}\\
-%		\hline
-%		/Q10/ & Robustheit der Smarthphone Verbindung \\
-%        \hline
-%		/Q20/ & ELO Zahlen sollen Stärke wiederspiegeln \\
-%        \hline
-%		/Q30/ & Zeiteinstellung soll von der KI Berücksichtigt werden \\
-%        \hline
-%		/Q40/ & Reaktionszeit des Touch-Interfaces \\
-%        \hline
-%		/Q50/ & Mobile Responsiveness \\
-%		\hline
-%	\end{tabular}
-%	\caption{Anforderungstabelle}
-%	\label{tab:Anforderungen}
-%\end{table}
+
 
 \pagebreak
 % ----------------------------------------------------------------------------------
@@ -667,26 +643,53 @@ Dieses Kapitel setzt sich mit der Softwarearchitktur auseinander.
 %Die ReversiXT GUI, über welche der User Spiele starten und KI's auswählen kann und dem KI Client, welcher eine künstliche Intelligenz für Dame ist, 
 %sind die beiden Clients die sich mit dem Server verbinden.
 \subsection{Überblick}
-Um für eine bessere Modularität und Erweiterbarkeit zu sorgen, ist die Software auf drei Teile aufgeteilt, siehe Abbildung \ref{fig:AllClassDiagrams}:
-\begin{itemize}
-    \item Gameserver
-    \item ReversiXT GUI
-    \item Gameclient
-\end{itemize}
-Der Gameserver hält die Spielelogik und den Zustand des Spieles. Er prüft gespielte Züge auf ihre Gülgitkeit 
-und entscheidet ob ein Spiel entschieden ist. Er ist außerdem für die Spielzeitverwaltung und die Reihenfolge, in 
-der Spieler an der Reihe sind verantwortlich. Die ReversiXT Graphische Oberfläche (GUI) ist das Bedienelement für 
-den Endnutzer, um Spiele gegen verschiedene KI's oder andere Nutzer starten zu können. 
-Die künstliche Intelligenz Logik befindet sich im Gameclient, er berechnet abhängig vom Spielfeld und Algorithmus
-den nächsten Zug den die KI für den besten hält.
+Dadurch, dass es sich bei der ReversiXT Software um ein Projekt handelt, welches bereits eine Implementierung einer Reversi Spieleoberfläche besitzt und 
+um Dame erweitert werden soll, muss die Software Modular und Erweiterbar genug sein, um durch weitere Spiele erweitert werden zu können.
+Die Vorraussetzungen um ein neues Spiel hinzuzufügen, ist das Vorhanden sein eines Gameservers, welcher die Spiellogik, 
+den Zustand, sowie die Zugreihenfolge des Spieles verwaltet. Desweiteren wird ein Gameclient benötigt, welcher die KI-Logik zur Berechnung
+neuer Züge bereitstellt. Bei diesen beiden Komponenten handelt es sich um eigene Anwendungen, was den Vorteil hat, dass sie einfach 
+durch neue Implementierungen ausgetauscht werden können. Möchte man das Spiel Dame um extra Regeln erweitern, welche in anderen Ländern gespielt werden
+und das umschreiben des alten Gameservers vermeiden, so kann man ihn einfach durch einen neuen ersetzten, welcher das gleiche Protokoll der Kommunikation 
+unterstützt, jedoch eine andere Implementierung aufweist. Gleiches gilt auch den Gameclient, bei welchem die Softwarekomponente durch 
+eine andere KI ersetzt werden kann, welche zum Beispiel Maschinelearning anstatt Graphalgorithmen unterstüzt. 
+
+In Abbildung \ref{fig:DeploymentDiagram} ist das Projek als Verteilungsdiagramm dargestellt. 
+Neben den Oben bereits erwähnen Gameserver und Gameclient, handelt es sich bei der Webapp um den Teil der Anwendung, der das Starten und Stoppen der Spiele verwaltet.
+Der Frontend Teil der Webapp übernimmt die Darstellung der Graphischen Oberfläche der Website. Das Backend ist für die Kommunikation zu den anderen 
+Bestandteilen verantwortlich. Außerdem beeinhaltet die Software einen Reverse Proxy, welcher wegen der Anbindung externer Mobilegeräte verwendet wird.
 
 \vspace{1em}
 \begin{minipage}{\linewidth}
 	\centering
-	\includegraphics[width=1.0\linewidth]{pics/AllClassDiagrams.png}
-	\captionof{figure}[Auswahlmenü]{ Die gesamte Anwendung im UML Klassendiagramm }
-	\label{fig:AllClassDiagrams}
+	\includegraphics[width=1.0\linewidth]{pics/DeploymentDiagram.png}
+	\captionof{figure}{ Die Anwendung als Verteilungsdiagramm}
+	\label{fig:DeploymentDiagram}
 \end{minipage}
+
+
+
+\subsection{Netzwerkkommunikation}
+Durch das Aufteilen der Anwendung in mehrere ausführbare Programme, teilen sich die Programme keinen gemeinsamen Quellcode und laufen parallel zueinander. 
+Dies hat zur Folge, das eine Netzwerkskommunikation zwischen den Programmen erforderlich ist, um den Ablauf zu regulieren.
+
+\subsubsection{Kommunikation zwischen den Software-Teilen}
+Die Kommunikation zwischen den drei Anwendungen ist in Abbildung \ref{fig:ComponentDiagram} auf Seite \pageref{fig:ComponentDiagram} als 
+Komponentendiagramm dargestellt. Dabei ist die gelbe Komponente der Gameserver, die blaue die Webapp, die rote der Gameclient und die grüne der Reverse Proxy.
+Der dunkelblaue eingefärbte Teil der Webapp, beeinhaltet das Frontend, also die Graphische Oberfläche (GUI) der Anwendung.
+Die hellblauen Komponenten, beschreiben das Backend. 
+
+In der Kommunikation zwischen den Backend und dem Frontend der Webapp Komponente, werden Züge über das ``incomingMove'' Interface des Backends an das Frontend
+weitergereicht. Züge die von der Grafischen Oberfläche aus gespielt sind, kommen über das Interface ``sendInstructions'' an das Backend. Dieses
+Interface wird außerdem verwendet um Befehle wie starten und stoppen eines Spieles zu übermitteln. Die Webapp Komponente hat zwei Ports nach Außen, 
+welche Nachrichten an das Backend
+weiterreichen. Der erste Port übernimmt alle Nachrichten, die mit Zügen in Verbindung stehen. So werden alle Züge die vom Gameserver angenommen werden
+und als Broadcast an alle Teilnehmer weitergegeben werden, sowie die Züge die aus dem Frontend heraus gespielt über diesen Port übertragen.
+Der zweite Port übernimmt das starten und stoppen des Gameservers und des Gameclients. 
+Neben den Oben genannen Verbindungen des Gameservers, hat dieser außerdem eine Verbindung zum Gameclient. Über diese Verbindung werden Züge, die von der 
+KI des Gameclients berechent werden an den Gameserver gesendet.
+
+Will sich ein Smartphone mit der Anwndung verbinden, so werden alle Anfragen an Frontend oder Backend der Webapp vom Reverse Proxy abgefangen und 
+nach überprüfung an diese Schnittstellen weitergegeben.
 
 
 \vspace{1em}
@@ -699,8 +702,7 @@ den nächsten Zug den die KI für den besten hält.
 
 
 
-
-\subsection{Kommunikation der Komponenten}
+\subsubsection{Kommunikation abhängig vom gewählten Spielmodus}
 \label{chap:Ablauf}
 Da die Applikation mit mehreren Spielmodi ausgestattet ist, ändert sich die Kommunikation und welche Komponente gestartet werden muss, abhängig vom Modus.
 Die verfügbaren Spielmodi sind:
@@ -732,27 +734,37 @@ abwechselnd von den Clients angefordert, bis ein Spieler gewonnen hat.
 \subsection{Dame Spiellogik}
 \label{chap:Spiellogik}
 Die Spiellogik für Dame ist in mehrfach in der Anwendung vorfindbar. Zum einen um Züge im KI-Client zu testen und zum anderen
-für den Gameserver, zur Überprüfungen und Aktualisierung der Züge. In den Abbildungen \ref{fig:KIClientClassDiagram} und \ref{fig:GameServerClassDiagram}
-befindet sich die Spiellogik im Paket "`Checkers"'. Diese Redundanz ist wichitg, da es sich beim Server und Client um eigenständige Prozesse handelt 
+für den Gameserver, zur Überprüfungen und Aktualisierung der Züge. In den Abbildungen \ref{fig:KIClientClassDiagram} auf Seite \pageref{fig:KIClientClassDiagram} 
+und \ref{fig:GameServerClassDiagram} auf Seite \pageref{fig:GameServerClassDiagram}
+befindet sich die Spiellogik im Paket \texttt{Checkers}. Diese Redundanz ist wichitg, da es sich beim Server und Client um eigenständige Prozesse handelt 
 und diese nicht die gleiche Code-Basis haben. Eine Möglichkeit diese Redundanz zu vermeiden wäre, die Validierung in den Gameserver zu verschieben und 
 dem Gameclient zu zwingen, dass jeder Zug von Gameserver validert werden muss. Dies erhöht aber die Netzwerkkommunikation und verlangsamt das finden eines Zuges, 
-durch den daraus entstehenden Overhead. 
+durch den daraus entstehenden Overhead.
 \\
-Die Hauptklassen der Spiellogik sind, die Board-, Move- und Player-Klasse. Dabei hält die Board-Klasse die Information über das aktuelle Spielbrett, sowie 
-Methoden um Spielsteine auf dem Spielbrett zu entfernen, oder zu bewegen. Die Move-Klasse dient zum repräsentieren eines Zuges, sie besteht aus dem 
+In Abbildung \ref{fig:GameLogic} zeigt die Spiellogik vom Paket \texttt{Checkers} unabhängig von der Applikation in der es verwendet wird.
+Die Hauptklassen der Spiellogik sind, die \texttt{Board}-, \texttt{Move}- und \texttt{Player}-Klasse. Dabei hält die \texttt{Board}-Klasse die Information über das aktuelle Spielbrett, sowie 
+Methoden um Spielsteine auf dem Spielbrett zu entfernen, oder zu bewegen. Die \texttt{Move}-Klasse dient zum repräsentieren eines Zuges, sie besteht aus dem 
 Uhrsprungspunk, den Zielpunkt, dem Spieler der den Zug getätigt hat und um welchem Spielstein es sich handelt. 
 \\
-Die Klassen CheckersForceCapture und CheckersAllPossibleMovesChecker, sind Klassen zum finden von aller möglichen Züge die aus einer Stellung heraus gespielt werden
-können. Dabei ist CheckersForceCapture verantwortlich für Züge bei denen ein Spieler gezwungen wird eine Figur zu schlagen und CheckersAllPossibleMovesChecker 
+Die Klassen \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}, sind Klassen zum finden von aller möglichen Züge die aus einer Stellung heraus gespielt werden
+können. Dabei ist \texttt{CheckersForceCapture} verantwortlich für Züge bei denen ein Spieler gezwungen wird eine Figur zu schlagen und \texttt{CheckersAllPossibleMovesChecker} 
 für alle Züge die keinen Schlagzwang haben. Die Aufteilung in zwei Klassen hat den Hintergrund, dass falls es sich um einen Schlagzwang handelt, braucht 
-die AllPossibleMoves-Klasse nicht erzeugt werden um Züge zu finden. Um einen von der Netzwerkkommunikation eingehenden Zug zu überprüfen, 
-werden die Metheoden der CheckersMoveTypeCheck-Klasse verwendet. Sie vergleichen einen gegebenen Zug, 
-den zum Beispiel der Benuzter getätigt hat, mit den Zügen die aus CheckersForceCapture und CheckersAllPossibleMovesChecker
-hervorgehen. Dieses Vergleichen ist sehr wichitg für den Gameserver, da alle Züge die von den Clients kommen valide sein müssen. Im Gameclient wird das Vergleichen nur 
+die \texttt{AllPossibleMoves}-Klasse nicht erzeugt werden um Züge zu finden. Um einen von der Netzwerkkommunikation eingehenden Zug zu überprüfen, 
+werden die Metheoden der \texttt{CheckersMoveTypeCheck}-Klasse verwendet. Sie vergleichen einen gegebenen Zug, 
+den zum Beispiel der Benuzter getätigt hat, mit den Zügen die aus \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}
+hervorgehen. Dieses Vergleichen ist sehr wichtig für den Gameserver, da alle Züge die von den Clients kommen valide sein müssen. Im Gameclient wird das Vergleichen nur 
 als Extravalidierung verwendet um den gesendeten Zug aus dem Gameserver nochmal zu überprüfen und so Fehler zu minimieren.
 \\
-Das Anwenden eines Spielzuges auf das Spielbrett wird mittels der MoveApplier-Klasse im Gameclient und mit der CheckersRules-Klasse im Gameserver 
+Das Anwenden eines Spielzuges auf das Spielbrett wird mittels der \texttt{MoveApplier}-Klasse im Gameclient und mit der \texttt{CheckersRules}-Klasse im Gameserver 
 getätigt. Beide verfolgen im Prinzip das selbe Ziel, der Unterschied wird im Implementierungskapitel \ref{chap:Moves} erklärt.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/GameLogic.png}
+	\captionof{figure}{ Das Paket Checkers welches die Spiellogik beeinhaltet }
+	\label{fig:GameLogic}
+\end{minipage}
 
 
 \subsection{Gameserver}
@@ -766,7 +778,7 @@ Nachdem ein Client verbunden ist und seine Nachrichten schickt, wird diese dekod
 an den Gamerulbook Teil weitergeleitet. Das Gamerulbook Paket verwaltet den Spielzustand, sowie die Spielregeln des laufenden Spieles.
 Es ist über das GameRules Interface mit dem Serverconnection Paket verbunden. Ein beliebiges Spiel kann mittels dieses Interfaces
 als eigenes Paket festgelegt werden, was zu einer Möglichkeit führt den Gameserver um beliebig viele Spiele erweitern zu können.
-Über den weiteren Inhalt des "`Checkers"' Paketes wird in Kapitel \ref{chap:Spiellogik} berichtet.
+Über den weiteren Inhalt des \texttt{Checkers} Paketes wird im vorherigen Kapitel \ref{chap:Spiellogik} berichtet.
 
 Abbildung \ref{fig:GameServerClassDiagram} zeigt den Aufbau als UML-Klassendiagramm, dabei sind Dame und Mühle as Spiele über das
 GameRules Interface als Pakete Beispielhaft gezeigt. 
@@ -802,8 +814,7 @@ Züge auszuführen. Durch diese Untergliederung in weitere Pakete kann die Softw
 	\label{fig:ReversiXTGUIClassDiagram}
 \end{minipage}
 
-
-
+\subsubsection{Reverse Proxy}
 
 \subsection{KI Client}
 Der KI Client beinhaltet die Logik der Künstlichen Intelligenz der Applikation. Wird ein Spiel gegen einen KI Client gestartet, so wird dieser gestartet und agiert als 
@@ -1262,18 +1273,112 @@ wertet diese Ergbnisse aus.
 \addcontentsline{toc}{section}{Anhang}
 \addtocontents{toc}{\vspace{-0.5em}}
 
-Inhalt des beigefügten Datenträgers:
+\section{Anforderungsanalyse}
+\label{apx:Anforderungsanalyse}
+In diesem Kapitel wird zuerst ein beispielhaftes Szenario gezeigt, bei welchem die Software eingesetzt werden soll.
+Anschließend werden anhand dieser Szenarios Anforderungen definiert, die von der Software erfüllt werden müssen.
+\subsection{Anwendungsszenario}
+Will ein Benutzer gegen den KI Client spielen, kann er über das Menü auf dem Touch Monitor den KI Algorithmus auswählen und diesen herausfordern.
+Dazu kann er, falls er mit seinem Smarthphone spielen will einen QR-Code auf dem Monitor aufrufen, diesen einscannen und dann das Spiel beginnen.
+Andernfalls kann der Benutzer auch direkt am Monitor das Spiel starten und auf diesen mittels Touch Züge ausführen.
+Die KI Algorithmen welche auf dem KI Client implementiert sind haben eine ELO Zahl hinterlegt, welche Auskunft über die Spielstärke gibt.
+Fühlt sich der Benutzer also über oder unterfordert, kann er den geeigneten Gegner auswählen. Gibt es mehrere Benutzer welche 
+gegen einander spielen wollen, haben diese die Möglichkeit entweder abwechselnd auf dem Monitor, oder beide mittels QR-Code über ihr Smartphone ein Spiel zu starten.
+Will ein Benutzer zwei KI's beim Spielen beobachten, so kann er diese am Monitor auswählen und diese gegeneinander Antreten lassen.
+\subsection{Anforderungen an die Software}
+Aus dem oben beschriebenen Anwendungsszenario lassen sich konkrete Anforderungen ableiten, die für die Software von Relevanz sind.
+Hierbei wird zwischen funktionalen und nicht funktionalen Anforderungen unterschieden \cite{RequirementEngenieering}.
+\subsubsection{Funktionale Anforderungen}
 \begin{itemize}
-  \item $\ldots$
-  \item $\ldots$
+    \item \textbf{/F10/} \textit{Menü zum Auswählen des Spieles:} Die Grafische Oberfläche soll dem Benutzer die Möglichkeit geben, das ein Spiel auszuwählen.
+        Dazu soll es ein Menü geben welches die möglichen Spiele, wie z.B. Reversi oder Dame zur Auswahl stellt.
+    \item \textbf{/F11/} \textit{Auswählbares Menü für verschiedene KI Algorithmen:} Die Applikation muss ein leicht bedienbares Grafisches Interface bieten,
+        bei welchem verschiedene künstliche Intelligenz Algorithmen ausgewählt und herausgefordert und werden können.
+    \item \textbf{/F12/} \textit{QR-Code fürs verbinden mit dem Smartphone:} Um einen unkomplizierten Verbindungsaufbau vom Raspberry mit dem Smarthphone zu 
+        gewährleisten, soll es eine Menü-Option geben, bei der ein QR-Code angezeigt wird. Nach dem Scannen des QR-Codes soll eine Verbindung
+        aufgebaut werden, welche bis zum Beenden bestehen bleibt.
+    \item \textbf{/F13/} \textit{Varaible Zeiteinstellung im Menü:} Dem Benutzer soll es möglich sein über das Menü eine Zeit einstellen zu können, 
+        welche jeder Spieler im Spiel zur Verfügung für seine Züge hat. Als Spieler können entweder Benutzer oder KI Clients agieren.
+    \item \textbf{/F20/} \textit{Benutzer soll Züge ausführen können:} Der Benutzer soll in der Lage sein, Züge gegen die KI spielen zu können. Dazu soll er entweder
+        direkt über den Touch-Monitor oder über das Smartphone eine Eingabemöglichkeit haben. Diese soll den Momentanzustand des Spielbrettes zeigen,
+        wodurch der Benutzer eine Entscheidung für seinen nächsten Zug treffen und diese über eine Touch-Berührung ausführen kann.
+    \item \textbf{/F21/} \textit{Benutzer sollen gegen andere Benutzer spielen können:} Für mehrere Benutzer soll es möglich sein, gegeneinander spielen zu können. Dazu sollen sie 
+        entweder den Touch-Monitor verwenden, indem sie abwechselnd Züge ausführen, oder beide jeweils ein Smarthphone.
+    \item \textbf{/F22/} \textit{Der Benutzer kann KI's gegeneinander spielen lassen:} Der Benutzer soll in der Lage sein zwei KI-Algorithemen auszuwählen
+        und diese gegeneinander spielen zu lassen. Damit man dieses Spiel sehe kann, sollen alle Züge die 
+        von beiden getätigt werden auf dem Spielbrett des Touch-Monitors angezeigt werden.
+    \item \textbf{/F30/} \textit{Eine ELO Zahl soll die Spielstärke der Algorithmen angeben:} Damit der Benutzer eine für sich angemessene Herausforderung findet,
+        sollen schwächere und stärkere KI-Algorithmen in der GUI gekennzeichnet werden. Um eine genaue Kennzahl für die Stärke zu erhalten, werden die ELO Zahlen durch
+        Simulationen berechnet. Diese Simulationen sind Spiele der Algorithmen untereinander.
+   
 \end{itemize}
+\subsubsection{Nichtfunktionale Anforderungen}
+\begin{itemize}
+    \item \textbf{/Q10/} \textit{Robustheit der Smarthphone Verbindung:} Nach der Verbindung mit dem Smarthphone (mittels QR-Code /F12/) muss sichergestellt sein, dass die Verbindung nicht ohne
+        Grund abbricht, sondern erst, wenn z.B. die Distanz zwischen Smartphone und Pi zu groß ist. Des weitern soll nach einem Verbindungsabbruch, 
+        das Spiel nicht abgebrochen werden, sondern es soll eine Möglichkeit zum Wiederverbinden bestehen.
+    \item \textbf{/Q20/} \textit{ELO Zahlen sollen Stärke wiederspiegeln:} Die durch die Simulationen errechnete ELO Zahl von /F30/ soll auch in etwa dem Stärkegrad der Algorithmen entsprechen.
+        Hat ein Algorithmus die sehr viel mehr ELO muss er auch dementsprechend stärker sein.
+    \item \textbf{/Q30/} \textit{Zeiteinstellung soll von der KI Berücksichtigt werden:} Die Zeiteinstellung von /F13/ soll vom KI Client als Berechnungsdauer genutzt werden.
+        Dieser soll dabei seine Rechenzeit so gut wie möglich an die Zeiteinstellung anpassen.
+    \item \textbf{/Q40/} \textit{Reaktionszeit des Touch-Interfaces:} Das Berühren des Touch-Monitors soll zur sofortigen Ausführung des Befehls der Software führen.
+    \item \textbf{/Q50/} \textit{Mobile Responsiveness:} Das Spielfeld soll auf egal welchem verbundenen Smarthphone gleich skaliert aussehen. 
+        Das Verwenden von Tablets, oder das Drehen des Gerätes soll keinen Einfluss auf die Darstellung des Spielbrettes haben.
+\end{itemize}
+\subsubsection{Zusammenfassung der Anforderungen}
+Die Identifizierten Funktionalen und Nichtfunktionalen Anforderungen werden in der Tabelle \ref{tab:Anforderungen} zusammengefasst. 
+Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Referenziert werden.
+\vspace{1em}
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{ID} & \textbf{Funktionale Anforderung}\\
+		\hline
+		/F10/ & Menü zum Auswählen des Spieles \\
+		\hline
+		/F11/ & Auswählbares Menü für verschiedene KI Algorithmen \\
+		\hline
+        /F12/ & QR-Code fürs verbinden mit dem Smartphone \\
+		\hline
+		/F13/ & Varaible Zeiteinstellung im Menü \\
+        \hline
+		/F20/ & Benutzer soll Züge ausführen können \\
+        \hline
+		/F21/ & Benutzer sollen gegen andere Benutzer spielen können \\
+        \hline
+		/F22/ & Der Benutzer kann KI's gegeneinander spielen lassen \\
+        \hline
+		/F30/ & Eine ELO Zahl soll die Spielstärke der Algorithmen angeben \\
+	
+		\hline
+		\textbf{ID} & \textbf{Nichtfunktionale Anforderung}\\
+		\hline
+		/Q10/ & Robustheit der Smarthphone Verbindung \\
+        \hline
+		/Q20/ & ELO Zahlen sollen Stärke wiederspiegeln \\
+        \hline
+		/Q30/ & Zeiteinstellung soll von der KI Berücksichtigt werden \\
+        \hline
+		/Q40/ & Reaktionszeit des Touch-Interfaces \\
+        \hline
+		/Q50/ & Mobile Responsiveness \\
+		\hline
+	\end{tabular}
+	\caption{Anforderungstabelle}
+	\label{tab:Anforderungen}
+\end{table}
 
-\section{Domändenmodell}
-Ein toller Anhang, der nicht nur als \glqq{}\emph{Müllhalde}\grqq{} genutzt wird, sondern in dem Bilder und Inhalte auch mit eigenen Worten erklärt werden und den man auch für sich alleine lesen kann. Es sollten auch Referenzen auf die zugehörige ausführliche Behandlung im Hauptteil inklusive Seitenangabe mit $\backslash$\texttt{pageref} gegeben werden.
+\section{UML Klassendiagramm vom Gesamten Projekt}
+\label{apx:AllClassDiagrams}
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/AllClassDiagrams.png}
+	\captionof{figure}{ UML Klassendigramm aller Komponenten des Projekts }
+\end{minipage}
 
-\subsection*{Screenshot}
-\label{app:screenshot}
-Unterkategorie, die nicht im Inhaltsverzeichnis auftaucht.
+
 
 \end{appendix}
 
