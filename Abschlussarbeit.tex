@@ -635,7 +635,8 @@ Gewinnchance für ihn hat.
 % ----------------------------------------------------------------------------------
 
 \section{Architektur der Software}
-Dieses Kapitel setzt sich mit der Softwarearchitktur auseinander. 
+Dieses Kapitel setzt sich mit der Softwarearchitktur auseinander. Um die Architektur richtig umzusetzen, wird sich an den Anforderungen an die Software orientiert,
+siehe Kapitel \ref{apx:Anforderungsanalyse} auf Seite \pageref{apx:Anforderungsanalyse} des Anhangs. 
 %Die Architektur ist nach dem Model der Client-Server-Architektur entworfen. 
 %Die Client-Server-Architektur trennt die Software in drei
 %Teile, zwei Clients und einen Server: \\
@@ -666,9 +667,241 @@ Bestandteilen verantwortlich. Außerdem beeinhaltet die Software einen Reverse P
 	\label{fig:DeploymentDiagram}
 \end{minipage}
 
+\subsection{Gameserver}
+Als Gameserver wird der Teil der Software betrachtet, welcher für das einhalten der Spielregeln und die Verwaltung der Spielfeldzustandes, 
+verantwortlich ist. 
+
+\subsubsection{Softwareaufbau des Gameservers}
+Die Software des Gameservers ist in zwei Pakete aufgeteilt, in das \texttt{Gamerulebook}- und \texttt{Serverconnection}-Paket.
+Der Serverconnection Teil ist für die Verbindung und das Dekodieren der Nachrichten der Clients verantwortlich, siehe Abbildung \ref{fig:GameServerClassDiagram}.
+Nachdem ein Client verbunden ist und seine Nachrichten schickt, wird diese dekodiert und falls das Protokoll korrekt eingehalten wird,
+an den \texttt{Gamerulebook} Teil weitergeleitet. Das \texttt{Gamerulebook} Paket verwaltet den Spielzustand, sowie die Spielregeln des laufenden Spieles.
+Das Spielfeld wird in \texttt{GameStatus} gespeichert und wird bei neu eintreffenden Nachrichten mit neuen Zügen mit diesen aktualisiert.
+Bevor ein neu eingetroffener Zug das Spielfeld aktualisiert, wird er erst über die Realisierungen des \texttt{GameRules} Interface überprüft.
+Diese Realisierungen ist im Diagram durch die Spiele Dame und Mühle dargestellt und befinden sich in den Paketen \texttt{Checkers} und \texttt{NineMensMorris}.
+Über den weiteren Inhalt des \texttt{Checkers} Paketes wird im Kapitel \ref{chap:Spiellogik} auf Seite \pageref{chap:Spiellogik} berichtet, da es 
+redundant in der Applikation vorzufinden ist und auch für den Gameclient von relevanz ist.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/GameServerClassDiagram.png}
+	\captionof{figure}[ClassDiagram]{ Das UML Klassendiagramm des Gameservers }
+	\label{fig:GameServerClassDiagram}
+\end{minipage}
+
+\subsubsection{Erweiterung um weitere Spiele}
+Ein beliebiges Spiel kann mittels des Interfaces \texttt{GameRules} zur Anwendung hinzugefügt werden, was dem Gameserver die Eigenschaft gibt um 
+beliebig viele Spiele erweiterbar zu sein, siehe Abbildung \ref{fig:GameServerClassDiagram}. Welche Implementierung des Interfaces gewählt wird, wählt der Server anhand der Spiel-Karte, die an ihn
+als Übergabeparameter übergeben wird aus. Wird ein neuer Zug registriert, wird abhängig vom Spiel die jeweilig implementierten Methoden 
+\texttt{move} und \texttt{hasPlayerWon} aufgerufen.
+Die \texttt{move} Methode, übernimmt die Validierung und Aktualisierung des Zuges am Spielbrett und
+die \texttt{hasPlayerWon} Methode wird verwendet, um zu prüfen ob die Vorraussetzungen eines Spielendes erfüllt sind.
+Klassen wie \texttt{Board} und \texttt{Move} sind vom Spieletyp unabhängig, es muss nur ein bestimmter Typ (wie z.B. \texttt{checkersPieces}) für die \texttt{Piece} 
+Klasse gewählt werden, um das Spielfiguren auf dem Spielfeld zu repräsentieren.  
+
+
+\subsubsection{ Server Kommunikation }
+Für die Kommunikation des Servers ist das zuvor erwähnte Paket \texttt{Serverconnection} (Abbildung \ref{fig:GameServerClassDiagram}) verantwortlich.
+Der Ablauf einer Verbindung eines Spieles mit zwei Spielern ist in Abbildung \ref{fig:SequenceDiagramGameServer} dargestellt. 
+Dieser Ablauf ist unabhängig von der Art des Spieles und immer, also auch für Dame oder Mühle, gleich.
+Die beiden dargestellten Clients, \texttt{Client1} und \texttt{Client2} können zwei beliebige Applikationen sein, welche as Selbe Protokoll
+wie der Gameserver sprechen.
+\\
+Nachdem der Gameserver gestartet wird, ist das erste was er macht macht in den Wartemodus überzugehen, dabei lauscht er an seinem Port ob sich irgendjemand
+mit ihm verbunden hat. Nachdem die geforderte Anazahl an Spielern für ein gewähltes Spiel mit \texttt{register} verbunden sind, im Beispielfall der Abbildung zwei, 
+startet er ein neues Spiel und sendet eine Zugaufforderung, \texttt{moveRequest} 
+an den Spieler der sich zuerst registriert hat. Kommt eine Nachricht mit einer Zugantwort zurück
+wird der nächste Spieler benachrichtigt, der an der Reihe ist. Dieser Ablauf wird so lange wiederholt, bis zum Spielende, wobei die Spieler 
+über das Resultat, mittels \texttt{gameResult}, des Spieles informiert werden.
+\\
+
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/SequenceDiagramGameServer.png}
+	\captionof{figure}{ Das Sequenzdiagramm zum Ablauf der Serververbindung }
+	\label{fig:SequenceDiagramGameServer}
+\end{minipage}
+
+
+\subsubsection{Zeitlimits für Spieler}
+Da in vielen Brettspielen, die auf Wettkampfbasis betrieben werden, Zeituhren verwendet werden, gibt es auch ein Inteface \texttt{TimeCalc}, welches
+für die Zeitüberprüfung für der Clients verwendet wird, siehe Abbildung \ref{fig:GameServerClassDiagram} von Seite \pageref{fig:GameServerClassDiagram}. 
+Vorallem bei Künstlichen Intelligenzen ist eine Zeitüberprüfung notwendig, da eine Verzicht auf ein 
+Zeitlimit zu einer sehr langen Berechnungsdauer führten kann. So kann es sein dass ein Algorithmus wie Minimax mit einer Suchtiefe von 7, bei einfachen
+Stellungen nur wenige Sekunden braucht, aber bei weitaus Komplexeren Stellungen mehrere Stunden. 
+Das \texttt{TimeCalc} Interface behandelt zwei Fälle, den Spielverlust auf Zeit und die 
+Dauer die ein KI für den Nächsten Zug brauchen soll. Der Spielverlust auf Zeit ist relative einfach erklärt, braucht ein Teilnehmer länger als 
+die vorgesehene Zeit, verliert er das Spiel. Die Berechnete Dauer des Nächsten Zuges der KI gibt an wieviel Zeit die KI zur Verfügung hat um ein
+Ergebnis zu liefern und soll anhand der für den jeweiligen Spieltyp über das 
+Interface \texttt{TimeCalc} implementiert werden. So kann anhand des Spielsituation, mehr oder weniger Zeit dem Nächsten Zug zugewiesen werden, 
+z.B. könnte man einer KI in der Eröffnung-Phase mehr und zum Spieleende weniger Zeit geben. 
+Die Entscheidung die Berechnung der KI-Zeit im \texttt{GameServer} und nicht im \texttt{GameClient} auszuführen hat den Hintergrund, 
+dass zum ersten, die gesamte Zeitberechnung im Server zusammengefasst ist und zum anderen, wenn die Applikation um ein Spiel erweitert wird, kann
+die Zeitberechnung eines schon implementieren Spieles verwendet werden.
+
+\subsection{Webapp}
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.9\linewidth]{pics/ReversiXTGUIClassDiagramm.png}
+	\captionof{figure}[ReversiXTGUI]{ Das UML Klassendiagramm der ReversiXT GUI }
+	\label{fig:ReversiXTGUIClassDiagram}
+\end{minipage}
+
+Die Wabapp ist der Teil der Software der für die eigentliche Userinteraktion verwendet wird. User Können über die GUI
+Spiele starten, bei welchen sie gegen KI's oder andere User spielen können. Dabei setzt sich die Webapp aus einem Frontend und 
+einem Backend zusammen, siehe Abbildung \ref{fig:ReversiXTGUIClassDiagram}. 
+Das Frontend wird zur Darstellung der Graphischen Oberfläche (GUI) der Anwendung verwendet. Über Interaktion mit der 
+GUI können Benuzter ein Spiel auswählen und Einstellungen treffen, welche die Spielregeln des Spieles verändern.
+Wird ein Spiel gestartet, wird ein Spielfeld mit Zugmöglichkeiten geboten, welche es dem Benutzer erlauben 
+Züge auszuführen.
+Diese Ausgewählten Optionen und Züge werden an das Backend weitergeleitet, welches den Gameserver und Gameclient 
+startet und diese über die Aktionen des Benutzers an der GUI informiert. 
+
+\subsubsection{Frontend}
+Das Frontend, in Abbildung \ref{fig:ReversiXTGUIClassDiagram} als gelbes Paket gekennzeichnet, ist wie schon zuvor erwähnt die
+GUI Komponente der gesammten Anwendung. Da die Aufgabe dieses Projektes, die Erweiterung der der Software um das Spiel Dame ist, 
+wird die Struktur des Frontendes übernommen und durch weitere Menüs, sowie dem Spielfeld erweitert. Dabei bleibt der vorhande Teil der Software gleich 
+und aus Sicht der Architektur nicht weiter beschrieben. 
+\\
+Die erste Veränderung ist das einbauen eines neuen Menüs, über welches das Spiel ausgewählt werden kann, in Abbildung \ref{fig:ReversiXTGUIClassDiagram} 
+handelt es sich hierbei um die Klasse \texttt{GameSelectionScreen}. Vorher wurde über den Menübutton ``Spielen'' direkt das Auswahlmenü \texttt{GameSelectionReversiScreen}
+(siehe Abbildung \ref{fig:ReversiMenu} und \ref{fig:ReversiGameSelection} auf Seite \pageref{fig:ReversiMenu}) zum Konfigurieren eines Reversi Spieles erreicht, 
+nun soll der \texttt{GameSelectionScreen} davor geschalten sein. Dieses weitere Menü beinhaltet nun Möglichkeiten nur Navigation, zu allen weiteren Spielen.
+Würde man das Projekt um ein weiteres Spiel erweitern wollen, so müsste man lediglich eine weitere Option zum \texttt{GameSelectionScreen} hinzufügen 
+und der eigntliche Spielfeldaufbau und Spielfluss kann in ein weiteres eigenes Paket hinzugefügt werden welches nur über dieses Menü erreichbar ist.
+\\
+Um das Spiel Dame konfigurieren zu können, also ob Benutzer oder KI antreten soll und welche auf welcher Karte gespielt wird, gibt es ein eigenes Menü, 
+in welchem diese Einstellungen vorgenommen werden können. \texttt{GameSelectionCheckersScreen} beschreibt genau dieses Menü und bietet die Schnittstellen 
+zum \texttt{Checkers} Paket, welches die Darstellung des eigentlichen Spieles beeinhaltet. Wichtig ist hier noch zu erwähnen, dass das \texttt{GameSelectionCheckersScreen}
+Menü über die \texttt{Socket} Klasse direkten Zugriff auf das Backend hat. Über diesen Zugriff werden nachdem alle Einstellungen getroffen sind und ein Spiel
+gestartet wird, jeweils die anderen Komponenten der Software wie Gameserver und Gameclient gestartet. In Kapietel \ref{chap:NetworkModie} auf Seite \pageref{chap:NetworkModie} 
+wird nochmal genauer auf wann welche Komponente gestartet wird eingegangen.
+\\
+Das Paket \texttt{Checkers} setzt sich aus dem \texttt{CheckersBoard} dem eigentlichem Spielfeld und \texttt{CheckersSideBar} den Informationen zum laufenden Spiel zusammen. 
+Das \texttt{CheckersBoard} ist abhängig von der gewählten Karte und passt seine Form und Größe der Karte an. Jeder Zug der auf dem Spielfeld ausgeführt wird, muss an 
+die \texttt{CheckersScreen} Klasse geschickt werden, welche dann die Informationen ans Backend weitergibt.
+Die \texttt{CheckersSideBar} verwaltet Informationen wie Zeitlimits und Spielerfarben. 
+Ist ein Spiel zuende, oder ein Fehler tritt auf, wird die Klasse \texttt{MsgBox} benötigt, über diese Klasse werden Spielinformationen, welche das Spiel beenden 
+dargestellt.
+
+\subsubsection{Backend}
+Das Backend, in Abbildung \ref{fig:ReversiXTGUIClassDiagram} als graues Paket dargestellt, verwaltet die Kommunikation zu den anderen Komponenten der Anwendung.
+Es ist eine eigene Anwendung, welche parallel zum Frontend läuft und mit diesem über seine \texttt{socket} Klasse kommuniziert.
+Die Besonderheit liegt hierbei auf der \texttt{match} Klasse, welche verwendet wird um ein Spiel zu verwalten. 
+Diese Klasse startet abhängig von der gewählten Einstellung Gameserver und Gameclient und verbindet sich mit beiden, das Kapietel \ref{chap:NetworkModie} auf 
+Seite \pageref{chap:NetworkModie} erläutert dies im Detail. Spielzüge aus dem Frontend werden somit 
+an den Gameserver weitergeleitet und Züge die von anderen Komponenten an den Gameserver geschickt wurden und von diesen angenommen sind, kommen zurück zum Frontend.
+Da der Gameserver, der Gameclient und das Backend die gleiche Codierung benutzen müssen um Nachrichten austauschen zu können, wird 
+die Klasse \texttt{msgParsing} Dekodieren und Encodieren der Nachrichten benötigt.
+
+\subsubsection{Reverse Proxy}
+Eine Der Anforderungen ist, dass es für den Benutzer möglich sein muss, sich mit einem Mobilegeräte an die Software zu verbinden und als Spieler eine
+Dame Partie spielen zu können. Diese Mobielverbindung muss Sicher gehalten werden, wodurch nur bestimmte Anfragen an die Anwendung durgelassen werden.
+In Abbildung \ref{fig:ReversiXTGUIClassDiagram} ist der Reverse Proxy in grün dargestellt.
+\\ 
+Ein Reverse Proxy wird verwendet um Anfragen an den Server weiterzuleiten und die geforderten Ressourcen an den Client zurückzuschicken. Dabei 
+bleibt die wahre Addresse des Servers dem Client verborgen, da dieser nur über den Rerverse Proxy mit den ihm kommunizieren kann.
+Erhält der Proxy eine Anfrage, welche der Nutzer nicht stellen darf, so verweigert er den Zugriff auf den Server.
+\\
+Da die Architektur der Software für eine Web Anwendung gedacht ist und der Nutzer extern mit seinem Mobil Gerät auf die Website zugreift, 
+muss dieser über diese Website auf das Backend der Webapp zugreifen, um Daten wie Züge holen zu können.
+Da über die Webanwendung am Server, immer wenn ein Spiel ausgewählt wird ein Gameserver gestartet wird, könnte ein böswilliger
+mit einem selbsgeschrieben Programm, welches das Protokoll des Servers einhält beliebig viele Gameserver starten und somit die 
+Anwendung zum Absturz bringen.
+Der Proxy ist eine Absicherung, dass der Benutzer sich nicht direkt auf das Backend ohne Website verbinden kann und somit 
+keinen Unfug auf dem Server anstellen kann. 
+
+\subsection{Gameclient}
+Der Gameclient beinhaltet die Logik der Künstlichen Intelligenz der Applikation. Wird ein Spiel gegen einen Gameclient gewählt, so wird dieser gestartet und agiert als 
+Gegenspieler zum User. Der User kann auch ein Spiel bei welchem zwei KI's gegeneinander spielen starten, wodurch zwei Clients gestartet werden.
+Da im Projekt mehrere verschiedene KI-Algorithmen implementiert sind, ist auch hier eine Modulare Architektur wichtig.
+
+\subsubsection{Genereller Aufbau}
+Der Gameclient besteht aus drei Paketen, \texttt{CheckersAiLogic}, \texttt{Checkers} und \texttt{Server}, siehe \ref{fig:KIClientClassDiagram}. 
+In \texttt{Checkers} befindet sich die Spilelogik, welche einen Momentanzustand des Spielbrettes, sowie Möglichkeiten dieses nach belieben zu modifizieren beeinhaltet 
+und ist in Kapietel \ref{chap:Spiellogik} genauer erklärt, da es sich um das gleiche wie im Gameserver verwendete Paket handelt. 
+Für die Verbindung zum Gameserver wird das \texttt{Server}-Paket gebraucht, eingehende Nachrichten sowie ausgehende werden hier übertragen.
+Der Kern des Clients befindet sich in \texttt{CheckersAiLogic}, hier befinden sich die Algorithemen welche zur Berechnung von neuen Zügen 
+benutzt werden.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.9\linewidth]{pics/GameClientClassDiagram.png}
+	\captionof{figure}[KIClient]{ Das UML Klassendiagramm des KI Clients }
+	\label{fig:KIClientClassDiagram}
+\end{minipage}
+
+\subsubsection{KI Logik}
+In Abbildung \ref{fig:KIClientClassDiagram}, erkennt man das in grün eingefärbte Paket \texttt{CheckersAiLogic}, welches für die KI Logik der Applikation verantwortlich ist.
+Jeder KI-Algorithmus der zur Applikation hinzugefügt wird, muss das \texttt{Algorithm-interface} implementieren, die Methode \texttt{start} ist dabei für die Berechnung 
+verantwortlich. Die Grundvoraussetzung die dabei jeder Algorithmus bekommt, ist das Spielfeld, der Spieler der am Zug ist, die Tiefe und die Zeit wie lange gesucht werden darf.
+Als Ergebnis wird ein Zug erwartet, welcher aus sicht der KI der Beste Zug in der jeweiligen Stellung ist. Dadurch ist es möglich die Applikation durch beliebig weitere 
+Algorithmen, wie Deeplearing, einfach zu erweitern. 
+Viele KI-Algorithemen brauchen, damit sie neue Stellungen evaluieren, oder aus einer Stellung anderen Stellungen simulieren können eine Möglichkeit um das Spielfeld mittels 
+Züge verändern zu können. Die Klasse \texttt{MoveApplier} aus dem \texttt{Checkers} Paket, erreicht genau dieses Vorhaben, indem sie es erlaubt Züge auf einem Spielfeld auszuführen, 
+sowie alle Züge die aus einer Stellung heraus möglich sind anzuzeigen.
+\\
+In der zuvor erwähnten Abbildung sind auch zwei dieser Algorithmen zu sehen, dabei handelt es sich um Minimax und MCTS. Da diese beiden Algorithmen zu den Baum-Algorithemen
+gehören, haben beide ihere ``Node''-Klassen. Dabei ist die Klasse eine Beschreibung der Knoten des Baumes, welcher im Laufe der Berechnung aufgebaut wird.
+Zur Auswahl der Algorithmen, findet man die Klasse \texttt{AiLogic} vor, welche eine Auswahl der verschiedenen Algorithmen bietet. 
+\\ 
+Die Besonderheiten diese Paketes befinden sich in der Implementierung, welche in Späteren Kapiteln genauer erläutert wird 
+(Kapitel \ref{chap:KIAlgorithms} auf Seite \pageref{chap:KIAlgorithms}).
+
+\subsubsection{Verbindung zum Server}
+Das Paket \texttt{Server} aus Abbildung \ref{fig:KIClientClassDiagram} ist zur Verbindung mit dem Gameserver gedacht, dabei Spricht es das vom Gameserver geforderte 
+Protokoll. Die genauen Details des Prokolles werden durch die Klasse \texttt{MessageBuilder} versteckt, welche statische Methoden anbietet Nachrichten zu generieren.
+\texttt{GameMessage} ist die Zentrale Komponente zur Kommunikation, hier werden Nachrichten encodiert und decodiert und je nach Nachrichteninhalt 
+Züge mittels des \texttt{CheckersAiLogic} Paket generiert.
+
+\subsection{Dame Spiellogik}
+\label{chap:Spiellogik}
+Die Spiellogik für Dame ist in mehrfach in der Anwendung vorfindbar. Zum einen um Züge im KI-Client zu testen und zum anderen
+für den Gameserver, zur Überprüfungen und Aktualisierung der Züge. In den Abbildungen \ref{fig:KIClientClassDiagram} auf Seite \pageref{fig:KIClientClassDiagram} 
+und \ref{fig:GameServerClassDiagram} auf Seite \pageref{fig:GameServerClassDiagram}
+befindet sich die Spiellogik im Paket \texttt{Checkers}. Diese Redundanz ist wichitg, da es sich beim Server und Client um eigenständige Prozesse handelt 
+und diese nicht die gleiche Code-Basis haben. Eine Möglichkeit diese Redundanz zu vermeiden wäre, die Validierung in den Gameserver zu verschieben und 
+dem Gameclient zu zwingen, dass jeder Zug von Gameserver validert werden muss. Dies erhöht aber die Netzwerkkommunikation und verlangsamt das finden eines Zuges, 
+durch den daraus entstehenden Overhead.
+\\
+In Abbildung \ref{fig:GameLogic} zeigt die Spiellogik vom Paket \texttt{Checkers} unabhängig von der Applikation in der es verwendet wird.
+Die Hauptklassen der Spiellogik sind, die \texttt{Board}-, \texttt{Move}- und \texttt{Player}-Klasse. Dabei hält die \texttt{Board}-Klasse die Information über das aktuelle Spielbrett, sowie 
+Methoden um Spielsteine auf dem Spielbrett zu entfernen, oder zu bewegen. 
+Die \texttt{Move}-Klasse dient zum repräsentieren eines Zuges, sie besteht aus dem 
+Uhrsprungspunk, den Zielpunkt, dem Spieler der den Zug getätigt hat und um welchem Spielstein es sich handelt. 
+\\
+Die Klassen \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}, sind Klassen zum finden von aller möglichen Züge die aus einer Stellung heraus gespielt werden
+können. Dabei ist \texttt{CheckersForceCapture} verantwortlich für Züge bei denen ein Spieler gezwungen wird eine Figur zu schlagen und \texttt{CheckersAllPossibleMovesChecker} 
+für alle Züge die keinen Schlagzwang haben. Die Aufteilung in zwei Klassen hat den Hintergrund, dass falls es sich um einen Schlagzwang handelt, braucht 
+die \texttt{CheckersAllPossibleMoves}-Klasse nicht erzeugt werden um Züge zu finden. Um einen von der Netzwerkkommunikation eingehenden Zug zu überprüfen, 
+werden die Metheoden der \texttt{CheckersMoveTypeCheck}-Klasse verwendet. Sie vergleichen einen gegebenen Zug, 
+den zum Beispiel der Benuzter getätigt hat, mit den Zügen die aus \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}
+hervorgehen. Dieses Vergleichen ist sehr wichtig für den Gameserver, da alle Züge die von den Clients kommen valide sein müssen. Im Gameclient wird das Vergleichen nur 
+als Extravalidierung verwendet um den gesendeten Zug aus dem Gameserver nochmal zu überprüfen und so Fehler zu minimieren.
+\\
+Das Anwenden und Validieren eines Spielzuges auf das Spielbrett wird mittels der \texttt{MoveApplier}-Klasse im Gameclient und mit der \texttt{CheckersRules}-Klasse im Gameserver 
+getätigt. Beide verfolgen im Prinzip das selbe Ziel, der Unterschied wird im Implementierungskapitel \ref{chap:Moves} auf Seite \pageref{chap:Moves} erklärt.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/GameLogic.png}
+	\captionof{figure}{ Das Paket Checkers welches die Spiellogik beeinhaltet }
+	\label{fig:GameLogic}
+\end{minipage}
+
+
+
 
 
 \subsection{Netzwerkkommunikation}
+\label{chap:Networkcom}
 Durch das Aufteilen der Anwendung in mehrere ausführbare Programme, teilen sich die Programme keinen gemeinsamen Quellcode und laufen parallel zueinander. 
 Dies hat zur Folge, das eine Netzwerkskommunikation zwischen den Programmen erforderlich ist, um den Ablauf zu regulieren.
 
@@ -678,8 +911,8 @@ Komponentendiagramm dargestellt. Dabei ist die gelbe Komponente der Gameserver, 
 Der dunkelblaue eingefärbte Teil der Webapp, beeinhaltet das Frontend, also die Graphische Oberfläche (GUI) der Anwendung.
 Die hellblauen Komponenten, beschreiben das Backend. 
 
-In der Kommunikation zwischen den Backend und dem Frontend der Webapp Komponente, werden Züge über das ``incomingMove'' Interface des Backends an das Frontend
-weitergereicht. Züge die von der Grafischen Oberfläche aus gespielt sind, kommen über das Interface ``sendInstructions'' an das Backend. Dieses
+In der Kommunikation zwischen den Backend und dem Frontend der Webapp Komponente, werden Züge über das \texttt{incomingMove} Interface des Backends an das Frontend
+weitergereicht. Züge die von der Grafischen Oberfläche aus gespielt sind, kommen über das Interface \texttt{sendInstructions} an das Backend. Dieses
 Interface wird außerdem verwendet um Befehle wie starten und stoppen eines Spieles zu übermitteln. Die Webapp Komponente hat zwei Ports nach Außen, 
 welche Nachrichten an das Backend
 weiterreichen. Der erste Port übernimmt alle Nachrichten, die mit Zügen in Verbindung stehen. So werden alle Züge die vom Gameserver angenommen werden
@@ -688,7 +921,7 @@ Der zweite Port übernimmt das starten und stoppen des Gameservers und des Gamec
 Neben den Oben genannen Verbindungen des Gameservers, hat dieser außerdem eine Verbindung zum Gameclient. Über diese Verbindung werden Züge, die von der 
 KI des Gameclients berechent werden an den Gameserver gesendet.
 
-Will sich ein Smartphone mit der Anwndung verbinden, so werden alle Anfragen an Frontend oder Backend der Webapp vom Reverse Proxy abgefangen und 
+Will sich ein Smartphone mit der Anwendung verbinden, so werden alle Anfragen an Frontend oder Backend der Webapp vom Reverse Proxy abgefangen und 
 nach überprüfung an diese Schnittstellen weitergegeben.
 
 
@@ -703,7 +936,7 @@ nach überprüfung an diese Schnittstellen weitergegeben.
 
 
 \subsubsection{Kommunikation abhängig vom gewählten Spielmodus}
-\label{chap:Ablauf}
+\label{chap:NetworkModie}
 Da die Applikation mit mehreren Spielmodi ausgestattet ist, ändert sich die Kommunikation und welche Komponente gestartet werden muss, abhängig vom Modus.
 Die verfügbaren Spielmodi sind:
 \begin{itemize}
@@ -716,6 +949,7 @@ Bei Benutzer gegen Benutzer wird die KI Komponente der Software nicht gestartet,
 Wird sich für zwei KI Clients die gegeneinander spielen entschieden, so werden auch zwei gestartet.
 Die Kommunikation findet nur mehr von Gameserver mit den beiden KI-Clients statt, jedoch hat die GUI-Komponente eine Man-in-the-Middle-Funktion
 wodurch sie die Kommunikation abhört und die gespielten Züge darstellen kann.
+Das Szenario, welches den meisten Nutzen hat, ist das Spielen einer KI gegen den Benutzer. 
 
 Abbildung \ref{fig:UserVsUserSequenceDiagram} stellt ein UML Sequenzdiagramm dar, bei welchem ein Benutzer gegen die KI spielt.
 Zuerst startet der Benutzer über die GUI mit dem Spielmodus ein Spiel, dadurch wird der Gameserver gestartet, sowie ein
@@ -731,112 +965,8 @@ abwechselnd von den Clients angefordert, bis ein Spieler gewonnen hat.
 	\label{fig:UserVsUserSequenceDiagram}
 \end{minipage}
 
-\subsection{Dame Spiellogik}
-\label{chap:Spiellogik}
-Die Spiellogik für Dame ist in mehrfach in der Anwendung vorfindbar. Zum einen um Züge im KI-Client zu testen und zum anderen
-für den Gameserver, zur Überprüfungen und Aktualisierung der Züge. In den Abbildungen \ref{fig:KIClientClassDiagram} auf Seite \pageref{fig:KIClientClassDiagram} 
-und \ref{fig:GameServerClassDiagram} auf Seite \pageref{fig:GameServerClassDiagram}
-befindet sich die Spiellogik im Paket \texttt{Checkers}. Diese Redundanz ist wichitg, da es sich beim Server und Client um eigenständige Prozesse handelt 
-und diese nicht die gleiche Code-Basis haben. Eine Möglichkeit diese Redundanz zu vermeiden wäre, die Validierung in den Gameserver zu verschieben und 
-dem Gameclient zu zwingen, dass jeder Zug von Gameserver validert werden muss. Dies erhöht aber die Netzwerkkommunikation und verlangsamt das finden eines Zuges, 
-durch den daraus entstehenden Overhead.
-\\
-In Abbildung \ref{fig:GameLogic} zeigt die Spiellogik vom Paket \texttt{Checkers} unabhängig von der Applikation in der es verwendet wird.
-Die Hauptklassen der Spiellogik sind, die \texttt{Board}-, \texttt{Move}- und \texttt{Player}-Klasse. Dabei hält die \texttt{Board}-Klasse die Information über das aktuelle Spielbrett, sowie 
-Methoden um Spielsteine auf dem Spielbrett zu entfernen, oder zu bewegen. Die \texttt{Move}-Klasse dient zum repräsentieren eines Zuges, sie besteht aus dem 
-Uhrsprungspunk, den Zielpunkt, dem Spieler der den Zug getätigt hat und um welchem Spielstein es sich handelt. 
-\\
-Die Klassen \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}, sind Klassen zum finden von aller möglichen Züge die aus einer Stellung heraus gespielt werden
-können. Dabei ist \texttt{CheckersForceCapture} verantwortlich für Züge bei denen ein Spieler gezwungen wird eine Figur zu schlagen und \texttt{CheckersAllPossibleMovesChecker} 
-für alle Züge die keinen Schlagzwang haben. Die Aufteilung in zwei Klassen hat den Hintergrund, dass falls es sich um einen Schlagzwang handelt, braucht 
-die \texttt{AllPossibleMoves}-Klasse nicht erzeugt werden um Züge zu finden. Um einen von der Netzwerkkommunikation eingehenden Zug zu überprüfen, 
-werden die Metheoden der \texttt{CheckersMoveTypeCheck}-Klasse verwendet. Sie vergleichen einen gegebenen Zug, 
-den zum Beispiel der Benuzter getätigt hat, mit den Zügen die aus \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}
-hervorgehen. Dieses Vergleichen ist sehr wichtig für den Gameserver, da alle Züge die von den Clients kommen valide sein müssen. Im Gameclient wird das Vergleichen nur 
-als Extravalidierung verwendet um den gesendeten Zug aus dem Gameserver nochmal zu überprüfen und so Fehler zu minimieren.
-\\
-Das Anwenden eines Spielzuges auf das Spielbrett wird mittels der \texttt{MoveApplier}-Klasse im Gameclient und mit der \texttt{CheckersRules}-Klasse im Gameserver 
-getätigt. Beide verfolgen im Prinzip das selbe Ziel, der Unterschied wird im Implementierungskapitel \ref{chap:Moves} erklärt.
-
-\vspace{1em}
-\begin{minipage}{\linewidth}
-	\centering
-	\includegraphics[width=1.0\linewidth]{pics/GameLogic.png}
-	\captionof{figure}{ Das Paket Checkers welches die Spiellogik beeinhaltet }
-	\label{fig:GameLogic}
-\end{minipage}
-
-
-\subsection{Gameserver}
-Als Gameserver wird der Teil der Software betrachtet, welcher für das einhalten der Spielregeln und die Verwaltung der Spielfeldzustandes, 
-verantwortlich ist. 
-
-\subsubsection{Softwareaufbau des Gameservers}
-Die Software des Gameservers ist in zwei Pakete aufgeteilt, in das Gamerulbook- und Serverconnection-Paket.
-Der Serverconnection Teil ist für die Verbindung und das Dekodieren der Nachrichten der Clients verantwortlich.
-Nachdem ein Client verbunden ist und seine Nachrichten schickt, wird diese dekodiert und falls das Protokoll korrekt eingehalten wird,
-an den Gamerulbook Teil weitergeleitet. Das Gamerulbook Paket verwaltet den Spielzustand, sowie die Spielregeln des laufenden Spieles.
-Es ist über das GameRules Interface mit dem Serverconnection Paket verbunden. Ein beliebiges Spiel kann mittels dieses Interfaces
-als eigenes Paket festgelegt werden, was zu einer Möglichkeit führt den Gameserver um beliebig viele Spiele erweitern zu können.
-Über den weiteren Inhalt des \texttt{Checkers} Paketes wird im vorherigen Kapitel \ref{chap:Spiellogik} berichtet.
-
-Abbildung \ref{fig:GameServerClassDiagram} zeigt den Aufbau als UML-Klassendiagramm, dabei sind Dame und Mühle as Spiele über das
-GameRules Interface als Pakete Beispielhaft gezeigt. 
-
-\vspace{1em}
-\begin{minipage}{\linewidth}
-	\centering
-	\includegraphics[width=1.0\linewidth]{pics/GameServerClassDiagram.png}
-	\captionof{figure}[ClassDiagram]{ Das UML Klassendiagramm des Gameservers }
-	\label{fig:GameServerClassDiagram}
-\end{minipage}
-
-\subsection{ReversiXT GUI}
-Die ReversiXT Graphische Oberfläche (GUI) ist der Teil der Software der für die eigentliche Userinteraktion gedacht ist. User Können über die GUI
-spiele starten, bei welchen sie gegen KI's oder andere User spielen können.
-
-\subsubsection{Softwareaufbau der ReversiXT GUI}
-Die ReversiXT GUI besteht aus zwei Teilen, dem Server und dem Webapp-Paket, siehe \ref{fig:ReversiXTGUIClassDiagram}. 
-Dabei behandelt der Server, die Verbindung zu den anderen
-Komponenten. Er startet den Gameserver und je nachdem wie viele KI's als Spieler gewählt werden, startet er auch die Gameclients dafür.
-Sind die anderen Komponenten gestartet, kommunziert der Server der ReversiXT GUI nur noch mit Gameserver und benutzt dabei das Protokoll
-welches dieser vorschreibt. Die Webapp behinhaltet das Benutzer Interface, über welches die Software für den Endnutzer bedient werden kann.
-Über das Menü kann kann die Gameselection augerufen werden, bei welcher die verfügbaren Spiele ausgewählt werden können.
-Wird ein Spiel ausgewählt, gibt es ein weiteres Menü über dass Spielspezifische Parameter einstellbar sind. 
-Die Spiele sind als eigene Pakete eingegliedert und behinhalten, je nach Spiel ein Spielbrett und Möglichkeiten mittels Touch-Berührungen
-Züge auszuführen. Durch diese Untergliederung in weitere Pakete kann die Software leicht um weitere Spiele erweitert werden.
-
-\vspace{1em}
-\begin{minipage}{\linewidth}
-	\centering
-	\includegraphics[width=0.9\linewidth]{pics/ReversiXTGUIClassDiagramm.png}
-	\captionof{figure}[ReversiXTGUI]{ Das UML Klassendiagramm der ReversiXT GUI }
-	\label{fig:ReversiXTGUIClassDiagram}
-\end{minipage}
-
-\subsubsection{Reverse Proxy}
-
-\subsection{KI Client}
-Der KI Client beinhaltet die Logik der Künstlichen Intelligenz der Applikation. Wird ein Spiel gegen einen KI Client gestartet, so wird dieser gestartet und agiert als 
-Gegenspieler zum User. Der User kann auch ein Spiel bei welchem zwei KI's gegeneinander spielen starten, wodurch zwei KI Clients gestartet werden.
-
-\subsubsection{Softwareaufbau des KI Clients}
-Der KI Client besteht aus drei Paketen, der KI-Logik, der Spiellogik und der Serververbindungslogik, siehe \ref{fig:KIClientClassDiagram}. 
-Die Spilelogik, beeinhaltet ein Momentanzustand des Spielbrettes, sowie Möglichkeiten dieses nach belieben zu modifizieren und ist in Kapietel 
-\ref{chap:Spiellogik} erklärt. Das KI-Paket benutzt diese Logik um 
-Züge auf auszuwerten und den bestmöglichen Zug zu wählen. Um verschiedene KI-Algorithmen verwenden zu können wird ein Interface bereit gestellt, wird die Applikation 
-um einen weiteren KI-Algorithmus erweitert, so muss dieser das Interface verwenden. Wird eine Auswertung des Nächsten besten Zuges abeschlossen, so sendet das KI-Paket sein
-Ergebnis an die das Server-Paket. Dieses ist verantwortlich für das Versenden und kodieren der Nachrichten. Nachrichten werden vom KI-Client zum Gameserver geschickt und müssen
-dabei das Protokoll von diesem einhalten.
-
-\vspace{1em}
-\begin{minipage}{\linewidth}
-	\centering
-	\includegraphics[width=0.9\linewidth]{pics/GameClientClassDiagram.png}
-	\captionof{figure}[KIClient]{ Das UML Klassendiagramm des KI Clients }
-	\label{fig:KIClientClassDiagram}
-\end{minipage}
-
+Die Sequezdiagramme für die Fälle KI gegen KI und Benutzer gegen Benutzer sind im Anhang im Kapitel \ref{apx:KommunikationDerKomp} 
+der Seite \pageref{apx:KommunikationDerKomp} zu finden.
 
 \pagebreak
 \section{Hardware}
@@ -911,7 +1041,7 @@ Laufzeitumgebung ausgeführt wird, was ihn Plattformunabhängig macht. \cite{C++
 %todo grafik die Laufzeitverbesserung zeigt
 
 \subsection{Kommunikation}
-in \ref{chap:Ablauf} ist bereits auf die Kommunikationsstruktur geschildert, im folgenden wird die genauere Implementierung beschrieben
+in Kapitel \ref{chap:Networkcom} von Seite \pageref{chap:Networkcom} ist bereits auf die Kommunikation geschildert, im folgenden wird die genauere Implementierung beschrieben
 
 \subsubsection{Verwendete Technolgie}
 Da der Gameserver, der Gameclient und die GUI eigenständige Prozesse sind, die nach bedarf gestartet und getstoppt werden, brauchen sie eine 
@@ -919,10 +1049,10 @@ Möglichkeit Nachrichten auszutauschen. Dafür werden die von Node.js bereitgest
 gegenüber zum Beispiel UDP, ist dass aufrechterhalten einer Verbindung. So muss sich der Client oder die GUI nur einmal zum Server verbinden 
 und kann im Laufe eines gesamten Spieles diese Verbindung nutzen. Ist ein Spiel zu Ende, kann die TCP-Verbindung gekappt und die 
 Sockets gescholossen werden. Da die GUI in zwei Softwarepakete getrennt ist siehe \ref{fig:ReversiXTGUIClassDiagram}, der React.js Webapp und einem Node.js Server, verwenden 
-diese Pakete auch eine eigen Netzwerkverbindung. Hierfür wird die Javascript library Socket.io verwendet, welche auf basis von Websockets basiert.
+diese Pakete auch eine eigene Netzwerkverbindung. Hierfür wird die Javascript library Socket.io verwendet, welche auf basis von Websockets basiert.
 
 \subsubsection{Kommunikationsprotokoll des Gameservers}
-Im Abschnitt \ref{chap:Ablauf} wird eine Kommunikation zwischen dem Gameserver und seinen Clients beschrieben, bei welcher der 
+Im Abschnitt \ref{chap:Networkcom} wird eine Kommunikation zwischen dem Gameserver und seinen Clients beschrieben, bei welcher der 
 Server nur Anfragen eines festgelegten Protokolles Akzeptiert. Das Protokoll für den Server orientiert sich stark nach dem Protokoll
 des Reversi-Gameservers und ist nur in einigen stellen erweitert worden.
 %Nachdem ein Spiel gestartet wurde, sendet der Gameserver den Initialzustand des Spielbrettes an die Clients und
@@ -944,7 +1074,7 @@ des Reversi-Gameservers und ist nur in einigen stellen erweitert worden.
 \end{table}
 
 in Abbildung \ref{fig:Nachritenaufbau} ist der Aufbau einer Nachricht dargestellt. Es gibt ingesamt neun verschiedene Nachrichtentypen, dazu gehören 
-neues Spiel starten, Zugaufforderung, Spiel Ende und viele weitere. Die meisten Nachrichten von einen gewissen Typ haben immer die selbe Länge, es gibt jedoch
+neues Spiel starten, Zugaufforderung, Spiel Ende und viele weitere, siehe \ref{apx:Protokoll} auf Seite \pageref{apx:Protokoll} des Anhangs. Die meisten Nachrichten von einen gewissen Typ haben immer die selbe Länge, es gibt jedoch
 Ausnahmen, wie die Spielbrettnachricht, bei welcher ein 10x10 oder 8x8 Damenspielbrett gewählt werden kann. Die Nachricht selber entspricht dann den eigentlichen 
 Daten, die übertragen werden, wie zum Beispiel, den Feldern welche besetzt sind beim Spielfeld, oder das Ursprungsfeld und das Zielfeld bei einer Zugantwort. 
 
@@ -963,6 +1093,7 @@ Dieses Menü zeigt eine Auswahl für Spielfeldgrößen,
 \end{minipage}
 
 \subsection{Verwendete KI-Algorithmen}
+\label{chap:KIAlgorithms}
 In Kapitel \ref{chap:Grundlagen} wurden einige künstliche Intelligenz Algorithemen beschrieben, welche auch im Dame-Spiel der Applikation implementiert sind.
 Die Applikation bietet vier Algorithemen zur Auswahl an, gegen die der Spieler antreten kann, siehe \ref{fig:Auswahlmenue}. 
 Diese Algorithemen sind: Minimax, Alpha-Beta-Pruning, Zugsortierung und MCTS.
@@ -1031,17 +1162,29 @@ ist der Zeitpunkt zum abbruch gekommen wird eine C++ Exception geworfen, was zum
 Um die Simulation Ausführen zu können werden die Methoden, welche in \ref{chap:Spiellogik} beschrieben sind verwendet.
 Das Ergebnis des MCTS ist der Kindknoten, welcher den besten Wert nach den Simulationen hat, dieser wird auch vom Algorihtmus zurückgegeben.
 
-\subsection{Dame Spiellogik}
-\label{chap:Moves}
-Im Kapitel \ref{chap:Moves} ist bereits der Aufbau der Spiellogik erklärt. Die Besonderheit bei der Implementierung ist, dass sich der Gameserver und 
-der Gameclient in der Implementierung des MoveAppliers und CheckersRules unterscheiden. Der Grundliegende Unterschied ist, dass 
-beim Berechenen eines neuen Zuges durch den Gameclient sehr oft die Methode "`move"' aufgerufen werden muss. Da diese Züge nicht von 
-anden Komponenten der Anwendung kommen, müssen sie nicht auf Korrektheit überprüft werden. Eine der Hautpaufgaben des Gameservers ist die 
-Überprüfung und Validierung der eingehenden Züge, diese Validierung kostet aber auch Zeit welche die Berechnung im Gameclient verlangsamen würden 
-und daher im Gameclient bei der Berechnung weggelassen wird.
+\subsection{Dame Spiellogik Implementierung}
 
+\subsubsection{Der Unterschied zwischen MoveApplier und CheckersRules}
+\label{chap:Moves}
+Im Kapitel \ref{chap:Spiellogik} auf Seite \pageref{chap:Spiellogik} ist bereits der Aufbau der Spiellogik erklärt. Die Besonderheit bei der Implementierung ist, dass sich der Gameserver und 
+der Gameclient in der Implementierung des \texttt{MoveAppliers} und \texttt{CheckersRules} unterscheiden. Der Grundliegende Unterschied ist,
+die Verwendung der \texttt{move} Methode der Klassen, siehe Abbildung \ref{apx:AllClassDiagrams} des Anhangs auf Seite \pageref{apx:AllClassDiagrams}. 
+So wird die Methode im Gameclient verwendet um für einen KI-Algorithmus, einen Zug auf ein Spielfeld zur Baum-Suche anzuwenden, sowie zur Validierung eingehender Züge vom
+Gameserver. Wird also ein Minimax-Baum aufgebaut, welcher als Knoten einen Spielfeldzustand hat, so muss diese Methode für jeden möglichen Zug eines 
+Spielfeldes aufgerufen werden, um alle seine Kindknoten zu erstellen. Bei solchen Bäumen mit hoher Suchtiefe kann es schnell passieren, 
+dass diese Methode sehr oft ausgeführt wird.
+Beim Gameserver hingegen wird die Methode zur Validierung, mittels der Klasse \texttt{CheckersMoveTypeCheck} verwendet um eingehende Züge der Clients 
+auf ihere Korrektheit zu überprüfen und falls sie Korrekt sind auf das Spielfeld Anzuwenden. 
+Der Gameserver braucht also auch noch eine Variante für das Anwenden des Zuges auf das Spielfeld eines Knoten im Baum, welche ohne die Validierung Performance einspart,
+sowie eine Variante mit Validierung für eingehende Züge vom Gameserver über die Netzwerkverbindung.
+Dies wird mittels eines einfachen Flags erziehlt, welches ermöglicht die Validierung aus oder einzuschalten.
 
 \section{Testing und Simulation}
+Folgendes Kapitel beschreibt, die Tests und Simulationen, welche benutzt wurden, um die Güte der Software zu verbessern. Die Simulationen wurden verwendet um 
+die Spielstärke der KI-Algorithmen zu validieren und dadurch auch Fehler zu beheben, dass ein Algorithmus zu schlecht für seine Verhältnisse spielt.
+Die Tests sind zum verhindern von Fehler die in Spezialfällen eintreffen können. So gibt es Stellungen in Dame welche nicht häufig auftreten, 
+aber zu Fehlerfällen führen könnten falls diese nicht beachtet werden.
+
 \subsection{Simulation}
 Da die Software mehrere KI-Algorithemen beeinhaltet und diese unterschiedlich stark sind, werden Simulationen verwendet um die erwartete Stärke der Algorithemen
 zu bestätigen. Im laufe der Simulationen spielt jede KI gegen die anderen KI's. Um die Ergebnisse in Form von Stärke festzuhalten, bekommt jeder Algorithmus ahnhand
@@ -1073,26 +1216,53 @@ Dabei entspricht:
 \end{conditions}
 
 Der K-Faktor gibt eine Aussage darüber wie stark sich ein Spiel auf die Eloänderung auswirkt. In der Applikation wurde ein K-Faktor von 30 verwendet, da 
-dieser auch in Turnierschach für Spieler unter 2100 Elo verwendet wird.
+dieser auch in Turnierschach für Spieler unter 2100 Elo verwendet wird \cite{EloFormulas}.
 
 \subsubsection{Aufbau der Simulationsoftware}
-Für die Simulation wurde eine Eigene Software geschrieben, welche unabhängig von der ReversiXT GUI arbeitet. 
-Es werden lediglich der Gameserver und der Gameclient benötigt. Um eine Simulation zu starten muss eine Anzahl durchläufen angeben werden, je nach dem
-wie viele Spiele ausgeführt werden sollen. Startet man ein Spiel wird der Gameserver und zwei Gameclients mit zufällig sich unterscheidenden Algorithmen gestartet.
-Wird ein Spiel abgeschlossen wird das Ergbnis in einer Datei gespeichert und die Elo aktualisiert.
+Für die Simulation wurde eine Eigene Software geschrieben, welche unabhängig von der ReversiXT GUI arbeitet und nur den Gameserver 
+sowie den Gameclient zur Berechnung der Ergebnisse benötigt. Dies hat den Vorteil, dass Simulationen parallel zur eigentlichen Applikation laufen können.
+So kann gerade ein Benutzer ein Spiel gegen eine KI gestartet haben, im Hintergrund läuft auch die Simulation die ihere eigenen Instanzen des 
+Gameservers und Gameclients hat und mit diesen arbeitet. 
+Die KI-Algorithmen welche spielen müssen werden zufällig gewählt und müssen sich unterscheiden. Ein Spiel zwei gleicher KIs hätte keine Auswirkung auf das 
+Ergebnis, da sich die Wertung nicht verändern würde. Außerdem wird ist die Auswahl auf Schwarz und Weiß so gewichtet, dass jedes Aufeinandertreffen von zwei
+Algorithemen beide gleich oft die jeweilige Farbe bekommen, denn Weiß hat immer einen Vorteil, da es den ersten Zug machen darf, auch wenn dieser 
+Vorteil nur sehr gering ist, kann er bei der Simulation einen Unterschied machen.
+\\
+Zum starten der Simulation muss ein Simulationsanzahl angegeben werden, was dazu führt dass die Software so lange simuliert, bis diese Anzahl erreicht wird.
+Nach jedem abgeschlossen Spiel wird das Ergebnis berechnet und zwischengespeichert, dadurch kann eine Simulation abgebrochen werden ohne die vorherigen 
+Ergebnisse zu verlieren. Außerdem arbeitet die Simulation mit den bereits berechneten Elo werten Weiter, so kann ist die Anzahl der am Anfang angegebenen 
+Spiele nur von Relevanz, wie lange man die Simulation laufen haben will und nicht wie akurat das Ergebnis nach nur diesen Simulationen sein soll.
+\\
+Damit der Benutzer auch weis wie stark die Algorithmen in Verhältnis zueinander sind, wird das Berechnete Ergbnis der Simulationen im Auswahlmenü der 
+Algorithmen als Elo Zahl mit angegeben, um somit den Benutzer eine Akkurate Repräsentation der Stärke anzuzeigen.
+
 
 \subsubsection{Interpretation der Ergebnisse}
-Die vier implementierten Algorithemen der Applikation sind:
+Damit die Ergebnisse auch wirklich Sinn im Vergleich zueinander machen, werden sie nach einigen Simulationen mit den Erwarteten Werten verglichen.
+Hier wurden um die 300 Simulationen ausgeführt um ein möglichst genaues Ergebnis zu erziehlen. Natürlich würde die Genauigkeit der Ergebnisse 
+besser werden, je öfter man die Simulation weiderholt, aber das Ergenbiss nach 300 Simulationen bestätigt bereits die Erwartungen.
+Da die Software eventuell zu einem Späteren Zeitpunk um weitere Algorithemen erweitert wird, sind die in dieser Simulation verwendeten die folgenden:
 \begin{itemize}
     \item MCTS
     \item Minimax 
     \item Alpha-Beta Pruning
     \item Alpha-Beta mit Zugsortierung 
 \end{itemize}
-Man könnte erwarten dass Alpha-Beta mit Zugsortierung die höchste Elozahl, Alpha-Beta Pruning die zweithöchste, Minimax die dritthöchste und MCTS die geringste Elo-
-Zahl erhalten würden. Diese Annahme lässt sich durch die Simulation bestätigen.
-
-%todo -> Bild mit werten einfügen
+Da Alpha-Beta eine Verbesserung des Minimax ist, kann man erwarten, dass es auch eine Besser Performance Abliefert, da ein großer Teil der Bäume 
+immer ignoriert werden kann und somit Rechenzeit eingespart werden kann. Ebenso sollte Alpha-Beta mit Zugsortierung besser als das normale 
+Alpha-Beta Pruing sein, da es wieder eine weitere Verbesserung dieses Algorithmuses ist. MCTS ist etwas schwiriger einzuschätzen, da 
+es über Simulationen läuft, doch Ergebnisse aus anderen Arbeiten bestätigen, dass MCTS im Vergleich zu Minimax vorallem bei Spielen wie Dame 
+schwächer abschneidet \cite{MiniaxMCTScomparison}.
+\\
+Die Ergebnisse mit den Zuvor erwähnten Elo-Formeln lauten:
+\begin{itemize}
+    \item MCTS: 1807
+    \item Minimax: 1963
+    \item Alpha-Beta Pruning: 2070
+    \item Alpha-Beta mit Zugsortierung: 2141
+\end{itemize}
+Bei diesen Ergebnissen wurde ein Basiswert von 2000 Elo verwendet, mit einem kleinen K-Faktor, da sehr viele Spiele simuliert werden können und 
+einzelne Spiele keine so große Auswirkung haben sollen. Wie man Sieht stimmen die Ergebnisse mit den Annahmen überein.
 
 \subsection{Testing}
 Um die Stabilität der Software, zu verbessern, sind Tests für die anfälligen Softwarekomponenten erstellt worden, durch welche gröbere Fehler vermieden werden können.
@@ -1275,7 +1445,7 @@ wertet diese Ergbnisse aus.
 
 \section{Anforderungsanalyse}
 \label{apx:Anforderungsanalyse}
-In diesem Kapitel wird zuerst ein beispielhaftes Szenario gezeigt, bei welchem die Software eingesetzt werden soll.
+In diesem Kapitel des Anhangs wird zuerst ein beispielhaftes Szenario gezeigt, bei welchem die Software eingesetzt werden soll.
 Anschließend werden anhand dieser Szenarios Anforderungen definiert, die von der Software erfüllt werden müssen.
 \subsection{Anwendungsszenario}
 Will ein Benutzer gegen den KI Client spielen, kann er über das Menü auf dem Touch Monitor den KI Algorithmus auswählen und diesen herausfordern.
@@ -1369,6 +1539,8 @@ Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Refer
 	\label{tab:Anforderungen}
 \end{table}
 
+\pagebreak
+
 \section{UML Klassendiagramm vom Gesamten Projekt}
 \label{apx:AllClassDiagrams}
 \vspace{1em}
@@ -1377,6 +1549,56 @@ Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Refer
 	\includegraphics[width=1.0\linewidth]{pics/AllClassDiagrams.png}
 	\captionof{figure}{ UML Klassendigramm aller Komponenten des Projekts }
 \end{minipage}
+\pagebreak
+
+\section{Sequenzdiagramme über die Kommunikation der Komponenten}
+\label{apx:KommunikationDerKomp}
+Die beiden Folgenden Abbildungen \ref{fig:UserVsAI} und \ref{fig:AiVsAi} zeigen die beiden anderen Fälle in 
+denen entweder zwei Benutzer oder zwei KIs gegeneinander spielen.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/SequenceDiagramBenutzervsBenutzer.png}
+    \captionof{figure}{ UML Sequenzdiagramm von Benuzter gegen Benutzer }
+    \label{fig:UserVsAI}
+\end{minipage}
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=1.0\linewidth]{pics/SequenceDiagramAiVsAi.png}
+    \captionof{figure}{ UML Sequenzdiagramm von KI gegen KI }
+    \label{fig:AiVsAi}
+\end{minipage}
+
+
+
+
+\pagebreak
+
+\section{Nachrichten Protokoll des Gameservers}
+\label{apx:Protokoll}
+Das Nachriten Protokoll des Gameservers besteht aus folgenden Nachrichtentypen:
+\begin{itemize}
+    \item 0: Fehler, entält die Fehlermeldung als String
+    \item 1: Besteht aus der Zeit die ein Client zur Verfügung hat (32-Bit Integer) und der Gruppennummer des Clients (Vorzeichenloser 8-Bit Integer)
+    \item 2: Spielfeld, zuerst die Art des Spieles als vorzeichenloser 8-Bit Integer (z.B 0 für Dame), dann ein vorzeichenloser 8-Bit Integer für die Anzahl an Spieler die 
+    beim Spiel Teilnehmen können, als nächstes zwei vorzeichenlose 8-Bit Integer für die Höhe und Breite des Spielfeldes 
+    (Achtung manche Spiele, wie Dame können nur von 2 Spielern gespielt werden!).
+    Danach folgen alle Felder des Spielfeldes nach Spezifikation (nicht \textbackslash0 terminiert!)
+    \item 3: Spieler Nummer als vorzeichenloser 8-Bit Integer die dem Spieler zugewiesen wird
+    \item 4: Zug Anforderung, bestehend aus einem 32-Bit Integer als Zeitlimit gefolgt von einem vorzeichenlosen 8-Bit Integer für die maximale Suchtiefe
+    \item 5: Zug Antwort, besteht aus 4 vorzeichenlosen 16-Bit Integern, welche die Ursprungsspalte und die Ursprungsreihe, sowie die Ziehlspalte und Ziehlreihe sind.
+    gefolgt von einem vorzeichenlosen 8-Bit Integer für die Angabe der Spielfigurenart (z.B normale Figur oder Dame).
+    \item 6: normaler Zug der Vom Server validiert worden ist und an alle Teilnehmer geschickt wird. Enthält den selben Inhalt wie die Zug Antwort (5), jedoch 
+    gefolgt von einem vorzeichenlosen 8-Bit Integer, welcher die Spieler ID beschreibt.
+    \item 7: Disqualifikation, ein vorzeichenloser 8-Bit Integer mit der Spieler ID welcher disqualifiziert wird.
+    \item 8: Letzte Phase, nachdem der Endzustand der ersten Phase erreicht wird (in Dame nicht verwerwendet, aber falls Mühle später relevant wird, z. B. um vom setzen 
+    der Steine zum Springen zu gelangen)
+    \item 9: Spielende, enthält einen vorzeichenlosen 8-Bit Integer mit der Spieler ID des Spielers welcher gewonnen hat.
+\end{itemize}
+
 
 
 

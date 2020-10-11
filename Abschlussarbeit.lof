@@ -23,20 +23,26 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {11}{\ignorespaces Die Anwendung als Verteilungsdiagramm\relax }}{12}{figure.11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12}{\ignorespaces Auswahlmen\IeC {\"u}}}{13}{figure.12}% 
+\contentsline {figure}{\numberline {12}{\ignorespaces ClassDiagram}}{13}{figure.12}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {13}{\ignorespaces SequenceDiagram}}{14}{figure.13}% 
+\contentsline {figure}{\numberline {13}{\ignorespaces Das Sequenzdiagramm zum Ablauf der Serververbindung \relax }}{15}{figure.13}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {14}{\ignorespaces Das Paket Checkers welches die Spiellogik beeinhaltet \relax }}{16}{figure.14}% 
+\contentsline {figure}{\numberline {14}{\ignorespaces ReversiXTGUI}}{17}{figure.14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {15}{\ignorespaces ClassDiagram}}{17}{figure.15}% 
+\contentsline {figure}{\numberline {15}{\ignorespaces KIClient}}{21}{figure.15}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16}{\ignorespaces ReversiXTGUI}}{19}{figure.16}% 
+\contentsline {figure}{\numberline {16}{\ignorespaces Das Paket Checkers welches die Spiellogik beeinhaltet \relax }}{23}{figure.16}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {17}{\ignorespaces KIClient}}{21}{figure.17}% 
+\contentsline {figure}{\numberline {17}{\ignorespaces Auswahlmen\IeC {\"u}}}{25}{figure.17}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {18}{\ignorespaces Der Aufbau einer Nachricht\relax }}{25}{table.caption.7}% 
+\contentsline {figure}{\numberline {18}{\ignorespaces SequenceDiagram}}{26}{figure.18}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {19}{\ignorespaces Auswahlmen\IeC {\"u}}}{25}{figure.19}% 
+\contentsline {figure}{\numberline {19}{\ignorespaces Der Aufbau einer Nachricht\relax }}{30}{table.caption.7}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {20}{\ignorespaces UML Klassendigramm aller Komponenten des Projekts \relax }}{IV}{figure.20}% 
+\contentsline {figure}{\numberline {20}{\ignorespaces Auswahlmen\IeC {\"u}}}{30}{figure.20}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {21}{\ignorespaces UML Klassendigramm aller Komponenten des Projekts \relax }}{IV}{figure.21}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {22}{\ignorespaces UML Sequenzdiagramm von Benuzter gegen Benutzer \relax }}{V}{figure.22}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {23}{\ignorespaces UML Sequenzdiagramm von KI gegen KI \relax }}{VI}{figure.23}% 

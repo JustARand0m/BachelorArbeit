@@ -68,6 +68,19 @@
     \endverb
   \endentry
 
+  \entry{EloFormulas}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Elo}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{note}{Die Berechnung der Elo Zahlen}
+    \field{title}{\texttt{Chessmetrics Formulas}}
+    \verb{url}
+    \verb http://www.chessmetrics.com/cm/CM2/Formulas.asp
+    \endverb
+  \endentry
+
   \entry{SpieleDerWelt}{book}{}
     \name{author}{1}{}{%
       {{hash=GFV}{%
@@ -89,6 +102,29 @@
     \field{sortinithash}{G}
     \field{title}{Spiele der Welt I - Geschichte, Spielen, Selbermachen}
     \field{year}{1985}
+  \endentry
+
+  \entry{MiniaxMCTScomparison}{report}{}
+    \name{author}{1}{}{%
+      {{hash=HBMW}{%
+         family={Hendrik\bibnamedelima Baier},
+         familyi={H\bibinitperiod\bibinitdelim B\bibinitperiod},
+         given={Mark\bibnamedelima Winands},
+         giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HBMW1}
+    \strng{fullhash}{HBMW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{HB}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Monte-Carlo Tree Search and Minimax Hybrids}
+    \list{institution}{1}{%
+      {Maastricht University}%
+    }
+    \field{type}{techreport}
   \endentry
 
   \entry{InternationalCheckersRules}{online}{}
@@ -233,29 +269,6 @@
     \endverb
   \endentry
 
-  \entry{KuenstlicheIntelligenzNorvig}{book}{}
-    \name{author}{1}{}{%
-      {{hash=RS}{%
-         family={Russell},
-         familyi={R\bibinitperiod},
-         given={Stuart},
-         giveni={S\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Pearson}%
-    }
-    \strng{namehash}{RS1}
-    \strng{fullhash}{RS1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{Rus12}
-    \field{sortinit}{R}
-    \field{sortinithash}{R}
-    \field{title}{Künstliche Intelligenz ein moderner Ansatz}
-    \field{year}{2012}
-  \endentry
-
   \entry{AlphaBeta}{report}{}
     \name{author}{1}{}{%
       {{hash=SPSMS}{%
@@ -279,6 +292,29 @@
       {National Institute of Technology, Tiruchirappalli}%
     }
     \field{type}{techreport}
+  \endentry
+
+  \entry{KuenstlicheIntelligenzNorvig}{book}{}
+    \name{author}{1}{}{%
+      {{hash=SRPN}{%
+         family={Stuart\bibnamedelima Russell},
+         familyi={S\bibinitperiod\bibinitdelim R\bibinitperiod},
+         given={Peter\bibnamedelima Norvig},
+         giveni={P\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Pearson}%
+    }
+    \strng{namehash}{SRPN1}
+    \strng{fullhash}{SRPN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{SR12}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Künstliche Intelligenz ein moderner Ansatz}
+    \field{year}{2012}
   \endentry
 \enddatalist
 \endinput

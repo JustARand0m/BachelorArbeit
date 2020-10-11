@@ -1,7 +1,7 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {ngerman}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {I}Abk\IeC {\"u}rzungsverzeichnis}{VII}{section.I}% 
+\contentsline {section}{\numberline {I}Abk\IeC {\"u}rzungsverzeichnis}{VIII}{section.I}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1}Einleitung}{1}{section.1}% 
 \defcounter {refsection}{0}\relax 
@@ -37,81 +37,95 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1}\IeC {\"U}berblick}{11}{subsection.3.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Netzwerkkommunikation}{12}{subsection.3.2}% 
+\contentsline {subsection}{\numberline {3.2}Gameserver}{12}{subsection.3.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.1}Kommunikation zwischen den Software-Teilen}{12}{subsubsection.3.2.1}% 
+\contentsline {subsubsection}{\numberline {3.2.1}Softwareaufbau des Gameservers}{12}{subsubsection.3.2.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.2}Kommunikation abh\IeC {\"a}ngig vom gew\IeC {\"a}hlten Spielmodus}{13}{subsubsection.3.2.2}% 
+\contentsline {subsubsection}{\numberline {3.2.2}Erweiterung um weitere Spiele}{13}{subsubsection.3.2.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Dame Spiellogik}{14}{subsection.3.3}% 
+\contentsline {subsubsection}{\numberline {3.2.3} Server Kommunikation }{14}{subsubsection.3.2.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4}Gameserver}{16}{subsection.3.4}% 
+\contentsline {subsubsection}{\numberline {3.2.4}Zeitlimits f\IeC {\"u}r Spieler}{15}{subsubsection.3.2.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.4.1}Softwareaufbau des Gameservers}{16}{subsubsection.3.4.1}% 
+\contentsline {subsection}{\numberline {3.3}Webapp}{17}{subsection.3.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5}ReversiXT GUI}{18}{subsection.3.5}% 
+\contentsline {subsubsection}{\numberline {3.3.1}Frontend}{18}{subsubsection.3.3.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.5.1}Softwareaufbau der ReversiXT GUI}{18}{subsubsection.3.5.1}% 
+\contentsline {subsubsection}{\numberline {3.3.2}Backend}{19}{subsubsection.3.3.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.5.2}Reverse Proxy}{20}{subsubsection.3.5.2}% 
+\contentsline {subsubsection}{\numberline {3.3.3}Reverse Proxy}{19}{subsubsection.3.3.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6}KI Client}{20}{subsection.3.6}% 
+\contentsline {subsection}{\numberline {3.4}Gameclient}{19}{subsection.3.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.1}Softwareaufbau des KI Clients}{20}{subsubsection.3.6.1}% 
+\contentsline {subsubsection}{\numberline {3.4.1}Genereller Aufbau}{20}{subsubsection.3.4.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Hardware}{22}{section.4}% 
+\contentsline {subsubsection}{\numberline {3.4.2}KI Logik}{21}{subsubsection.3.4.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Raspberry Pi}{22}{subsection.4.1}% 
+\contentsline {subsubsection}{\numberline {3.4.3}Verbindung zum Server}{22}{subsubsection.3.4.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Touch Monitor}{22}{subsection.4.2}% 
+\contentsline {subsection}{\numberline {3.5}Dame Spiellogik}{22}{subsection.3.5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Implementierung}{23}{section.5}% 
+\contentsline {subsection}{\numberline {3.6}Netzwerkkommunikation}{23}{subsection.3.6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Programmiersprachen und Frameworks}{23}{subsection.5.1}% 
+\contentsline {subsubsection}{\numberline {3.6.1}Kommunikation zwischen den Software-Teilen}{24}{subsubsection.3.6.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.1.1}React.js}{23}{subsubsection.5.1.1}% 
+\contentsline {subsubsection}{\numberline {3.6.2}Kommunikation abh\IeC {\"a}ngig vom gew\IeC {\"a}hlten Spielmodus}{25}{subsubsection.3.6.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.1.2}Node.js}{23}{subsubsection.5.1.2}% 
+\contentsline {section}{\numberline {4}Hardware}{27}{section.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.1.3}Typescript}{24}{subsubsection.5.1.3}% 
+\contentsline {subsection}{\numberline {4.1}Raspberry Pi}{27}{subsection.4.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.1.4}C/C++ Node Addons}{24}{subsubsection.5.1.4}% 
+\contentsline {subsection}{\numberline {4.2}Touch Monitor}{27}{subsection.4.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Kommunikation}{24}{subsection.5.2}% 
+\contentsline {section}{\numberline {5}Implementierung}{28}{section.5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.1}Verwendete Technolgie}{24}{subsubsection.5.2.1}% 
+\contentsline {subsection}{\numberline {5.1}Programmiersprachen und Frameworks}{28}{subsection.5.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.2.2}Kommunikationsprotokoll des Gameservers}{24}{subsubsection.5.2.2}% 
+\contentsline {subsubsection}{\numberline {5.1.1}React.js}{28}{subsubsection.5.1.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}GUI Dame Erweiterung}{25}{subsection.5.3}% 
+\contentsline {subsubsection}{\numberline {5.1.2}Node.js}{28}{subsubsection.5.1.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}Verwendete KI-Algorithmen}{25}{subsection.5.4}% 
+\contentsline {subsubsection}{\numberline {5.1.3}Typescript}{29}{subsubsection.5.1.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.4.1}Minimax}{26}{subsubsection.5.4.1}% 
+\contentsline {subsubsection}{\numberline {5.1.4}C/C++ Node Addons}{29}{subsubsection.5.1.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.4.2}Minimax Erweiterungen Alpha-Beta-Pruning und Zugsortierung}{27}{subsubsection.5.4.2}% 
+\contentsline {subsection}{\numberline {5.2}Kommunikation}{29}{subsection.5.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.4.3}MCTS}{27}{subsubsection.5.4.3}% 
+\contentsline {subsubsection}{\numberline {5.2.1}Verwendete Technolgie}{29}{subsubsection.5.2.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5}Dame Spiellogik}{28}{subsection.5.5}% 
+\contentsline {subsubsection}{\numberline {5.2.2}Kommunikationsprotokoll des Gameservers}{29}{subsubsection.5.2.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Testing und Simulation}{28}{section.6}% 
+\contentsline {subsection}{\numberline {5.3}GUI Dame Erweiterung}{30}{subsection.5.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1}Simulation}{28}{subsection.6.1}% 
+\contentsline {subsection}{\numberline {5.4}Verwendete KI-Algorithmen}{30}{subsection.5.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.1.1}ELO}{28}{subsubsection.6.1.1}% 
+\contentsline {subsubsection}{\numberline {5.4.1}Minimax}{31}{subsubsection.5.4.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.1.2}Aufbau der Simulationsoftware}{29}{subsubsection.6.1.2}% 
+\contentsline {subsubsection}{\numberline {5.4.2}Minimax Erweiterungen Alpha-Beta-Pruning und Zugsortierung}{32}{subsubsection.5.4.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.1.3}Interpretation der Ergebnisse}{29}{subsubsection.6.1.3}% 
+\contentsline {subsubsection}{\numberline {5.4.3}MCTS}{32}{subsubsection.5.4.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}Testing}{30}{subsection.6.2}% 
+\contentsline {subsection}{\numberline {5.5}Dame Spiellogik Implementierung}{33}{subsection.5.5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.1}Gameserver}{30}{subsubsection.6.2.1}% 
+\contentsline {subsubsection}{\numberline {5.5.1}Der Unterschied zwischen MoveApplier und CheckersRules}{33}{subsubsection.5.5.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.2}Gameclient}{30}{subsubsection.6.2.2}% 
+\contentsline {section}{\numberline {6}Testing und Simulation}{33}{section.6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Fazit und Ausblick}{31}{section.7}% 
+\contentsline {subsection}{\numberline {6.1}Simulation}{33}{subsection.6.1}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.1.1}ELO}{34}{subsubsection.6.1.1}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.1.2}Aufbau der Simulationsoftware}{34}{subsubsection.6.1.2}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.1.3}Interpretation der Ergebnisse}{35}{subsubsection.6.1.3}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2}Testing}{36}{subsection.6.2}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.2.1}Gameserver}{36}{subsubsection.6.2.1}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.2.2}Gameclient}{36}{subsubsection.6.2.2}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Fazit und Ausblick}{38}{section.7}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{Anhang}{I}{section*.8}% 
 \defcounter {refsection}{0}\relax 
@@ -130,3 +144,7 @@
 \contentsline {subsubsection}{\numberline {A.2.3}Zusammenfassung der Anforderungen}{III}{subsubsection.A.2.3}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {B}UML Klassendiagramm vom Gesamten Projekt}{IV}{appendix.B}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {C}Sequenzdiagramme \IeC {\"u}ber die Kommunikation der Komponenten}{V}{appendix.C}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {D}Nachrichten Protokoll des Gameservers}{VII}{appendix.D}% 
