@@ -165,6 +165,29 @@
     \field{year}{1985}
   \endentry
 
+  \entry{UnitTestBook}{book}{}
+    \name{author}{1}{}{%
+      {{hash=MG}{%
+         family={Meszaros},
+         familyi={M\bibinitperiod},
+         given={Gerard},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {The Addison-Wesley Signature Series}%
+    }
+    \strng{namehash}{MG1}
+    \strng{fullhash}{MG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Mes09}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{xUnit Test Patterns: Refactoring Test Code}
+    \field{year}{2009}
+  \endentry
+
   \entry{DeepLearingGo}{book}{}
     \name{author}{1}{}{%
       {{hash=MPKF}{%

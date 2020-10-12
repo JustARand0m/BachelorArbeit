@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.18)  11 OCT 2020 19:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.18)  12 OCT 2020 22:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1424,7 +1424,7 @@ This may cause the page layout to be inconsistent, however.
 \openout9 = `Abschlussarbeit.lot'.
 
  [7] [8] [1] [2]
-<pics/checkersboard.png, id=486, 904.88063pt x 900.36375pt>
+<pics/checkersboard.png, id=490, 904.88063pt x 900.36375pt>
 File: pics/checkersboard.png Graphic file (type png)
 <use pics/checkersboard.png>
 Package pdftex.def Info: pics/checkersboard.png  used on input line 202.
@@ -1435,7 +1435,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 203.
 See the caption package documentation for explanation.
 
-<pics/ReversiMenues.png, id=490, 1442.38875pt x 692.5875pt>
+<pics/ReversiMenues.png, id=494, 1442.38875pt x 692.5875pt>
 File: pics/ReversiMenues.png Graphic file (type png)
 <use pics/ReversiMenues.png>
 Package pdftex.def Info: pics/ReversiMenues.png  used on input line 216.
@@ -1446,7 +1446,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 See the caption package documentation for explanation.
 
 [3 <c:/Users/Korbi/Project/BachelorArbeit/pics/checkersboard.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/ReversiMenues.png>]
-<pics/ReversiGameSelection.png, id=499, 1441.63594pt x 691.83469pt>
+<pics/ReversiGameSelection.png, id=503, 1441.63594pt x 691.83469pt>
 File: pics/ReversiGameSelection.png Graphic file (type png)
 <use pics/ReversiGameSelection.png>
 Package pdftex.def Info: pics/ReversiGameSelection.png  used on input line 228.
@@ -1457,7 +1457,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 229.
 See the caption package documentation for explanation.
 
-<pics/ReversiGame.png, id=501, 1442.38875pt x 691.83469pt>
+<pics/ReversiGame.png, id=505, 1442.38875pt x 691.83469pt>
 File: pics/ReversiGame.png Graphic file (type png)
 <use pics/ReversiGame.png>
 Package pdftex.def Info: pics/ReversiGame.png  used on input line 241.
@@ -1474,69 +1474,69 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 276.
-<pics/root.png, id=510, 669.2503pt x 668.4975pt>
+<pics/root.png, id=514, 669.2503pt x 668.4975pt>
 File: pics/root.png Graphic file (type png)
 <use pics/root.png>
 Package pdftex.def Info: pics/root.png  used on input line 317.
 (pdftex.def)             Requested size: 133.84769pt x 133.69713pt.
-<pics/1goodmove.png, id=511, 670.75594pt x 670.00313pt>
+<pics/1goodmove.png, id=515, 670.75594pt x 670.00313pt>
 File: pics/1goodmove.png Graphic file (type png)
 <use pics/1goodmove.png>
 Package pdftex.def Info: pics/1goodmove.png  used on input line 317.
 (pdftex.def)             Requested size: 100.60904pt x 100.49612pt.
-<pics/21goodmove.png, id=512, 673.01437pt x 670.00313pt>
+<pics/21goodmove.png, id=516, 673.01437pt x 670.00313pt>
 File: pics/21goodmove.png Graphic file (type png)
 <use pics/21goodmove.png>
 Package pdftex.def Info: pics/21goodmove.png  used on input line 317.
 (pdftex.def)             Requested size: 100.9478pt x 100.49612pt.
-<pics/311goodmove.png, id=513, 669.2503pt x 668.4975pt>
+<pics/311goodmove.png, id=517, 669.2503pt x 668.4975pt>
 File: pics/311goodmove.png Graphic file (type png)
 <use pics/311goodmove.png>
 Package pdftex.def Info: pics/311goodmove.png  used on input line 317.
 (pdftex.def)             Requested size: 80.30656pt x 80.21623pt.
-<pics/312goodmove.png, id=514, 673.01437pt x 667.74469pt>
+<pics/312goodmove.png, id=518, 673.01437pt x 667.74469pt>
 File: pics/312goodmove.png Graphic file (type png)
 <use pics/312goodmove.png>
 Package pdftex.def Info: pics/312goodmove.png  used on input line 317.
 (pdftex.def)             Requested size: 80.75824pt x 80.1259pt.
-<pics/313goodmove.png, id=515, 668.4975pt x 668.4975pt>
+<pics/313goodmove.png, id=519, 668.4975pt x 668.4975pt>
 File: pics/313goodmove.png Graphic file (type png)
 <use pics/313goodmove.png>
 Package pdftex.def Info: pics/313goodmove.png  used on input line 317.
 (pdftex.def)             Requested size: 80.21623pt x 80.21623pt.
-<pics/22badmove.png, id=516, 670.00313pt x 669.2503pt>
+<pics/22badmove.png, id=520, 670.00313pt x 669.2503pt>
 File: pics/22badmove.png Graphic file (type png)
 <use pics/22badmove.png>
 Package pdftex.def Info: pics/22badmove.png  used on input line 317.
 (pdftex.def)             Requested size: 100.49612pt x 100.38321pt.
-<pics/322badmove.png, id=517, 670.00313pt x 668.4975pt>
+<pics/322badmove.png, id=521, 670.00313pt x 668.4975pt>
 File: pics/322badmove.png Graphic file (type png)
 <use pics/322badmove.png>
 Package pdftex.def Info: pics/322badmove.png  used on input line 317.
 (pdftex.def)             Requested size: 80.3969pt x 80.21623pt.
-<pics/321badmove.png, id=518, 670.75594pt x 669.2503pt>
+<pics/321badmove.png, id=522, 670.75594pt x 669.2503pt>
 File: pics/321badmove.png Graphic file (type png)
 <use pics/321badmove.png>
 Package pdftex.def Info: pics/321badmove.png  used on input line 317.
 (pdftex.def)             Requested size: 80.48723pt x 80.30656pt.
-<pics/1badmove.png, id=519, 670.75594pt x 670.75594pt>
+<pics/1badmove.png, id=523, 670.75594pt x 670.75594pt>
 File: pics/1badmove.png Graphic file (type png)
 <use pics/1badmove.png>
 Package pdftex.def Info: pics/1badmove.png  used on input line 317.
 (pdftex.def)             Requested size: 100.60904pt x 100.60904pt.
-<pics/2winAfter1badmove.png, id=520, 673.01437pt x 670.75594pt>
+<pics/2winAfter1badmove.png, id=524, 673.01437pt x 670.75594pt>
 File: pics/2winAfter1badmove.png Graphic file (type png)
 <use pics/2winAfter1badmove.png>
 Package pdftex.def Info: pics/2winAfter1badmove.png  used on input line 317.
 (pdftex.def)             Requested size: 100.9478pt x 100.60904pt.
  [5] [6 <c:/Users/Korbi/Project/BachelorArbeit/pics/root.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/1goodmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/21goodmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/311goodmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/312goodmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/313goodmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/22badmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/322badmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/321badmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/1badmove.png> <c:/Users/Korbi/Project/BachelorArbeit/pics/2winAfter1badmove.png>] [7]
-<pics/ArrowRight.png, id=546, 76.78688pt x 57.96657pt>
+<pics/ArrowRight.png, id=550, 76.78688pt x 57.96657pt>
 File: pics/ArrowRight.png Graphic file (type png)
 <use pics/ArrowRight.png>
 Package pdftex.def Info: pics/ArrowRight.png  used on input line 527.
 (pdftex.def)             Requested size: 76.78668pt x 57.96642pt.
  [8] [9 <c:/Users/Korbi/Project/BachelorArbeit/pics/ArrowRight.png>] [10]
-<pics/DeploymentDiagram.png, id=571, 981.6675pt x 551.81157pt>
+<pics/DeploymentDiagram.png, id=575, 981.6675pt x 551.81157pt>
 File: pics/DeploymentDiagram.png Graphic file (type png)
 <use pics/DeploymentDiagram.png>
 Package pdftex.def Info: pics/DeploymentDiagram.png  used on input line 665.
@@ -1552,7 +1552,7 @@ Overfull \hbox (49.93692pt too wide) in paragraph at lines 675--684
 []\OT1/cmr/m/n/12 Die Soft-wa-re des Ga-me-ser-ve-rs ist in zwei Pa-ke-te auf-ge-teilt, in das \OT1/cmtt/m/n/12 Gamerulebook\OT1/cmr/m/n/12 - und \OT1/cmtt/m/n/12 Serverconnection\OT1/cmr/m/n/12 -
  []
 
-<pics/GameServerClassDiagram.png, id=579, 1611.01875pt x 1886.54813pt>
+<pics/GameServerClassDiagram.png, id=583, 1611.01875pt x 1886.54813pt>
 File: pics/GameServerClassDiagram.png Graphic file (type png)
 <use pics/GameServerClassDiagram.png>
 Package pdftex.def Info: pics/GameServerClassDiagram.png  used on input line 688.
@@ -1567,7 +1567,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 705--718
 
  []
 
-<pics/SequenceDiagramGameServer.png, id=594, 621.07031pt x 545.78906pt>
+<pics/SequenceDiagramGameServer.png, id=598, 621.07031pt x 545.78906pt>
 File: pics/SequenceDiagramGameServer.png Graphic file (type png)
 <use pics/SequenceDiagramGameServer.png>
 Package pdftex.def Info: pics/SequenceDiagramGameServer.png  used on input line 723.
@@ -1578,7 +1578,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 See the caption package documentation for explanation.
 
 [14]
-<pics/ReversiXTGUIClassDiagramm.png, id=601, 1175.89313pt x 1767.60374pt>
+<pics/ReversiXTGUIClassDiagramm.png, id=605, 1175.89313pt x 1767.60374pt>
 File: pics/ReversiXTGUIClassDiagramm.png Graphic file (type png)
 <use pics/ReversiXTGUIClassDiagramm.png>
 Package pdftex.def Info: pics/ReversiXTGUIClassDiagramm.png  used on input line 750.
@@ -1608,7 +1608,7 @@ Overfull \hbox (48.60004pt too wide) in paragraph at lines 766--791
  []
 
 [18] [19]
-<pics/GameClientClassDiagram.png, id=640, 1442.38875pt x 1632.0975pt>
+<pics/GameClientClassDiagram.png, id=644, 1442.38875pt x 1632.0975pt>
 File: pics/GameClientClassDiagram.png Graphic file (type png)
 <use pics/GameClientClassDiagram.png>
 Package pdftex.def Info: pics/GameClientClassDiagram.png  used on input line 835.
@@ -1620,7 +1620,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 See the caption package documentation for explanation.
 
 [20] [21 <c:/Users/Korbi/Project/BachelorArbeit/pics/GameClientClassDiagram.png>] [22]
-<pics/GameLogic.png, id=666, 1349.79282pt x 737.75626pt>
+<pics/GameLogic.png, id=670, 1349.79282pt x 737.75626pt>
 File: pics/GameLogic.png Graphic file (type png)
 <use pics/GameLogic.png>
 Package pdftex.def Info: pics/GameLogic.png  used on input line 894.
@@ -1632,7 +1632,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 See the caption package documentation for explanation.
 
 [23 <c:/Users/Korbi/Project/BachelorArbeit/pics/GameLogic.png>]
-<pics/Komponentendiagram.png, id=674, 1651.67062pt x 1062.97125pt>
+<pics/Komponentendiagram.png, id=678, 1651.67062pt x 1062.97125pt>
 File: pics/Komponentendiagram.png Graphic file (type png)
 <use pics/Komponentendiagram.png>
 Package pdftex.def Info: pics/Komponentendiagram.png  used on input line 931.
@@ -1644,7 +1644,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 See the caption package documentation for explanation.
 
 [24] [25 <c:/Users/Korbi/Project/BachelorArbeit/pics/Komponentendiagram.png>]
-<pics/UserVsAiCommunication.png, id=685, 922.19531pt x 769.37437pt>
+<pics/UserVsAiCommunication.png, id=689, 922.19531pt x 769.37437pt>
 File: pics/UserVsAiCommunication.png Graphic file (type png)
 <use pics/UserVsAiCommunication.png>
 Package pdftex.def Info: pics/UserVsAiCommunication.png  used on input line 963.
@@ -1656,7 +1656,7 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 See the caption package documentation for explanation.
 
 [26 <c:/Users/Korbi/Project/BachelorArbeit/pics/UserVsAiCommunication.png>] [27] [28] [29]
-<pics/AlgorithmeninderApplikation.png, id=725, 791.95876pt x 551.81157pt>
+<pics/AlgorithmeninderApplikation.png, id=729, 791.95876pt x 551.81157pt>
 File: pics/AlgorithmeninderApplikation.png Graphic file (type png)
 <use pics/AlgorithmeninderApplikation.png>
 Package pdftex.def Info: pics/AlgorithmeninderApplikation.png  used on input line 1090.
@@ -1677,82 +1677,106 @@ Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on in
  (c:/Users/Korbi/Project/BachelorArbeit/code/Alpha-Beta.txt
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
-) [32] [33] [34] [35] [36] [37] [38]
-Overfull \hbox (6.47551pt too wide) in paragraph at lines 1418--1418
+) [32] [33] [34] [35]
+<pics/ExcelSimulation.png, id=791, 334.24875pt x 88.83188pt>
+File: pics/ExcelSimulation.png Graphic file (type png)
+<use pics/ExcelSimulation.png>
+Package pdftex.def Info: pics/ExcelSimulation.png  used on input line 1293.
+(pdftex.def)             Requested size: 338.58632pt x 89.99191pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 1294.
+See the caption package documentation for explanation.
+
+[36] [37 <c:/Users/Korbi/Project/BachelorArbeit/pics/ExcelSimulation.png>]
+<pics/UnitTestResult.png, id=804, 389.95688pt x 349.305pt>
+File: pics/UnitTestResult.png Graphic file (type png)
+<use pics/UnitTestResult.png>
+Package pdftex.def Info: pics/UnitTestResult.png  used on input line 1336.
+(pdftex.def)             Requested size: 290.22107pt x 259.97403pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 1337.
+See the caption package documentation for explanation.
+
+[38 <c:/Users/Korbi/Project/BachelorArbeit/pics/UnitTestResult.png>] [39] [40]
+Overfull \hbox (6.47551pt too wide) in paragraph at lines 1487--1487
 []\OT1/cmr/m/n/12 Richard E. Korf. \OT1/cmr/m/it/12 Depth-First Iterative-Deepening: An Op-ti-mal Ad-mis-si-ble Tree Search\OT1/cmr/m/n/12 .
  []
 
-[39] [40]pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
+[41] [42]pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1472     \item \textbf
+l.1541     \item \textbf
                         {/F20/} \textit{Benutzer soll Züge ausführen könn... [1]pdfTeX warning (ext4): destination with the same identifier (name{page.II}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1541 
+l.1610 
         [2]pdfTeX warning (ext4): destination with the same identifier (name{page.III}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1543 
+l.1612 
         [3]
-<pics/AllClassDiagrams.png, id=835, 2873.4853pt x 3105.35156pt>
+<pics/AllClassDiagrams.png, id=854, 2873.4853pt x 3105.35156pt>
 File: pics/AllClassDiagrams.png Graphic file (type png)
 <use pics/AllClassDiagrams.png>
-Package pdftex.def Info: pics/AllClassDiagrams.png  used on input line 1549.
+Package pdftex.def Info: pics/AllClassDiagrams.png  used on input line 1618.
 (pdftex.def)             Requested size: 483.69687pt x 522.69057pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1550.
+(caption)                particular \caption on input line 1619.
 See the caption package documentation for explanation.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.IV}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1553 
+l.1622 
         [4 <c:/Users/Korbi/Project/BachelorArbeit/pics/AllClassDiagrams.png>]
-Overfull \hbox (9.61285pt too wide) in paragraph at lines 1554--1554
+Overfull \hbox (9.61285pt too wide) in paragraph at lines 1623--1623
 |[]\OT1/cmr/bx/n/17.28 Sequenzdiagramme []uber die Kom-mu-ni-ka-ti-on der Kom-
  []
 
-<pics/SequenceDiagramBenutzervsBenutzer.png, id=842, 712.16063pt x 693.34032pt>
+<pics/SequenceDiagramBenutzervsBenutzer.png, id=861, 712.16063pt x 693.34032pt>
 File: pics/SequenceDiagramBenutzervsBenutzer.png Graphic file (type png)
 <use pics/SequenceDiagramBenutzervsBenutzer.png>
-Package pdftex.def Info: pics/SequenceDiagramBenutzervsBenutzer.png  used on input line 1562.
+Package pdftex.def Info: pics/SequenceDiagramBenutzervsBenutzer.png  used on input line 1631.
 (pdftex.def)             Requested size: 483.69687pt x 470.91504pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1563.
+(caption)                particular \caption on input line 1632.
 See the caption package documentation for explanation.
 
-<pics/SequenceDiagramAiVsAi.png, id=843, 1030.60031pt x 789.70032pt>
+<pics/SequenceDiagramAiVsAi.png, id=862, 1030.60031pt x 789.70032pt>
 File: pics/SequenceDiagramAiVsAi.png Graphic file (type png)
 <use pics/SequenceDiagramAiVsAi.png>
-Package pdftex.def Info: pics/SequenceDiagramAiVsAi.png  used on input line 1570.
+Package pdftex.def Info: pics/SequenceDiagramAiVsAi.png  used on input line 1639.
 (pdftex.def)             Requested size: 483.69687pt x 370.62901pt.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1571.
+(caption)                particular \caption on input line 1640.
 See the caption package documentation for explanation.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.V}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1579 
+l.1648 
         [5 <c:/Users/Korbi/Project/BachelorArbeit/pics/SequenceDiagramBenutzervsBenutzer.png>]pdfTeX warning (ext4): destination with the same identifier (name{page.VI}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1579 
+l.1648 
         [6 <c:/Users/Korbi/Project/BachelorArbeit/pics/SequenceDiagramAiVsAi.png>]pdfTeX warning (ext4): destination with the same identifier (name{page.VII}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1609 
+l.1678 
         [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1613.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1613.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1682.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1682.
  (c:/Users/Korbi/Project/BachelorArbeit/Abschlussarbeit.aux (c:/Users/Korbi/Project/BachelorArbeit/inhalt/erklaerung.aux) (c:/Users/Korbi/Project/BachelorArbeit/inhalt/abstract.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1613.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1613.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1682.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1682.
 Package rerunfilecheck Info: File `Abschlussarbeit.out' has not changed.
 (rerunfilecheck)             Checksum: 9BB5715338FDA89FA1F057458B1F95D6;5335.
 Package logreq Info: Writing requests to 'Abschlussarbeit.run.xml'.
@@ -1760,18 +1784,18 @@ Package logreq Info: Writing requests to 'Abschlussarbeit.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 55115 strings out of 492609
- 1123732 string characters out of 6132818
+ 55134 strings out of 492609
+ 1124177 string characters out of 6132818
  1497828 words of memory out of 5000000
- 58153 multiletter control sequences out of 15000+600000
+ 58165 multiletter control sequences out of 15000+600000
  541844 words of font info for 61 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  163i,19n,195p,1687b,3015s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on c:/Users/Korbi/Project/BachelorArbeit/Abschlussarbeit.pdf (57 pages, 3214732 bytes).
+Output written on c:/Users/Korbi/Project/BachelorArbeit/Abschlussarbeit.pdf (59 pages, 3231382 bytes).
 PDF statistics:
- 949 PDF objects out of 1000 (max. 8388607)
- 824 compressed objects within 9 object streams
- 178 named destinations out of 1000 (max. 500000)
- 742 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 969 PDF objects out of 1000 (max. 8388607)
+ 840 compressed objects within 9 object streams
+ 183 named destinations out of 1000 (max. 500000)
+ 752 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -115,17 +115,17 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.1.1}ELO}{34}{subsubsection.6.1.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.1.2}Aufbau der Simulationsoftware}{34}{subsubsection.6.1.2}% 
+\contentsline {subsubsection}{\numberline {6.1.2}Aufbau der Simulationsoftware}{35}{subsubsection.6.1.2}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.1.3}Interpretation der Ergebnisse}{35}{subsubsection.6.1.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}Testing}{36}{subsection.6.2}% 
+\contentsline {subsection}{\numberline {6.2}Testing}{37}{subsection.6.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.1}Gameserver}{36}{subsubsection.6.2.1}% 
+\contentsline {subsubsection}{\numberline {6.2.1}Gameserver}{37}{subsubsection.6.2.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {6.2.2}Gameclient}{36}{subsubsection.6.2.2}% 
+\contentsline {subsubsection}{\numberline {6.2.2}Gameclient}{38}{subsubsection.6.2.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Fazit und Ausblick}{38}{section.7}% 
+\contentsline {section}{\numberline {7}Fazit und Ausblick}{40}{section.7}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{Anhang}{I}{section*.8}% 
 \defcounter {refsection}{0}\relax 

@@ -1186,17 +1186,25 @@ Die Tests sind zum verhindern von Fehler die in Spezialfällen eintreffen könne
 aber zu Fehlerfällen führen könnten falls diese nicht beachtet werden.
 
 \subsection{Simulation}
-Da die Software mehrere KI-Algorithemen beeinhaltet und diese unterschiedlich stark sind, werden Simulationen verwendet um die erwartete Stärke der Algorithemen
-zu bestätigen. Im laufe der Simulationen spielt jede KI gegen die anderen KI's. Um die Ergebnisse in Form von Stärke festzuhalten, bekommt jeder Algorithmus ahnhand
+Bei der Implementierung von KI-Algorithmen, kann es schnell passieren, dass ein kleiner Fehler welcher sich in der Implementierung eingeschlichen hat, 
+zwar nicht zum Absturz der Software führt, aber dazu dass die KI eine wesendlich schlechtere Performance aufweist. Da eine kleine Verschlechterung 
+sehr schwer nachzuweisen ist, kann man auch keine Spezifischen Tests schreiben die dies prüfen können. Was aber in diesem Fall funktioniert, 
+ist das Vergleichen der KIs untereinander, um zu sehen ob sie die erwartete Spielstärke im Verhältnis zueinander aufzeigen.
+Ein Vorteil bei den Vergleichen von Algorithemen sind die Ergbnisse aus anderen Arbeiten die sich mit einem ähnlichen Thema befasst haben.
+Nimmt man diese Ergebnisse und lässt die KI-Algorithemen dieser Arbeit gegeneinander spielen, so kann man das ähnliche Resultate erwarten.
+\\
+Im laufe der Simulationen spielt jede KI gegen die anderen KI's. Um die Ergebnisse in Form von Stärke festzuhalten, bekommt jeder Algorithmus ahnhand
 seiner Performance eine ELO-Zahl zugewisen.
 
 \subsubsection{ELO}
-Das Elo System ist eine Kennzahl für die relative Spielstärke die ein Spieler in einem Nullsummenspiel hat. ELO wird hauptsächlich in Schach und Go verwendet,
+Das Elo System ist eine Kennzahl für die relative Spielstärke die ein Spieler in einem Nullsummenspiel hat. Elo wird hauptsächlich in Schach und Go verwendet,
 findet aber auch immer mehr Anwendung in anderen Sportarten wie Tischtennis oder auch in Computerspielen. Bei der Berechnung von Elo wird ein Spiel von zwei 
-Spielern untersucht, dabei ist die Elozahl der Spieler die erwartete Spielstärke. Demnach wird von einem Spieler mit höherer Elo-Zahl als sein Gegener
-vielmehr ein Gewinn erwartet. Dementsprechend verhält sich auch die Eloänderung nach dem Spiel. Verliert ein Spieler A mit einer höheren Elo gegen einen
+Spielern untersucht, dabei ist die Elo-Zahl der Spieler die erwartete Spielstärke. Demnach wird von einem Spieler mit höherer Elo-Zahl als sein Gegener
+vielmehr ein Gewinn erwartet. Dementsprechend verhält sich auch die Elo-Änderung nach dem Spiel. Verliert ein Spieler A mit einer höheren Elo gegen einen
 Spieler B mit gerigerer Elo, so verliert A viel Punkte und B bekommt viel Punkte dazu. Gewinnt jeoch A, so bekommt er nur sehr wenig Punkte hinzu und B verliert 
-nur sehr wenig. \\ Die in der Applikation verwendete Elo Zahl wird wie folgt berechnet:
+nur sehr wenig. 
+\\ 
+Die in der Applikation verwendete Elo Zahl wird wie folgt berechnet:
 
 \begin{align}
     R_1 = 10^{\frac{E_1}{400}} \\ 
@@ -1231,7 +1239,13 @@ Vorteil nur sehr gering ist, kann er bei der Simulation einen Unterschied machen
 Zum starten der Simulation muss ein Simulationsanzahl angegeben werden, was dazu führt dass die Software so lange simuliert, bis diese Anzahl erreicht wird.
 Nach jedem abgeschlossen Spiel wird das Ergebnis berechnet und zwischengespeichert, dadurch kann eine Simulation abgebrochen werden ohne die vorherigen 
 Ergebnisse zu verlieren. Außerdem arbeitet die Simulation mit den bereits berechneten Elo werten Weiter, so kann ist die Anzahl der am Anfang angegebenen 
-Spiele nur von Relevanz, wie lange man die Simulation laufen haben will und nicht wie akurat das Ergebnis nach nur diesen Simulationen sein soll.
+Spiele nur von Relevanz, wie lange man die Simulation laufen haben will, sowie zum Speichern von Statisiken und 
+nicht wie akurat das Ergebnis nach nur diesen Simulationen sein soll.
+Die Ergebnisse einer Session werden neben der Aktualisierung der Elo Zahlen ausßerdem nach der Beendung der Simulationssoftware in eine .csv Datei 
+geschrieben. Diese Datei zeigt die Details in den Spielen gegeneinander an, die in dieser Simulationssession stattgefunden haben.
+Da es eventuell vom Vorteil sein kann diese Sessions unabhängig zu bewerten und das zusammenfügen mehrerer .csv Dateien sehr einfach ist, 
+wird dabei jedes mal eine eigene Datei angelegt. Ein Problem welches hier auftreten kann, ist das sich Dateien eventuell überschreiben würden, deswegen 
+bekommt jede Datei den Namen ``statistics'' gefolgt von einem Universally Unique Identifier (UUID).
 \\
 Damit der Benutzer auch weis wie stark die Algorithmen in Verhältnis zueinander sind, wird das Berechnete Ergbnis der Simulationen im Auswahlmenü der 
 Algorithmen als Elo Zahl mit angegeben, um somit den Benutzer eine Akkurate Repräsentation der Stärke anzuzeigen.
@@ -1239,8 +1253,8 @@ Algorithmen als Elo Zahl mit angegeben, um somit den Benutzer eine Akkurate Repr
 
 \subsubsection{Interpretation der Ergebnisse}
 Damit die Ergebnisse auch wirklich Sinn im Vergleich zueinander machen, werden sie nach einigen Simulationen mit den Erwarteten Werten verglichen.
-Hier wurden um die 300 Simulationen ausgeführt um ein möglichst genaues Ergebnis zu erziehlen. Natürlich würde die Genauigkeit der Ergebnisse 
-besser werden, je öfter man die Simulation weiderholt, aber das Ergenbiss nach 300 Simulationen bestätigt bereits die Erwartungen.
+Hier wurden um die 500 Simulationen ausgeführt um ein möglichst genaues Ergebnis zu erziehlen. Natürlich würde die Genauigkeit der Ergebnisse 
+besser werden, je öfter man die Simulation weiderholt, aber das Ergenbiss nach 500 Simulationen bestätigt bereits die Erwartungen.
 Da die Software eventuell zu einem Späteren Zeitpunk um weitere Algorithemen erweitert wird, sind die in dieser Simulation verwendeten die folgenden:
 \begin{itemize}
     \item MCTS
@@ -1263,31 +1277,86 @@ Die Ergebnisse mit den Zuvor erwähnten Elo-Formeln lauten:
 \end{itemize}
 Bei diesen Ergebnissen wurde ein Basiswert von 2000 Elo verwendet, mit einem kleinen K-Faktor, da sehr viele Spiele simuliert werden können und 
 einzelne Spiele keine so große Auswirkung haben sollen. Wie man Sieht stimmen die Ergebnisse mit den Annahmen überein.
+\\
+In Abbildung \ref{fig:ExcelSimulation} sieht man die Darstellung der .csv Datei im Programm Excel. Die Anzahl an Simulierten Spielen
+beläuft sich hierbei auf 39. Da die 500 Simulationen nicht in einer Session möglich sind zu Simulieren, dies würde mehrere Tage in Anspruch nehmen,
+wurden die Simulationssessions in mehrere unterteilt welche immer um die 50 Spiele umfassen.
+Jede Zeile gibt die Siege eines Algorihtmus gegen die anderen an und jede Spalte dessen Niederlagen.
+Wichtig ist, dass eine Große Zahl nicht automatisch eine Gute Performance bedeutet, so hat Minimax zwar die meisten
+Siege gegen MCTS, das liegt aber an der Zufallszuteilung wer gegen wen spielen muss. Wichtiger ist hier zu bemerken, dass Minimax mehr Spiele 
+gegen Alpha-Beta Pruning und Alpha-Beta mit Zugsortierung verloren, als gewonnen hat.
+
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/ExcelSimulation.png}
+	\captionof{figure}{ Ergebnisse der Simulation der .csv Datei }
+	\label{fig:ExcelSimulation}
+\end{minipage}
+
 
 \subsection{Testing}
-Um die Stabilität der Software, zu verbessern, sind Tests für die anfälligen Softwarekomponenten erstellt worden, durch welche gröbere Fehler vermieden werden können.
-Die GUI ist weniger Fehleranfällig, da in ihr lediglich Informationen dargestellt werden. Die Kritischen Softwareteile sind der Gameserver und der Gameclient, 
-in welchen das Dame Spiel ausgeführt und neue Züge berechnet werden. Ein Fehler dort wäre verherend, da die Software nicht in einen Korrekten Zustand zurückgeführt
-werden kann.
+Was Simulationen leider nicht schaffen, ist das finden von gröberen Fehler, um so einen Programmabsturz zu vermeiden.
+Um die Stabilität der Software zu Verbessern werden deswegen Tests im Form von Modultests, oder auch Unit Tests genannten, in die Software integriert.
+\\
+Dabei beschreibt ein Unit Test das Testen der funktionalen Einzelteile eines Computerprogrammes, auf ihre korrekte Funktionalität. 
+Was soviel bedeutet, wie einzelne Module eines Programmes werden isoliert ohne interaktion mit anderen getestet. 
+Dabei kann es sein das externe Komponenten wie zum Beispiel Datenbanken oder Unterprogramme simuliert werden müssen. \cite{UnitTestBook}
+\\
+In der Applikation werden diese Unit Tests in den Kritischen Softwarebestandteilen verwendet, welche der Gameserver und der Gameclient sind.
+Die Webapp, ist weniger Fehleranfällig, da es sich lediglich um eine Graphische Oberfläche handelt, welche hauptsächlich zur Informationendarstellung verwendet wird.
+Am kritischsten sind dabei die Implementierungen der Spiellogik, der KI-Algorithmen-Logik, sowie die Netzwerkkommunikation zwischen den Komponenten. 
 
 \subsubsection{Gameserver}
-Im Gameserver ist der Zustand des Spieles und die Überprüfung der gespielten Züge. Diese Überprüfung darf auch in Spezialfällen nicht fehlschlagen, so muss z.B. ein
+Im Gameserver ist der Zustand des Spieles und die Überprüfung der gespielten Züge. 
+Die Besonderheit beim Testen, befindet sich hier in den Spezialfällen, die in gewissen Dame Stellungen entstehen können, so muss z.B. ein
 Spieler in Schlagzwang immer das Schlagen einer Figur ausführen, oder ein Spieler kann nicht noch einmal schlagen, wenn er mit einem Zug bei dem geschlagen worden ist,
-eine Dame erhält. Um dies zu überprüfen, gibt es Tests, die Spezielle Spielsituationen als Eingabe bekommen und prüfen ob die Software den Zug als Gültig/Ungültig
-anerkennt. Die Situationen sind entweder Spezialfälle die aus den Damenregeln hervorgehen, oder Standartstellungen bei denen eigentlich kein Fehler auftreten dürfte.
-Die Testsoftware verwendet das Testing Framework Chai, welches zum testen von Node Anwendungen verwendet wird. 
-Dabei werden mehrere Testfällte beschrieben, diese werden dann über asserts oder expects von Chai ausgewertet. Diese Auswertung verläuft automatisiert,
-dass heißt wird die Software neu von Typescript in Javascript kompiliert, werden auch die Testfälle ausgeführt.
+eine Dame erhält. Viele dieser Spezialfälle, müssen vorallem in der Implementierung beachtet werden und auch bei Änderung muss beachtet werden, dass 
+diese Züge immernoch valide sind. Was dazu führt, dass die Unit Tests immer laufen sollten, nachdem Änderungen an der Spiellogik vorgenommen werden,
+um so zu garantieren das diese Spezialfälle immernoch funktionieren.
+\\
+Da es sich bim Gameserver um eine Node.js Anwendung handelt, welche in Typescript implementiert ist, kann eine vorgefertigte Unit Test Library verwendet werden.
+Bei der Verwendeten Testing Framework handelt es sich um Mocha, welches zum Testen von Node.js und Javascript Browser Anwendungen benutzt wird. 
+Für jeden Testfall einer Funktion wird das Ergbnis mit dem erwarteten Ergebnis verglichen und somit eine Statistik aufgestellt, wie viele Testfälle 
+bestanden wurden und wieviele nicht korrekt waren. Ein Großer Vorteil den Mocha dabei zur Konkurenz hat, ist dass die Test automatisiert ausgeführt werden 
+können, sobalt der Typescriptcode in Javascript kompiliert wird.
+\\ 
+Abbildung \ref{fig:UnitTestResult} zeigt das Ergebnis des Mocha Unit Tests, wobei alle 18 Testfälle erfolgreich abgeschlossen wurden.
+Bei der letzten Stellung, welche auch in der Abbildung dargestellt ist, wird getestet, ob die Software einen Fehler beim doppelt Schlagen erkennen würde.
+Weiß wird durch ``o'' und Schwarz durch ``x'' dargestellt, das Ausrufezeichen steht für eine Figur die im Zug davor geschlagen wurde. 
+Beim ersten Spielfeld hat Weiß von Reihe 4 Spalte 3 nach Reihe 2 Spalte 5 eine Schwarze Figur geschlagen. Da im nächsten Zug die Schwarze Figur auf 
+Reihe 3 Spalte 6 wegen Schlagzwang geschlagen werden muss, wird auch dieser Zug erwartet. Der Testfall testet, Falls der nächste Zug der 
+and die Software übergeben wird, nicht der erwartete Weiße Zug ist, sondern ein Zug von Schwarz indem er die Bedrohte Figur zieht.
+Erwartet wird ein Fehler welcher, welcher auch erkannt wird und somit zählt der Testfall als ``passed'', also bestanden.
+
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.6\linewidth]{pics/UnitTestResult.png}
+	\captionof{figure}{ Beispiel aus den Unit Tests des Gameservers }
+	\label{fig:UnitTestResult}
+\end{minipage}
 
 \subsubsection{Gameclient}
 Das Testen des Gameclients ist sehr wichtig, da kleinste Fehler zu einer enormen Verschlechterung der Performance des KI-Algorithmuses führen.
 Um den Gameclient zu testen, verwendet man ähnlich wie beim Gameserver Szenarien, in denen es schwirig ist den besten Zug zu finden, oder 
 in sehr einfachen Situationen, bei dem der KI-Algorithmus nicht sehr lagen brauchen sollte um den Perfekten Zug ausfindig zu machen.
-Da die KI-Logik des Gameclients in C++ implementiert ist, ist die Testsoftware manuel geschrieben. 
-Was bedeutet, dass es handelt sich um eine unabhängige Applikation, welche einen Gameclient startet und diesem mit Spielsituation und Zugaufforderung füttert.
-Der Client gibt der Testsoftware, dann den nächsten Zug zurück. Das Ergbnis wird mit dem gewünschten Ergbnis verglichen, um zu bestimmen ob ein Fehler 
-oder eine Korrekte Ausgabe getätigt werden muss. In diesem Prinzip startet die Testsoftware den Gameclient mehrfach für verschiedenste Testfällte und
-wertet diese Ergbnisse aus.
+Da die KI-Logik als Node.js Addon implementiert und dadruch in C++ geschrieben ist, kann man nicht einfach ein C++ Testframework benutzen, 
+denn es sind Codeschnipsel enthalten, welche für die Kompatibilität zu Node.js sorgen und nicht mit nativen C++ Kompiler zum laufen gebracht werden können.
+Dazu ist sind die Unit Tests, dieser Anwendung als eine Applikation implementiert, welche auf den reinen Nativen Teile der Berechnung Zugreifen und 
+dies Modular testen. 
+\\
+Das Testen der Module läuft ähnlich wie beim Gameserver ab, es wird eine entweder eine Komplizierte Stellung oder eine sehr einfach Stellung 
+allen KI-Algorihtmen übergeben, diese berechnen anhand ihrerer Implementierung den Zug den sie in dieser Stellung spielen würden und
+geben diesen zurück. Er wird daraufhin überprüft und verglichen mit dem zuvor definierten Zug welcher erwartet wird, oder welcher in 
+Komplexen Stellungen definitiv nicht gespielt werden soll. Beispielsweise in einer Komplexen Stellung sind sechs Züge möglich, davon sind drei sehr schlecht,
+ein Zug ist durchschnittlich gut und die beiden anderen etwas besser. Erwartet wird vom Algorithmus, dass er wenigstens keinen der drei schlechten Züge
+auswählt. In sehr einfachen Szenarien, muss der Algorihtmus den einzigen guten Zug finden, der nicht zum Verlust der Partie führt. 
+Außerdem werden in der Testsoftware Parameter der Tiefe und Zeit verändert, dabei muss jeder Algorithmus auch bei geringem Zeitlimit, die sehr einfachen
+Stellungen richtig berechnen. Am Ende wird wie beim Testframework Mocha, eine Liste ausgeben mit allen Fällen die Korrekt berechent wurden und 
+eine Detailierte Ausgabe, falls ein Testfall fehlgeschlagen ist. 
+
 
 
 \pagebreak
