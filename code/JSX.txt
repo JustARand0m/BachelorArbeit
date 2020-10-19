@@ -1,0 +1,9 @@
+<h1>Spielerauswahl</h1>
+{ possibleMaps.length > 0 &&
+    <div className="flex-column" style={{marginBottom: "1rem"}}>
+        <h3>Karte</h3>
+        <div className="maps flex-row">
+            {mapSelection}
+        </div>
+    </div>
+}

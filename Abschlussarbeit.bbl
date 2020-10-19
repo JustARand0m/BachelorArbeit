@@ -41,6 +41,19 @@
     \field{year}{2009}
   \endentry
 
+  \entry{CheckersFederation}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Che}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{note}{Durchschnittszahl der Züge pro Spiel}
+    \field{title}{\texttt{The American Checker Federation}}
+    \verb{url}
+    \verb http://www.usacheckers.com/show_game_start.php
+    \endverb
+  \endentry
+
   \entry{C++Node}{online}{}
     \keyw{online}
     \field{labeltitlesource}{title}
@@ -263,6 +276,19 @@
     \verb{url}
     \verb https://medium.com/the-node-js-collection/speed-up-your-node-js-app-w
     \verb ith-native-addons-5e76a06f4a40
+    \endverb
+  \endentry
+
+  \entry{portfinder}{online}{}
+    \keyw{online}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Por}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{note}{portfinder}
+    \field{title}{\texttt{node-portfinder}}
+    \verb{url}
+    \verb https://www.npmjs.com/package/portfinder
     \endverb
   \endentry
 
