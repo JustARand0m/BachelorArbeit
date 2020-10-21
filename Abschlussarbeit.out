@@ -46,9 +46,9 @@
 \BOOKMARK [3][-]{subsubsection.5.2.1}{Verwendete Kommunkations Technolgie}{subsection.5.2}% 46
 \BOOKMARK [3][-]{subsubsection.5.2.2}{Kommunikationsprotokoll des Gameservers}{subsection.5.2}% 47
 \BOOKMARK [3][-]{subsubsection.5.2.3}{Dynamische Portsuche}{subsection.5.2}% 48
-\BOOKMARK [2][-]{subsection.5.3}{ Erweiterungen der Graphischen Benutzeroberfl\344che }{section.5}% 49
+\BOOKMARK [2][-]{subsection.5.3}{ Erweiterungen der graphischen Benutzeroberfl\344che }{section.5}% 49
 \BOOKMARK [2][-]{subsection.5.4}{Mobile Anbindung}{section.5}% 50
-\BOOKMARK [2][-]{subsection.5.5}{Gameclient C++ und Typescript Zusammenspiel}{section.5}% 51
+\BOOKMARK [2][-]{subsection.5.5}{Gameclient C++ und Typescript Kompatibilit\344tsschicht}{section.5}% 51
 \BOOKMARK [2][-]{subsection.5.6}{Verwendete KI-Algorithmen}{section.5}% 52
 \BOOKMARK [3][-]{subsubsection.5.6.1}{Minimax}{subsection.5.6}% 53
 \BOOKMARK [3][-]{subsubsection.5.6.2}{Alpha-Beta-Pruning}{subsection.5.6}% 54
@@ -66,14 +66,14 @@
 \BOOKMARK [3][-]{subsubsection.6.2.1}{Gameserver}{subsection.6.2}% 66
 \BOOKMARK [3][-]{subsubsection.6.2.2}{Gameclient}{subsection.6.2}% 67
 \BOOKMARK [1][-]{section.7}{Fazit und Ausblick}{}% 68
-\BOOKMARK [1][-]{section*.7}{Anhang}{}% 69
+\BOOKMARK [1][-]{section*.8}{Anhang}{}% 69
 \BOOKMARK [1][-]{appendix.A}{Anforderungsanalyse}{}% 70
 \BOOKMARK [2][-]{subsection.A.1}{Anwendungsszenario}{appendix.A}% 71
 \BOOKMARK [2][-]{subsection.A.2}{Anforderungen an die Software}{appendix.A}% 72
 \BOOKMARK [3][-]{subsubsection.A.2.1}{Funktionale Anforderungen}{subsection.A.2}% 73
 \BOOKMARK [3][-]{subsubsection.A.2.2}{Nichtfunktionale Anforderungen}{subsection.A.2}% 74
 \BOOKMARK [3][-]{subsubsection.A.2.3}{Zusammenfassung der Anforderungen}{subsection.A.2}% 75
-\BOOKMARK [1][-]{appendix.B}{UML Klassendiagramm vom Gesamten Projekt}{}% 76
+\BOOKMARK [1][-]{appendix.B}{UML Klassendiagramm vom gesamten Projekt}{}% 76
 \BOOKMARK [1][-]{appendix.C}{Sequenzdiagramme \374ber die Kommunikation der Komponenten}{}% 77
 \BOOKMARK [1][-]{appendix.D}{Nachrichten Protokoll des Gameservers}{}% 78
 \BOOKMARK [1][-]{appendix.E}{\334bergabeparameter von Gameserver und Gameclient}{}% 79

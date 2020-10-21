@@ -850,7 +850,7 @@ Züge mittels des \texttt{CheckersAiLogic} Paket generiert.
 
 \subsection{Dame Spiellogik}
 \label{chap:Spiellogik}
-Die Spiellogik für Dame ist mehrfach in der Anwendung vorfindbar. Zum einen um Züge im KI-Client zu testen und zum anderen
+Die Spiellogik für Dame ist mehrfach in der Anwendung vorfindbar. Zum einen, um Züge im KI-Client zu testen und zum anderen
 für den Gameserver, zur Überprüfung und Aktualisierung der Züge. In den Abbildungen \ref{fig:KIClientClassDiagram} auf Seite \pageref{fig:KIClientClassDiagram} 
 und \ref{fig:GameServerClassDiagram} auf Seite \pageref{fig:GameServerClassDiagram}
 befindet sich die Spiellogik im Paket \texttt{Checkers}. Diese Redundanz ist wichtig, da es sich beim Server und Client um eigenständige Prozesse handelt 
@@ -866,7 +866,7 @@ Ursprungspunkt, dem Zielpunkt, dem Spieler, der den Zug getätigt hat und um wel
 \\
 Die Klassen \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}, sind Klassen zum Finden aller möglichen Züge, die aus einer Stellung heraus gespielt werden
 können. Dabei ist \texttt{CheckersForceCapture} verantwortlich für Züge, bei denen ein Spieler gezwungen wird, eine Figur zu schlagen und \texttt{CheckersAllPossibleMovesChecker} 
-für alle Züge die keinen Schlagzwang haben. Die Aufteilung in zwei Klassen hat den Hintergrund, dass falls es sich um einen Schlagzwang handelt, braucht 
+für alle Züge die keinen Schlagzwang haben. Die Aufteilung in zwei Klassen hat folgenden Hintergrund: Falls es sich um einen Schlagzwang handelt, braucht 
 die \texttt{CheckersAllPossibleMoves}-Klasse nicht erzeugt werden, um Züge zu finden. Um einen von der Netzwerkkommunikation eingehenden Zug zu überprüfen, 
 werden die Methoden der \texttt{CheckersMoveTypeCheck}-Klasse verwendet. Sie vergleichen einen gegebenen Zug, 
 den zum Beispiel der Benutzer getätigt hat, mit den Zügen die aus \texttt{CheckersForceCapture} und \texttt{CheckersAllPossibleMovesChecker}
@@ -893,17 +893,17 @@ Dies hat zur Folge, dass eine Netzwerkskommunikation zwischen den Programmen erf
 Die Kommunikation zwischen den drei Anwendungen ist in Abbildung \ref{fig:ComponentDiagram} auf Seite \pageref{fig:ComponentDiagram} als 
 Komponentendiagramm dargestellt. Dabei ist die gelbe Komponente der Gameserver, die blaue die Webapp, die rote der Gameclient und die grüne der Reverse Proxy.
 Der dunkelblaue eingefärbte Teil der Webapp, beinhaltet das Frontend, also die Graphische Oberfläche (GUI) der Anwendung.
-Die hellblauen Komponenten, beschreiben das Backend. 
+Die hellblauen Komponenten beschreiben das Backend. 
 
-In der Kommunikation zwischen dem Backend und Frontend der Webapp Komponente, werden Züge über das \texttt{incomingMove} Interface des Backends an das Frontend
-weitergereicht. Züge die von der Grafischen Oberfläche aus gespielt sind, kommen über das Interface \texttt{sendInstructions} an das Backend. Dieses
-Interface wird außerdem verwendet um Befehle wie starten und stoppen eines Spieles zu übermitteln. Die Webapp Komponente hat zwei Ports nach Außen, 
+In der Kommunikation zwischen dem Backend und dem Frontend der Webapp Komponente, werden Züge über das \texttt{incomingMove} Interface des Backends an das Frontend
+weitergereicht. Züge die von der graphischen Oberfläche aus gespielt sind, kommen über das Interface \texttt{sendInstructions} an das Backend. Dieses
+Interface wird außerdem verwendet, um Befehle wie starten und stoppen eines Spieles zu übermitteln. Die Webapp Komponente hat zwei Ports nach Außen, 
 welche Nachrichten an das Backend
-weiterreichen. Der erste Port übernimmt alle Nachrichten, die mit Zügen in Verbindung stehen. So werden alle Züge die vom Gameserver angenommen werden
-und als Broadcast an alle Teilnehmer weitergegeben werden, sowie die Züge die aus dem Frontend heraus gespielt über diesen Port übertragen.
-Der zweite Port übernimmt das Starten und stoppen des Gameservers und des Gameclients. 
-Neben den Oben genannten Verbindungen des Gameservers, hat dieser außerdem eine Verbindung zum Gameclient. Über diese Verbindung werden Züge, die von der 
-KI des Gameclients berechnet werden an den Gameserver gesendet.
+weiterreichen. Der erste Port übernimmt alle Nachrichten, die mit Zügen in Verbindung stehen. So werden alle Züge die der Gameserver annimmt
+und als Broadcast an alle Teilnehmer weitergibt, über diesen Port übertragen. Weitere Züge aus dem Frontend werden ebenfalls über diesen Port gesendet.
+Der zweite Port übernimmt das Starten und Stoppen des Gameservers und des Gameclients. 
+Neben den oben genannten Verbindungen des Gameservers, hat dieser außerdem eine Verbindung zum Gameclient. Über diese Verbindung werden Züge, die von der 
+KI des Gameclients berechnet werden, an den Gameserver gesendet.
 
 Will sich ein Smartphone mit der Anwendung verbinden, so werden alle Anfragen an Frontend oder Backend der Webapp vom Reverse Proxy abgefangen und 
 nach Überprüfung an diese Schnittstellen weitergegeben.
@@ -931,16 +931,16 @@ Die verfügbaren Spielmodi sind:
     \item KI gegen KI
 \end{itemize}
 Egal welche Option gewählt wird, der Gameserver wird immer gestartet, da dieser die Züge überprüft und Sieg oder Niederlage auswertet.
-Bei Benutzer gegen Benutzer wird die KI Komponente der Software nicht gestartet, es kommuniziert die GUI-Komponente direkt mit Gameserver.
+Bei Benutzer gegen Benutzer wird die KI Komponente der Software nicht ausgeführt. Die GUI-Komponente kommuniziert direkt mit dem Gameserver.
 Wird sich für zwei KI Clients die gegeneinander spielen entschieden, so werden auch zwei gestartet.
-Die Kommunikation findet nur mehr von Gameserver mit den beiden KI-Clients statt, jedoch hat die GUI-Komponente eine Man-in-the-Middle-Funktion
+Die Kommunikation findet nur noch von Gameserver mit den beiden KI-Clients statt, jedoch hat die GUI-Komponente eine Man-in-the-Middle-Funktion,
 wodurch sie die Kommunikation abhört und die gespielten Züge darstellen kann.
-Das Szenario, welches den meisten Nutzen hat, ist das Spielen einer KI gegen den Benutzer. 
+Das Spiel ``KI gegen Benutzer'' ist das Szenario, das den größten Nutzen hat.
 
 Abbildung \ref{fig:UserVsUserSequenceDiagram} stellt ein UML Sequenzdiagramm dar, bei welchem ein Benutzer gegen die KI spielt.
-Zuerst startet der Benutzer über die GUI mit dem Spielmodus ein Spiel, dadurch wird der Gameserver gestartet, sowie ein
-Gameclient. Würde man stattdessen KI gegen KI als Parameter mitsenden würden zwei Gameclients gestartet werden. 
-Der Gameserver wartet wärend dessen bis zwei Spieler bei ihm registriert haben. Ist die Registrierung abgeschlossen, werden Züge
+Zuerst startet der Benutzer über die GUI mit dem Spielmodus ein Spiel. Dadurch wird der Gameserver sowie ein
+Gameclient ausgeführt. Würde man stattdessen KI gegen KI als Parameter mitsenden, würden zwei Gameclients gestartet. 
+Der Gameserver wartet, bis sich zwei Spieler bei registriert haben. Ist die Registrierung abgeschlossen, werden Züge
 abwechselnd von den Clients angefordert, bis ein Spieler gewonnen hat.
 
 \vspace{1em}
@@ -956,54 +956,56 @@ der Seite \pageref{apx:KommunikationDerKomp} zu finden.
 
 \pagebreak
 \section{Hardware}
-Dieses Kapitel handelt von der verwendeten Hardware für welche die Software erstellt worden ist. 
-Die Ursprüngliche Idee des Projektes ist, einen Vorzeigegegenstand für Messen, wie den Tag der Informatik, zu haben.
-Um dies zu realisieren, besteht das Projekt aus einen Touchscreen, welcher in einem Tischförmigen Gerüst verankert 
+Dieses Kapitel handelt von der verwendeten Hardware, für welche die Software erstellt worden ist. 
+Die Ursprüngliche Idee des Projektes ist, einen Vorzeigeobjekt für Messen, wie den Tag der Informatik, zu haben.
+Um dies zu realisieren, besteht die Hardware aus einen Touchscreen, welcher in einem tischförmigen Standfuß verankert 
 und mit einen Raspberry Pi verbunden ist.
 
 \subsection{Raspberry Pi}
-Die Software wird auf einen Raspberry Pi Model 3 ausgeführt. Bei dem Betriebssystemen handelt es sich hierbei um 
-Raspbian, ein auf Debian Basiertes Linux Betriebssystem. \cite{RaspberryPi} Da die Software auch mit anderen Betriebssystem
-kompatibel ist, könnte man den Pi durch ein beliebig anderes Gerät ersetzen, dass entweder Linux oder Windows unterstüzt.
-Der Raspberry Pi ist jedoch anhand seiner Kosten und Größe perfekt für das Projekt, da er in das Gerüst passt.
+Die Software wird auf einen Raspberry Pi Model 4 ausgeführt. Bei dem Betriebssystem handelt es sich um 
+Raspbian, ein auf Debian basiertes Linux Betriebssystem. \cite{RaspberryPi} Da die Software auch mit anderen Betriebssystemen
+kompatibel ist, könnte man den Pi durch ein beliebiges Gerät ersetzen, das eine Node.js Laufzeitumgebung unterstüzt.
+Der Raspberry Pi ist jedoch aufgrund seiner Kosten und Größe perfekt für das Projekt.
+Die Installation der Software auf den Raspberry Pi ist in Kapitel \ref{apx:Installation} auf Seite \pageref{apx:Installation} des Anhangs beschrieben.
+Zum starten kann das Kapiel \ref{apx:appStarten} auf Seite \pageref{apx:appStarten} des Anhangs verwendet werden.
 
 \subsection{Touch Monitor}
-Die Bedienung der Benutzerobefläche erfolgt hauptsächlich mit dem Touchscreen, jedoch kann die Software auch auf normalen Monitoren ausgeführt werden.
-Der Touch Monitor ist ...% todo Tochscreengröße einfügen und Marke
+Die Bedienung der Benutzeroberfläche erfolgt hauptsächlich über dem Touchscreen, jedoch kann die Software auch auf normalen Monitoren ausgeführt werden.
+Deim Touchscreen handelt es sich um den 27“ Llyama Touchscreen welcher in einem Standfuß integriert ist. 
 Eingaben können entweder durch Berührung des Touchscreens mit dem Finger, oder mit einer klassischen Computermaus ausgeführt werden.
 Für Texteingabe, kann entweder das integrierte Softwarekeyboard, oder eine normale Tastatur verwendet werden.
-
-%todo bild der Hardware
-
+Abbildung \ref{asdf} zeigt den kompletten Aufbau der Hardware.
+\\\\\\
+---Platzhalter für die Abbildung des Hardwareaufbau---
 
 \pagebreak
 \section{Implementierung}
 Diese Kapitel befasst sich mit den Implementierungsdetails, welche im Architektur Kapitel ausgelassen wurden. Wobei in diesem 
-Kapiel auf die Verwendeten Programmiersprachen und Frameworks eingegangen wird und welche Auswirkungen diese auf 
+Kapiel auf die verwendeten Programmiersprachen und Frameworks eingegangen wird und welche Auswirkungen diese auf 
 die Implementierung haben.
 
 \subsection{Programmiersprachen und Frameworks}
 Da die Software aus mehreren individuellen Applikationen besteht, werden auch verschiedenste Programmiersprachen und Frameworks für diese verwendet.
-Im Folgenden werden alle Programmiersprachen und Frameworks die Verwendung finden erklärt.
+Im Folgenden werden alle Programmiersprachen und Frameworks die Verwendung finden, erklärt.
 
 \subsubsection{React.js}
-Um die Software so kompatibel wie möglich zu gestalten, basiert der Frontend Teil der Webapp auf Webtechnologie. Dies bedeutet, jedes Endgerät, welches einen neueren 
-Internetbrowser unterstützt kann die Software zu einem Teil ausführen. Da eine Webseite in reinen Javascript, HTML und CSS zu schreiben viel Aufwand benötigt, 
+Um die Software so kompatibel wie möglich zu gestalten, basiert der Frontendteil der Webapp auf Webtechnologie. Das bedeutet, dass jedes Endgerät, welches einen neueren 
+Internetbrowser unterstützt die Software zu einem Teil ausführen kann. Da eine Webseite in reinem Javascript, HTML und CSS zu schreiben viel Aufwand benötigt, 
 wird ein Framework wie React.js verwendet. Bei React handelt es sich um eine Javascript Library zum Erstellen von Benutzeroberflächen.
-Die Vorteile von React zu reinem Javascript sind:
+Die Vorteile von React gegenüber Javascript stellen sich wie folgt dar:
 \begin{itemize}
     \item Einfach, dynamische Websiten zu entwickeln
     \item Wiederverwertbare Komponenten
     \item Methoden und Markup gehören zusammen
     \item Funktionale Programmierung mit pure Functions
 \end{itemize}
-Vor allem das erleichterte Erstellen von Dynamischen Websiten ist Vorteilhaft, da die Benutzeroberfläche während ein Spiel gespielt wird, dynamisch gehalten werden muss.
-Im klassischen Javascript muss das Document Object Model (DOM), mühsam verändert werden. Diese DOM-Manipulationen sind sehr fehleranfällig und können Memoryleaks
+Vor allem das erleichterte Erstellen von dynamischen Webseiten ist vorteilhaft, da die Benutzeroberfläche während ein Spiel gespielt wird, dynamisch gehalten werden muss.
+Im klassischen Javascript muss das Document Object Model (DOM) mühsam verändert werden. Diese DOM-Manipulationen sind sehr fehleranfällig und können Memoryleaks
 verursachen. React sitzt hingegen zwischen Komponenten und dem DOM und übernimmt die komplette DOM-Manipulation.
-Das Verwenden von Komponenten ist auch Vorteilhaft, da zum Beispiel einzelne Spielfiguren als Komponenten festgelegt werden können 
+Das Verwenden von Komponenten ist auch vorteilhaft, da zum Beispiel einzelne Spielfiguren als Komponenten festgelegt werden können 
 und so Code mehrfach eingespart werden kann. 
 Dabei ist das Besondere an React-Komponenten, dass sie einen ``Render'' Anteil besitzen, welcher eine JSX-Struktur zurückgibt. 
-JSX ist ähnelt vom Code her HTML, aber kann dabei in Javascript verwendet und somit auch viel leichter direkt verändert werden \cite{React.js}.
+JSX ähnelt vom Code her HTML, aber kann dabei in Javascript verwendet und somit auch viel leichter direkt verändert werden \cite{React.js}.
 
 \vspace{1em}
 \lstinputlisting[caption=Ein Beispiel einer JSX Struktur aus dem Auswahlmenü Dame der Anwendung, label=lst:JSX,basicstyle=\ttfamily\scriptsize]{code/JSX.txt}
@@ -1014,59 +1016,58 @@ In Listing \ref{lst:JSX} zeigt eine JSX Struktur, in welcher man klassische HTML
 
 
 \subsubsection{Node.js}
-Der Gameserver, der Gameclient und das Backend der Webapp, sind mit Node.js implementiert. 
+Der Gameserver, der Gameclient und das Backend der Webapp sind mit Node.js implementiert. 
 Node.js ist eine asynchrone ereignisgesteuertes Javascript-Laufzeitumgebung, welche Javascript-Code außerhalb des Webbrowsers ausführen kann.
-Node.js wird hauptsächlich zur Programmierung von Netzwerkanwendungen, wie Webservern verwendet. Da einen Großteil der Anwendung die
+Node.js wird hauptsächlich zur Programmierung von Netzwerkanwendungen, wie Webservern verwendet. Da der Großteil der Anwendung die
 Kommunikation der einzelnen Komponenten ausmacht, ist Node.js perfekt für dieses Szenario. 
-Ein weiterer Vorteil von Node ist, dass Node.js unabhängig vom Betriebssystem ist. Dies bedeutet, kann die V8 Javascript-Laufzeitumgebung
-auf dem Betriebssystem ausgeführt werden, so kann man auch die Node-Applikation dort zum Laufen bringen.
+Ein weiterer Vorteil von Node.js ist, dass es unabhängig vom Betriebssystem ist. Das bedeutet, dass die V8 Javascript-Laufzeitumgebung
+auf dem Betriebssystem ausgeführt und dadurch die Node-Applikation dort zum Laufen gebracht werden kann.
 \cite{Node}
 
 \subsubsection{Typescript}
-Node.js wir eigentlich in reinem Javascript geschrieben, jedoch leidet Javascript daraunter, dass es keine Typisierung hat und sich somit leicht Fehler 
-einschleichen können. Typescript ist eine auf Javascript basierende Programmiersprache, welche statische Typisierung unterstützt. 
+Node.js wir eigentlich in reinem Javascript geschrieben. Javascript leidet jedoch daraunter, dass es keine Typisierung hat und sich somit leicht Fehler 
+einschleichen können. Typescript ist eine auf Javascript basierende Programmiersprache, welche eine statische Typisierung unterstützt. 
 Ähnlich wie bei C und C++ ist valider Javascript-Code auch valider Typescript code wodurch Typescript eine Obermenge von Javascript ist.
 Nachdem Typescript-Code geschrieben wird, kann er in reines Javascript kompiliert werden.
 Der Gameserver und der Gameclient sind in Typescript geschrieben um Fehler durch die Typsicherheit zu verhindern. 
 
 \subsubsection{C/C++ Node Addons}
 Da Javascript eine im Vergleich sehr langsame Programmiersprache ist, wäre es sinnvoll den künstliche Intelligenz Teil der Applikation, welcher für die 
-Berechnung der nächsten Züge verantwortlich ist, in einer Performanteren Sprache welche auch Memorymanagement bietet, wie C oder C++ zu schreiben. 
+Berechnung der nächsten Züge verantwortlich ist, in einer performanteren Sprache welche auch Memorymanagement bietet, wie C oder C++ zu schreiben. 
 Node.js bietet hierfür die Möglichkeit an
-Module mittles C++ zu implementieren und von deren Geschwindigkeit zu profitieren \cite{NodeC++Performance}. Ein C++ Node Addon wird zu Maschinencode kompiliert, welcher von der
+Module mittles C++ zu implementieren und von deren Geschwindigkeit zu profitieren \cite{NodeC++Performance}. Ein C++ Node Addon wird zu Maschinencode kompiliert, der von der
 normalen Node-Anwendung, über eine Javascript-Funktion ausgeführt werden kann. Der Vorteil hierbei zum reinen C++ ist, dass der Code in der V8 
-Laufzeitumgebung ausgeführt wird, was ihn Plattformunabhängig macht. \cite{C++Node}
-Ein weiterer Großer Vorteil, ist die Verfügbarkeit von Performanten C++ Libraries, welche speziell für Maschinelearning geschrieben sind. 
-In dieser Arbeit wird zwar kein Maschinelearning verwendet, aber da für die KI-Logik C++ benutzt wird, könnte man bei einer Erweiterung 
+Laufzeitumgebung ausgeführt wird, was ihn plattformunabhängig macht. \cite{C++Node}
+Ein weiterer großer Vorteil ist die Verfügbarkeit von Performanten C++ Libraries, welche speziell für maschinelles Lernen geschrieben sind. 
+In dieser Arbeit wird zwar kein maschinelles Lernen verwendet, aber da für die KI-Logik C++ benutzt wird, könnte man bei einer Erweiterung 
 um andere KI-Algorithmen Libraries wie Tensorflow benutzen.
 %todo grafik die Laufzeitverbesserung zeigt
 
 \subsection{Kommunikation}
-in Kapitel \ref{chap:Networkcom} von Seite \pageref{chap:Networkcom} ist bereits auf die Kommunikation geschildert, im folgenden wird die genauere Implementierung beschrieben.
+In Kapitel \ref{chap:Networkcom} auf Seite \pageref{chap:Networkcom} ist bereits die Kommunikation geschildert. Im Folgenden wird die genauere Implementierung beschrieben.
 
 \subsubsection{Verwendete Kommunkations Technolgie}
-Da der Gameserver, der Gameclient und die Webapp eigenständige Prozesse sind, die nach Bedarf gestartet und getstoppt werden, brauchen sie eine 
-Möglichkeit Nachrichten auszutauschen. Dafür werden die von Node.js bereitgestellten TCP-Sockets verwendet. 
-Da TCP ein Standartprotokoll mit Industriestandart ist, muss eine Komponente wie der Gameserver nicht umbedingt in der gleichen Programmiersprache 
+Da der Gameserver, der Gameclient und die Webapp eigenständige Prozesse sind, die nach Bedarf gestartet und getstoppt werden, benötigen sie eine 
+Möglichkeit Nachrichten auszutauschen. Um dies zu gewähren, werden die von Node.js bereitgestellten TCP-Sockets verwendet. 
+Da TCP ein Standartprotokoll mit Industriestandart ist, muss eine Komponente wie der Gameserver nicht unbedingt in der gleichen Programmiersprache 
 wie der Gameclient implementiert sein, solage beide das selbe Protokoll mit der gleichen Codierung benutzen.
-Das hätte den Vorteil, falls man zum Beispiel eine Spezielle KI-Library verwenden möchte, welche nur für Python verfügbar ist, so könnte man 
-den kompletten Gameclient in Python schreiben.
+Das hätte den Vorteil, falls man eine spezielle Python KI-Library verwenden möchte, wäre es möglich den kompletten Gameclient in Python zu schreiben.
 \\
-Der Vorteil von TCP-Sockets gegenüber zum Beispiel UDP, ist dass aufrechterhalten einer Verbindung. So muss sich der Client oder die GUI nur einmal zum Server verbinden 
+Der Vorteil von TCP-Sockets gegenüber zum Beispiel UDP, ist dass Aufrechterhalten einer Verbindung. So muss sich der Client oder die GUI nur einmal zum Server verbinden 
 und kann im Laufe eines gesamten Spieles diese Verbindung nutzen. Ist ein Spiel zu Ende, kann die TCP-Verbindung gekappt und die 
 Sockets geschlossen werden. 
 \\
-Da es sich bei der Webapp um Webtechnologie handelt, welche in zwei Softwarepakete getrennt ist siehe \ref{fig:ReversiXTGUIClassDiagram}, dem Frontend und dem Backend, verwenden 
-diese Pakete auch eine eigene Netzwerkverbindung. Hierfür wird die Javascript library Socket.io verwendet, welche auf basis von Websockets basiert.
-Websockets funktionieren im Prinzip wie TCP-Sockets mit dem Unterschied, dass sie konstruiert wurden um auf dem selben Port wie HTTP zu laufen und vom 
-Webbrowser unterstützt werden. Den Entscheidenden Vorteil den diese Technologie bringt, ist neben der einfacheren Programmierung, auch dass Proxys, 
+Da es sich bei der Webapp um Webtechnologie handelt, welche in zwei Softwarepakete getrennt ist, siehe Abbildung \ref{fig:ReversiXTGUIClassDiagram}, dem Frontend und dem Backend, verwenden 
+diese Pakete auch eine eigene Netzwerkverbindung. Hierfür wird die Javascript Library Socket.io verwendet, die auf Basis von Websockets basiert.
+Websockets funktionieren im Prinzip wie TCP-Sockets mit dem Unterschied, dass sie konstruiert wurden um auf demselben Port wie HTTP zu laufen und vom 
+Webbrowser unterstützt werden. Den entscheidenden Vorteil den diese Technologie hat, ist neben der einfacheren Programmierung auch, dass Proxys, 
 wie der in der Anwendung verwendete Reverse Proxy, sehr einfach mit Websockets umgehen können. So kann sich das Frontend, sobald es auf einem 
 Mobilgerät aufegrufen wird, mit dem Backend auf dem Raspberry, über den Reverse Proxy verbinden, ohne dabei auf der Selben Hardware zu laufen.
 
 \subsubsection{Kommunikationsprotokoll des Gameservers}
 Im Abschnitt \ref{chap:Networkcom} wird eine Kommunikation zwischen dem Gameserver und seinen Clients beschrieben, bei welcher der 
-Server nur Anfragen eines festgelegten Protokolles Akzeptiert. Das Protokoll für den Server orientiert sich stark nach dem Protokoll
-des Reversi-Gameservers und ist nur in einigen stellen erweitert worden.
+Server nur Anfragen eines festgelegten Protokolles akzeptiert. Das Protokoll für den Server orientiert sich stark nach dem Protokoll
+des Reversi-Gameservers und ist nur in einigen Stellen erweitert worden.
 %Nachdem ein Spiel gestartet wurde, sendet der Gameserver den Initialzustand des Spielbrettes an die Clients und
 %eine Zugaufforderung an den Spieler der den ersten Zug ziehen darf. Der Client sendet daraufhin eine Zugantwort.
 %Dieser Zug wird auf Richtigkeit überprüft und falls er in Ordnung ist auf das Spielfeld angewendet. 
@@ -1081,28 +1082,28 @@ des Reversi-Gameservers und ist nur in einigen stellen erweitert worden.
         Typ (8-Bit-Integer) & Länge der Nachricht n (32-Bit-Integer) & Nachricht (n Bytes) \\
         \hline
     \end{tabular}
-	\captionof{figure}{Der Aufbau einer Nachricht}
-    \label{fig:Nachritenaufbau}
+	\caption{Der Aufbau einer Nachricht}
+    \label{tab:Nachritenaufbau}
 \end{table}
 
-in Abbildung \ref{fig:Nachritenaufbau} ist der Aufbau einer Nachricht dargestellt. Es gibt ingesamt neun verschiedene Nachrichtentypen, dazu gehören 
-neues Spiel starten, Zugaufforderung, Spiel Ende und viele weitere, siehe \ref{apx:Protokoll} auf Seite \pageref{apx:Protokoll} des Anhangs für weitere Details. 
-Die meisten Nachrichten von einen gewissen Typ haben immer die selbe Länge, es gibt jedoch
-Ausnahmen, wie die Spielbrettnachricht, bei welcher ein 10x10 oder 8x8 Damenspielbrett gewählt werden kann. Die Nachricht selber entspricht dann den eigentlichen 
-Daten, die übertragen werden, wie zum Beispiel, den Feldern welche besetzt sind beim Spielfeld, oder das Ursprungsfeld und das Zielfeld bei einer Zugantwort. 
+In Tabelle \ref{tab:Nachritenaufbau} ist der Aufbau einer Nachricht dargestellt. Es gibt ingesamt neun verschiedene Nachrichtentypen. Dazu gehören 
+``neues Spiel starten'', ``Zugaufforderung'', ``Spiel Ende'' und viele Weitere, siehe Kapitel \ref{apx:Protokoll} auf Seite \pageref{apx:Protokoll} des Anhangs für weitere Details. 
+Die meisten Nachrichten eines gewissen Typs haben immer die selbe Länge. Es gibt jedoch
+Ausnahmen, wie die Nachricht zum senden des Spielfelds, bei welcher ein 10x10 oder 8x8 Damenspielbrett gewählt werden kann. Der eigentliche Inhalt der Nachricht entspricht dann 
+den Daten, die übertragen werden, wie zum Beispiel, den Feldern welche bei einem Spielfeld besetzt sind, oder das Ursprungsfeld und das Zielfeld bei einer Zugantwort. 
 Das einhalten diese Protokoll ist sehr wichtig, denn nur so kann garantiert werden, dass zwei Komponenten auch wirklich miteinander kommunizieren können.
 
 \subsubsection{Dynamische Portsuche}
 Da es möglich sein muss, dass mehrere Gameclients gegeneinander spielen, muss beachtet werden, dass sich diese nicht den selben TCP-Port holen können.
-Deswegen bekommt das Backend der Webapp ein Interval in aus welchem es die Ports des Gameclients wählen darf und versucht somit einen freien Port zu finden, welcher noch nicht 
-besetzt ist. Das gleiche gilt auch für den Gameserver, für diesen muss auch einen Port gefunden werden, unter welchen er arbeiten wird. 
-Das Szenario das mehrere Gameserver laufen ist nicht sehr unwarscheinlich, denn verbinden sich mehrere Benutzer mit iheren Smartphones mit der Anwendung,
-so muss für jeden der ein Spiel startet ein eigener Gameserver starten. Einen weiteren Vorteil den diese Dynamik bietet, ist das die Simulation 
-zum Testen der Software parallel zur normalen laufen kann. Bei der verwendeten Library welche für diese Fälle gedacht ist, handelt es sich um 
-das Node.js NPM-Paket ``node-portfinder'' \cite{portfinder}. In der Anwendung wird die portfinder-Library in jeder Komponente verwendet, denn 
-wird eine Komponente unabhängig von den anderen gestartet, kann es sein das ihr Port bereits belegt ist und sucht sich somit einen eigenen.
+Deswegen bekommt das Backend der Webapp ein Interval, aus welchem es die Ports des Gameclients wählen darf. Es versucht somit einen freien Port zu finden, der noch nicht 
+besetzt ist. Das gleiche gilt auch für den Gameserver. Für diesen muss auch einen Port gefunden werden, unter welchem er arbeiten wird. 
+Das Szenario, das mehrere Gameserver laufen, ist nicht sehr unwarscheinlich. Sollten sich mehrere Benutzer mit iheren Smartphones mit der Anwendung verbinden,
+so muss für jeden der ein Spiel beginnt ein eigener Gameserver starten. Einen weiteren Vorteil, den diese Dynamik bietet, ist, dass die Simulation 
+zum Testen der Software parallel zur Normalen laufen kann. Bei der verwendeten Library, die für diese Fälle gedacht ist, handelt es sich um 
+das Node.js NPM-Paket ``node-portfinder'' \cite{portfinder}. In der Anwendung wird die Portfinder-Library in jeder Komponente verwendet. Sollte 
+eine Komponente unabhängig von den anderen gestartet werden und ihr Port bereits belegt sein, sucht sie sich einen eigenen.
 
-\subsection{ Erweiterungen der Graphischen Benutzeroberfläche }
+\subsection{ Erweiterungen der graphischen Benutzeroberfläche }
 Im Grundlagenkapitel findet man eine Erklärung zur vorhandenen GUI, siehe Kapitel \ref{chap:gegebeneApp} von Seite \pageref{chap:gegebeneApp}, welche 
 um weitere Menüs erweitert erweitert worden ist. Da die Anwendung vor der Erweiterung um das Spiel Dame nur Reversi als Spiel hatte, 
 braucht die sie ein weiteres Menü um zwischen den verschiedenen Spielen wählen zu können, siehe \ref{fig:GameSelectionScreen}.
@@ -1115,8 +1116,9 @@ braucht die sie ein weiteres Menü um zwischen den verschiedenen Spielen wählen
 	\label{fig:GameSelectionScreen}
 \end{minipage}
 
-Die Abbildung Zeigt zwei Buttons, mit Links auf die URL-Pfade der Spieleinstellungen der jeweiligen Spiele. Das nächste Menü welches dadurch erreicht wird 
-enspricht entweder dem schon vorhanden Auswahlmenü von Reversi oder den neuen für Dame, welches in Abbildung \ref{fig:Auswahlmenue} zu seheen ist.
+Die Abbildung \ref{fig:GameSelectionScreen} zeigt zwei Buttons, mit Links auf die URL-Pfade der Spieleinstellungen der jeweiligen Spiele. 
+Das nächste Menü, das dadurch erreicht wird,
+enspricht entweder dem schon vorhanden Auswahlmenü von Reversi oder dem Neuen für Dame, welches in Abbildung \ref{fig:Auswahlmenue} zu sehen ist.
 
 \vspace{1em}
 \begin{minipage}{\linewidth}
@@ -1126,13 +1128,13 @@ enspricht entweder dem schon vorhanden Auswahlmenü von Reversi oder den neuen f
 	\label{fig:Auswahlmenue}
 \end{minipage}
 
-Direkt nachdem dieses Menü aufgerufen wird, schickt das Frontend eine Nachricht, über Websockets, an das Backend um alle Karten die im Ordner ``maps'' liegen, sowie 
-alle Algorithmen, welche in algorithms-consts.js des Gameclients vermerkt sind, zu bekommen. Außerdem wird die elo.txt Datei, welche durch 
-Simulation erzeugte Elo-Werte für die Spielstärke aufweist, benutzt um die jeweilige Stärke der Algorithmen zu zeigen, was in der Abbildung 
-den Wert in Klammern entspricht. Unter der Spielerauswahl befindet sich eine Eingabe für die Zeit in Minuten, welche die Maximale Zeit 
-die ein Spieler für ein Spiel verfügbar hat angibt. Wird diese auf 0 gesetzt, taucht ein weiteres Menü auf welches aber dieses mal eine 
-Suchtiefe fordert. Durch das klicken auf ``Starten'' gelangt man zur Seite welche das eigentliche Spiel darstellt, siehe Abbildung \ref{fig:DameSpielSeite}.
-Bei den Buttons, Radiobuttons und der Dropdown-Liste handelt es sich um HTML-Elemente welche mittels CSS gestylet sind und mittles 
+Direkt nachdem dieses Menü aufgerufen wird, schickt das Frontend eine Nachricht über Websockets an das Backend, um alle Karten die im Ordner ``maps'' liegen, sowie 
+alle Algorithmen, die in algorithms-consts.js des Gameclients vermerkt sind, zu bekommen. Außerdem wird die elo.txt Datei, die durch 
+Simulation erzeugte Elo-Werte für die Spielstärke aufweist, benutzt, um die jeweilige Stärke der Algorithmen zu zeigen, was in der Abbildung 
+den Wert in Klammern entspricht. Unter der Spielerauswahl befindet sich eine Eingabe für die Zeit in Minuten, welche die maximale Zeit 
+die ein Spieler für ein Spiel verfügbar hat, angibt. Wird diese auf 0 gesetzt, taucht ein weiteres Menü auf, welches aber dieses Mal eine 
+Suchtiefe fordert. Durch das klicken auf ``Starten'' gelangt man zur Seite, die das eigentliche Spiel darstellt, siehe Abbildung \ref{fig:DameSpielSeite}.
+Bei den Buttons, Radiobuttons und der Dropdown-Liste handelt es sich um HTML-Elemente, die mittels CSS gestylt sind und mittles 
 des Javascript von React.js Aktionen ausführen.
 
 \vspace{1em}
@@ -1143,20 +1145,47 @@ des Javascript von React.js Aktionen ausführen.
 	\label{fig:DameSpielSeite}
 \end{minipage}
 
-Diese Seite Zeigt das Damespielfeld mit der Informations-Sidebar, welche die Restzeit pro Spieler anzeigt.
-Auf dem Spielfeld, sind die Damespielsteine durch die Farben Schwarz und Weiß, als Scheiben dargestellt. 
+Diese Seite zeigt das Damespielfeld mit der Informations-Sidebar, welche die Restzeit pro Spieler anzeigt.
+Auf dem Spielfeld sind die Damespielsteine durch die Farben Schwarz und Weiß, als Scheiben dargestellt. 
 Ist das Spielfeld hinter dem Stein gelb markiert bedeuetet das, dass er gezogen werden darf. 
-Durch das klicken eines solchen gelb hinterlegten Steines werden alle Felder auf welche der Stein ziehen darf 
-grau markiert dargestellt. Um dieses Markieren und nächste Zug finden zu ermöglichen verwendet das Frontend Funktionen 
+Durch das Klicken eines solchen gelb hinterlegten Steines werden alle Felder auf welche der Stein ziehen darf 
+grau markiert dargestellt. Um dieses ``Markieren'' und ``nächste Zug finden'' zu ermöglichen, verwendet das Frontend Funktionen,
 welche den Funktionen der Spiellogik-Dame ähneln.
 \\
-Bei den Spielsteinen und dem Spielfeld handelt es sich um React.js Komponenten die mittels JSX und CSS ihre Form bekommen.
-Jeder Spielstein hat eine Callback Methode, welche aufgerufen wird, falls er geklickt wird und je nach Position und 
-dem Ergbnis der Funktion für alle möglichen Züge, werden die richtigen Felder auf dem Spielfeld markiert.
+Bei den Spielsteinen und dem Spielfeld handelt es sich um React.js Komponenten, die mittels JSX und CSS ihre Form bekommen.
+Jeder Spielstein hat eine Callback Methode, die nach einem Klick aufgerufen wird. Je nach Position und 
+Ergbnis der \texttt{CheckersAllPossibleMoves} Funktion, werden die richtigen Felder auf dem Spielfeld markiert.
 
 \subsection{Mobile Anbindung}
+Für die Anbindung der Mobilgeräte an die Software muss die Software nicht groß umgestaltet werden. 
+Da es sich bei der Software um eine React.js Anwendung handelt und sie auch auf dem Touchscreen im Webbrowser als Website 
+ausgeführt wird, kann sie problemlos mit nur kleinen Anpassungen auf dem Browser eines Smartphones laufen.
+Über CSS Stylesheets bieten eine Möglichkeit das Gerät, welches auf die Website zugreift zu erkennen und 
+dadurch das Layout und Design anzupassen. Es muss so keine Logik verändert werden nur Art wie die Website dargestellt wird.
+\\
+Die eigentliche Verbindung wird über die lokale IP-Adresse des Netzwerks, in der sich 
+die Hardware befindet, getätigt. Um die Adresse für das Smartphone zu bekommen, ist in der graphischen Oberfläche im 
+Hauptmenü ein QR-Code eingebaut. Der QR-Code wird zum start der Anwendung neu mittels einer Javascript Library generiert,
+dadurch ist die Software unabhängig vom Netzwerk in der sie sich befindet. Scannt ein Gerät diesen bekommt es einen Link auf das Auswahlmenü von Dame. Würde ein weiteres
+Spiel zur Software hinzufügen, könnte die Software um einen weiteren QR-Code erweitert werden. 
+Abbildung \ref{fig:QRCodeScreen} zeigt das Hauptmenü, mit dem QR-Code unten in der Mitte.
 
-\subsection{Gameclient C++ und Typescript Zusammenspiel}
+\vspace{1em}
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pics/mainMenuWithQR.png}
+	\captionof{figure}{ Das Hauptmenü mit dem QR Code }
+	\label{fig:QRCodeScreen}
+\end{minipage}
+
+Damit ein Zugriff nicht auf andere Ports oder Funktionen des Raspberry Pis möglich ist,
+wird ein Reverse Proxy verwendet, welcher jeden Zugriff überprüft und nur gültige durch lässt. Beim verwendeten Reverse Proxy handelt 
+es sich um die Software Nginx. Nginx ist eine Webserver-Software, welche als Load Balancer, Mail Proxy, HTTP cache und auch 
+als Reverse Proxy verwendet werden kann. Weitere Informationen zur Konfiguration und Installation kann in Anhang Kapitel \ref{apx:Installation} 
+auf Seite \pageref{apx:Installation} gefunden werden.
+
+
+\subsection{Gameclient C++ und Typescript Kompatibilitätsschicht}
 Die Besonderheit der Implementierung des Gameclients basiert darauf, dass es sich um eine Applikation handelt, welche in zwei verschiedenen 
 Programmiersprachen geschrieben ist. Zum einen wird die durch Node.js verwendete Sprache Typescript für den Netzwerk und Validierungs Teil 
 verwendet und zum anderen C++ für die Performance der KI-Algorithemen. Man hätte auch die Anwendung komplett in C++ schreiben können, leider 
@@ -1164,19 +1193,19 @@ könnte man dann die Netzwerkkomponente nicht so einfach erneut verwenden. Auch 
 bei C++ beachtet werden muss, dass Libraries für verschiedene Betriebssysteme verfügbar sein müssen und diese eventuell mit anderen 
 Compilern bearbeitet werden. 
 \\
-Um einen Reibungslosen Übergang zwischen den beiden Programmiersprachen zu garantieren, wird eine Klasse als reine Kompatibilitäts Schicht verwendet.
-Alle Funktionen und Umwandlungen, welche für das Konvertieren nötig sind, werden in dieser Klasse zusammengefasst. Dies erlaubt, dass der Restliche 
-C++ Code auch unabhängig Compiliert werden kann ohne Node.js Add-on spezifische Details, was ein leichteres Testen erlaubt.
-In Abbildung \ref{fig:KIClientClassDiagram} von Seite \pageref{fig:KIClientClassDiagram} wird diese Umwandlung in der Klasse \texttt{CheckersAi} 
+Um einen reibungslosen Übergang zwischen den beiden Programmiersprachen zu garantieren, wird eine Klasse als reine kompatibilitäts Schicht verwendet.
+Alle Funktionen und Umwandlungen, welche für das Konvertieren nötig sind, werden in dieser Klasse zusammengefasst. Dies erlaubt, dass der restliche 
+C++ Code auch unabhängig kompiliert werden kann ohne Node.js Add-on spezifische Details, was ein leichteres Testen erlaubt.
+In Abbildung \ref{fig:KIClientClassDiagram} auf Seite \pageref{fig:KIClientClassDiagram} wird diese Umwandlung in der Klasse \texttt{CheckersAi} 
 vorgenommen.
 
 \subsection{Verwendete KI-Algorithmen}
 \label{chap:KIAlgorithms}
-In Kapitel \ref{chap:Grundlagen} wurden einige künstliche Intelligenz Algorithemen beschrieben, welche auch im Dame-Spiel der Applikation implementiert sind.
-Die Applikation bietet vier Algorithemen zur Auswahl an, gegen die der Spieler antreten kann, siehe \ref{fig:Auswahlmenue}. 
+In Kapitel \ref{chap:Grundlagen} wurden einige KI Algorithemen beschrieben, welche auch im Dame-Spiel der Applikation implementiert sind.
+Die Applikation bietet vier Algorithemen zur Auswahl an, gegen die der Spieler antreten kann, siehe Abbildung \ref{fig:Auswahlmenue} auf Seite \pageref{fig:Auswahlmenue}. 
 Diese Algorithemen sind: Minimax, Alpha-Beta-Pruning, Zugsortierung und MCTS.
-Aus Abbildung \ref{fig:KIClientClassDiagram}
-kann man entnehmen, dass es zwei Hauptalgorithmen in dem Paket CheckersAiLogik gibt, Minimax und MCTS. Diese Aufteilung kann vorgenommen werden,
+Aus Abbildung \ref{fig:KIClientClassDiagram} auf Seite \pageref{fig:KIClientClassDiagram}
+kann man entnehmen, dass es zwei Hauptalgorithmen in dem Paket CheckersAiLogik gibt. Minimax und MCTS. Diese Aufteilung kann vorgenommen werden,
 da Alpha-Beta-Pruning und Zugsortierung auf Minimax basieren.
 
 
@@ -1299,27 +1328,27 @@ weniger Züge als am Anfang zur Verfügung, es sei den es ist eine Dame im Spiel
 \pagebreak
 
 \section{Testing und Simulation}
-Folgendes Kapitel beschreibt, die Tests und Simulationen, welche benutzt wurden, um die Güte der Software zu verbessern. Die Simulationen wurden verwendet, um 
-die Spielstärke der KI-Algorithmen zu validieren und dadurch auch Fehler zu beheben, dass ein Algorithmus zu schlecht für seine Verhältnisse spielt.
-Die Tests sind zum Verhindern von Fehler, die in Spezialfällen eintreffen können. So gibt es Stellungen in Dame, welche nicht häufig auftreten, 
+Folgendes Kapitel beschreibt, die Tests und Simulationen, welche benutzt wurden, um die Qualität der Software zu verbessern. Die Simulationen wurden verwendet, um 
+die Spielstärke der KI-Algorithmen zu validieren und dadurch auch Fehler zu beheben, um zu vermeiden, dass ein Algorithmus zu schlecht für seine Verhältnisse spielt.
+Die Tests sollen Fehler verhindern, die in Spezialfällen eintreten können. So gibt es Stellungen in Dame, die zwar nicht häufig auftreten, 
 aber zu Fehlerfällen führen könnten, falls diese nicht beachtet werden.
 
 \subsection{Simulation}
-Bei der Implementierung von KI-Algorithmen kann es schnell passieren, dass ein kleiner Fehler, welcher sich in der Implementierung eingeschlichen hat, 
+Bei der Implementierung von KI-Algorithmen kann es schnell passieren, dass ein kleiner Fehler, der sich in der Implementierung eingeschlichen hat, 
 zwar nicht zum Absturz der Software führt, aber dazu, dass die KI eine wesentlich schlechtere Performance aufweist. Da eine kleine Verschlechterung 
 sehr schwer nachzuweisen ist, kann man auch keine spezifischen Tests schreiben, die dies prüfen können. Was aber in diesem Fall funktioniert, 
 ist das Vergleichen der KIs untereinander, um zu sehen, ob sie die erwartete Spielstärke im Verhältnis zueinander aufzeigen.
 Ein Vorteil bei den Vergleichen von Algorithmen sind die Ergebnisse aus anderen Arbeiten, die sich mit einem ähnlichen Thema befasst haben.
 Nimmt man diese Ergebnisse und lässt die KI-Algorithmen dieser Arbeit gegeneinander spielen, so kann man das ähnliche Resultate erwarten.
 \\
-Im Laufe der Simulationen spielt jede KI gegen die anderen KIs. Um die Ergebnisse in Form von Stärke festzuhalten, bekommt jeder Algorithmus Ahnhand
+Im Laufe der Simulationen spielt jede KI gegen die anderen KIs. Um die Ergebnisse in Form von Stärke festzuhalten, bekommt jeder Algorithmus anhand
 seiner Performance eine Elo-Zahl zugewiesen.
 
 \subsubsection{ELO}
-Das Elo System ist eine Kennzahl für die relative Spielstärke, die ein Spieler in einem Nullsummenspiel hat. Elo wird hauptsächlich in Schach und Go verwendet,
+Das Elo-System ist eine Kennzahl für die relative Spielstärke, die ein Spieler in einem Nullsummenspiel hat. Elo wird hauptsächlich in Schach und Go verwendet,
 findet aber auch immer mehr Anwendung in anderen Sportarten wie Tischtennis oder auch in Computerspielen. Bei der Berechnung von Elo wird ein Spiel von zwei 
-Spielern untersucht, dabei ist die Elo-Zahl der Spieler die erwartete Spielstärke. Demnach wird von einem Spieler mit höherer Elo-Zahl als sein Gegner
-vielmehr ein Gewinn erwartet. Dementsprechend verhält sich auch die Elo-Änderung nach dem Spiel. Verliert ein Spieler A mit einer höheren Elo gegen einen
+Spielern untersucht, wobei die Elo-Zahl der Spieler die erwartete Spielstärke darstellt. Demnach wird von dem Spieler mit der höherern Elo-Zahlein 
+Gewinn erwartet. Dem entsprechend verhält sich auch die Elo-Änderung nach dem Spiel. Verliert ein Spieler A mit einer höheren Elo gegen einen
 Spieler B mit geringerer Elo, so verliert A viel Punkte und B bekommt viel Punkte dazu. Gewinnt jedoch A, so bekommt er nur sehr wenig Punkte hinzu und B verliert 
 nur sehr wenig. 
 \\ 
@@ -1336,45 +1365,68 @@ Die in der Applikation verwendete Elo Zahl wird wie folgt berechnet:
 
 Dabei entspricht:
 \begin{conditions}
-    E     &  Elo Zahl \\   
-    F     &  Warscheinlichkeit das der Spieler gewinnt \\
+    E     &  Elo-Zahl \\   
+    F     &  Warscheinlichkeit, dass der Spieler gewinnt \\
     k     &  K-Faktor \\
     S     &  Sieg oder Niederlage (1 oder 0)
 \end{conditions}
 
-Der K-Faktor gibt eine Aussage darüber, wie stark sich ein Spiel auf die Elo-Änderung auswirkt. In der Applikation wurde ein K-Faktor von 30 verwendet, da 
-dieser auch in Turnierschach für Spieler unter 2100 Elo verwendet wird \cite{EloFormulas}.
+Der K-Faktor gibt Auskunft darüber, wie stark sich ein Spiel auf die Elo-Änderung auswirkt. In der Applikation wurde ein K-Faktor von 30 verwendet, da 
+dieser auch im Turnierschach für Spieler unter 2100 Elo verwendet wird \cite{EloFormulas}.
+\\
+Zum Beispiel, nimmt man an, dass Spieler A 1500 Punkte und Spieler B 2000 Punkte hat und setzt man diese Punkte in die Formel von oben ein, so ergibt sich:
+\\
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{ |c||c|c| } 
+    \hline
+    Ergebnis & Spieler A Elo & Spieler B Elo \\ 
+    \hline
+    \hline
+    Spieler A Sieg & 1528 & 1972 \\ 
+    \hline
+    Spieler B Sieg & 1498 & 2002 \\ 
+    \hline
+    Unentschieden & 1513 & 1987 \\ 
+    \hline
+\end{tabular}
+\caption{Ergebnistabelle einer Begegnung von Spieler A (1500) und Spieler B (2000)}
+\label{tab:EloErgebnistabelle}
+\end{center}
+\end{table}
+
+Wie die Tabelle \ref{tab:EloErgebnistabelle} zeigt, bringt Spieler B der Sieg nur sehr wenig Punkte, aber hohe Verluste, bei einer Niederlage.
+Dies ist sinnvoll, da von ihm ein Sieg erwartet wird.
 
 \subsubsection{Aufbau der Simulationsoftware}
 Für die Simulation wurde eine eigene Software geschrieben, welche unabhängig von der ReversiXT GUI arbeitet und nur den Gameserver 
 sowie den Gameclient zur Berechnung der Ergebnisse benötigt. Dies hat den Vorteil, dass Simulationen parallel zur eigentlichen Applikation laufen können.
-So kann gerade ein Benutzer ein Spiel gegen eine KI gestartet haben, im Hintergrund läuft auch die Simulation, die ihre eigenen Instanzen des 
-Gameservers und Gameclients hat und mit diesen arbeitet. 
+So kann ein Benutzer ein Spiel gegen eine KI gestartet haben, während im Hintergrund eine Simulation läuft, die ihre eigenen Instanzen des 
+Gameservers und Gameclients hat. 
 Die KI-Algorithmen, welche spielen müssen, werden zufällig gewählt und müssen sich unterscheiden. Ein Spiel zwei gleicher KIs hätte keine Auswirkung auf das 
-Ergebnis, da sich die Wertung nicht verändern würde. Außerdem wird die Auswahl auf Schwarz und Weiß so gewichtet, dass jedes Aufeinandertreffen von zwei
-Algorithmen beide gleich oft die jeweilige Farbe bekommen, denn Weiß hat immer einen Vorteil, da es den ersten Zug machen darf, auch wenn dieser 
+Ergebnis, da sich die Wertung nicht verändern würde. Außerdem wird die Auswahl auf Schwarz und Weiß so gewichtet, dass beide gleich oft die jeweilige Farbe bekommen, 
+denn Weiß hat immer einen Vorteil, da es den ersten Zug machen darf. Auch wenn dieser 
 Vorteil nur sehr gering ist, kann er bei der Simulation einen Unterschied machen.
 \\
 Zum Starten der Simulation muss eine Simulationsanzahl angegeben werden, was dazu führt, dass die Software so lange simuliert, bis diese Anzahl erreicht wird.
-Nach jedem abgeschlossen Spiel wird das Ergebnis berechnet und zwischengespeichert, dadurch kann eine Simulation abgebrochen werden, ohne die vorherigen 
-Ergebnisse zu verlieren. Außerdem arbeitet die Simulation mit den bereits berechneten Elo Werten weiter, so kann ist die Anzahl der am Anfang angegebenen 
-Spiele nur von Relevanz, wie lange man die Simulation laufen haben will, sowie zum Speichern von Statistiken und 
-nicht wie akkurat das Ergebnis nach nur diesen Simulationen sein soll.
-Die Ergebnisse einer Session werden neben der Aktualisierung der Elo Zahlen außerdem nach der Beendung der Simulationssoftware in eine .csv Datei 
+Nach jedem abgeschlossenen Spiel wird das Ergebnis berechnet und zwischengespeichert. Dadurch kann eine Simulation abgebrochen werden, ohne die vorherigen 
+Ergebnisse zu verlieren. Außerdem arbeitet die Simulation mit den bereits berechneten Elo-Werten weiter. Die Anzahl der am Anfang angegebenen 
+Spiele ist nur für die Dauer und zum Speichern der Statistiken der Simulationen relevant. 
+Die Ergebnisse einer Session werden neben der Aktualisierung der Elo-Zahlen außerdem nach der Beendung der Simulationssoftware in eine .csv Datei 
 geschrieben. Diese Datei zeigt die Details in den Spielen gegeneinander an, die in dieser Simulationssession stattgefunden haben.
-Da es eventuell vom Vorteil sein kann diese Sessions unabhängig zu bewerten und das Zusammenfügen mehrerer .csv Dateien sehr einfach ist, 
-wird dabei jedes Mal eine eigene Datei angelegt. Ein Problem, welches hier auftreten kann, ist das sich Dateien eventuell überschreiben würden, deswegen 
-bekommt jede Datei den Namen ``statistics'' gefolgt von einem Universally Unique Identifier (UUID).
+Da es eventuell von Vorteil sein kann, diese Sessions unabhängig zu bewerten und das Zusammenfügen mehrerer .csv Dateien sehr einfach ist, 
+wird dabei jedes Mal eine eigene Datei angelegt. Ein Problem, welches hier auftreten kann, ist dass sich Dateien eventuell überschreiben würden, weswegen 
+jede Datei den Namen ``statistics'' gefolgt von einem Universally Unique Identifier (UUID), bekommt.
 \\
-Damit der Benutzer auch weis, wie stark die Algorithmen in Verhältnis zueinander sind, wird das Berechnete Ergebnis der Simulationen im Auswahlmenü der 
-Algorithmen als Elo Zahl mit angegeben, um somit den Benutzer eine akkurate Repräsentation der Stärke anzuzeigen.
+Damit der Benutzer auch weiß, wie stark die Algorithmen in Verhältnis zueinander sind, wird das berechnete Ergebnis der Simulationen im Auswahlmenü der 
+Algorithmen als Elo-Zahl mit angegeben, um somit dem Benutzer eine akkurate Repräsentation der Stärke anzuzeigen.
 
 
 \subsubsection{Interpretation der Ergebnisse}
 Damit die Ergebnisse auch wirklich Sinn im Vergleich zueinander machen, werden sie nach einigen Simulationen mit den erwarteten Werten verglichen.
-Hier wurden um die 500 Simulationen ausgeführt um ein möglichst genaues Ergebnis zu erzielen. Natürlich würde die Genauigkeit der Ergebnisse 
-besser werden, je öfter man die Simulation wiederholt, aber das Ergebnis nach 500 Simulationen bestätigt bereits die Erwartungen.
-Da die Software eventuell zu einem späteren Zeitpunkt um weitere Algorithmen erweitert wird, sind die in dieser Simulation verwendeten die folgenden:
+Hier wurden um die 500 Simulationen ausgeführt, um ein möglichst genaues Ergebnis zu erzielen. Natürlich würde die Genauigkeit der Ergebnisse 
+besser werden, je öfter man die Simulation wiederholt. Das Ergebnis nach 500 Simulationen bestätigt aber bereits die Erwartungen.
+Da die Software eventuell zu einem späteren Zeitpunkt um weitere Algorithmen erweitert wird, sind die in dieser Simulation verwendeten die Folgenden:
 \begin{itemize}
     \item MCTS
     \item Minimax 
@@ -1384,25 +1436,25 @@ Da die Software eventuell zu einem späteren Zeitpunkt um weitere Algorithmen er
 Da Alpha-Beta eine Verbesserung des Minimax ist, kann man erwarten, dass es auch eine bessere Performance abliefert, da ein großer Teil der Bäume 
 immer ignoriert werden kann und somit Rechenzeit eingespart werden kann. Ebenso sollte Alpha-Beta mit Zugsortierung besser als das normale 
 Alpha-Beta Pruing sein, da es wieder eine weitere Verbesserung dieses Algorithmus ist. MCTS ist etwas schwieriger einzuschätzen, da 
-es über Simulationen läuft, doch Ergebnisse aus anderen Arbeiten bestätigen, dass MCTS im Vergleich zu Minimax vor allem bei Spielen wie Dame 
+es über Simulationen läuft. Doch Ergebnisse aus anderen Arbeiten bestätigen, dass MCTS im Vergleich zu Minimax vor allem bei Spielen wie Dame 
 schwächer abschneidet \cite{MiniaxMCTScomparison}.
 \\
-Die Ergebnisse mit den Zuvor erwähnten Elo-Formeln lauten:
+Die Ergebnisse mit den zuvor erwähnten Elo-Formeln lauten:
 \begin{itemize}
     \item MCTS: 1807
     \item Minimax: 1963
     \item Alpha-Beta Pruning: 2070
     \item Alpha-Beta mit Zugsortierung: 2141
 \end{itemize}
-Bei diesen Ergebnissen wurde ein Basiswert von 2000 Elo verwendet, mit einem kleinen K-Faktor, da sehr viele Spiele simuliert werden können und 
-einzelne Spiele keine so große Auswirkung haben sollen. Wie man Sieht stimmen die Ergebnisse mit den Annahmen überein.
+Bei diesen Ergebnissen wurde ein Basiswert von 2000 Elo, mit einem kleinen K-Faktor verwendet, da sehr viele Spiele simuliert werden können und 
+einzelne Spiele keine so große Auswirkung haben sollen. Wie man sieht stimmen die Ergebnisse mit den Annahmen überein.
 \\
 In Abbildung \ref{fig:ExcelSimulation} sieht man die Darstellung der .csv Datei im Programm Excel. Die Anzahl an simulierten Spielen
-beläuft sich hierbei auf 39. Da die 500 Simulationen nicht in einer Session möglich sind, dies würde mehrere Tage in Anspruch nehmen,
-wurden die Simulationsessions  in mehrere unterteilt welche immer um die 50 Spiele umfassen.
+beläuft sich hierbei auf 39. Da die 500 Simulationen nicht in einer Session möglich sind, weil dies mehrere Tage in Anspruch nehmen würde,
+wurden die Simulationssessions in mehrere unterteilt, welche immer um die 50 Spiele umfassen.
 Jede Zeile gibt die Siege eines Algorithmus gegen die anderen an und jede Spalte dessen Niederlagen.
-Wichtig ist, dass eine große Zahl nicht automatisch eine Gute Performance bedeutet, so hat Minimax zwar die meisten
-Siege gegen MCTS, das liegt aber an der Zufallszuteilung wer gegen wen spielen muss. Wichtiger ist hier zu bemerken, dass Minimax mehr Spiele 
+Wichtig ist, dass eine große Zahl nicht automatisch eine gute Performance bedeutet. So hat Minimax zwar die meisten
+Siege gegen MCTS, was aber an der Zufallszuteilung, wer gegen wen spielen muss, liegt. Wichtiger ist hier zu bemerken, dass Minimax mehr Spiele 
 gegen Alpha-Beta Pruning und Alpha-Beta mit Zugsortierung verloren, als gewonnen hat.
 
 
@@ -1416,41 +1468,40 @@ gegen Alpha-Beta Pruning und Alpha-Beta mit Zugsortierung verloren, als gewonnen
 
 
 \subsection{Testing}
-Was Simulationen leider nicht schaffen, ist das Finden von gröberen Fehler, um so einen Programmabsturz zu vermeiden.
-Um die Stabilität der Software zu Verbessern werden deswegen Tests im Form von Modultests, oder auch Unit Tests genannten, in die Software integriert.
+Was Simulationen leider nicht schaffen, ist das Finden von gröberen Fehlern, um einen Programmabsturz zu vermeiden.
+Um die Stabilität der Software zu verbessern, werden deswegen Tests im Form von Modultests, oder auch Unit Tests genannten, in die Software integriert.
 \\
-Dabei beschreibt ein Unittest das Testen der funktionalen Einzelteile eines Computerprogramms, auf ihre korrekte Funktionalität. 
+Dabei beschreibt ein Unit Test das Testen der funktionalen Einzelteile eines Computerprogramms, auf ihre korrekte Funktionalität. 
 Was so viel bedeutet, wie einzelne Module eines Programmes werden isoliert ohne Interaktion mit anderen getestet. 
-Dabei kann es sein, das externe Komponenten wie zum Beispiel Datenbanken oder Unterprogramme simuliert werden müssen. \cite{UnitTestBook}
+Dabei kann es sein, dass externe Komponenten wie zum Beispiel Datenbanken oder Unterprogramme simuliert werden müssen. \cite{UnitTestBook}
 \\
 In der Applikation werden diese Unit Tests in den kritischen Softwarebestandteilen verwendet, welche der Gameserver und der Gameclient sind.
-Die Webapp, ist weniger fehleranfällig, da es sich lediglich um eine Graphische Oberfläche handelt, welche hauptsächlich zur Informationsdarstellung verwendet wird.
+Die Webapp ist weniger fehleranfällig, da es sich lediglich um eine graphische Oberfläche handelt, welche hauptsächlich zur Informationsdarstellung verwendet wird.
 Am kritischsten sind dabei die Implementierungen der Spiellogik, der KI-Algorithmen-Logik, sowie die Netzwerkkommunikation zwischen den Komponenten. 
 
 \subsubsection{Gameserver}
 Im Gameserver ist der Zustand des Spieles und die Überprüfung der gespielten Züge. 
-Die Besonderheit beim Testen, befindet sich hier in den Spezialfällen, die in gewissen Dame Stellungen entstehen können, so muss z.B. ein
+Die Besonderheit beim Testen, befindet sich hier in den Spezialfällen, die in gewissen Damestellungen entstehen können. So muss z.B. ein
 Spieler in Schlagzwang immer das Schlagen einer Figur ausführen, oder ein Spieler kann nicht noch einmal schlagen, wenn er mit einem Zug bei dem geschlagen worden ist,
 eine Dame erhält. Viele dieser Spezialfälle, müssen vor allem in der Implementierung beachtet werden und auch bei Änderung muss beachtet werden, dass 
-diese Züge immer noch valide sind. Was dazu führt, dass die Unit Tests immer laufen sollten, nachdem Änderungen an der Spiellogik vorgenommen werden,
-um so zu garantieren, das diese Spezialfälle immer noch funktionieren.
+diese Züge immer noch valide sind. Das führt dazu, dass die Unit Tests immer laufen sollten, nachdem Änderungen an der Spiellogik vorgenommen werden,
+um so zu garantieren, dass diese Spezialfälle immer noch funktionieren.
 \\
 Da es sich beim Gameserver um eine Node.js Anwendung handelt, welche in Typescript implementiert ist, kann eine vorgefertigte Unit Test Library verwendet werden.
-Bei der Verwendeten Testing Framework handelt es sich um Mocha, welches zum Testen von Node.js und Javascript Browser Anwendungen benutzt wird. 
+Bei dem verwendeten Testing Framework handelt es sich um Mocha, welches zum Testen von Node.js und Javascript Browser Anwendungen benutzt wird. 
 Für jeden Testfall einer Funktion wird das Ergebnis mit dem erwarteten verglichen und somit eine Statistik aufgestellt, wie viele Testfälle 
-bestanden wurden und wie viele nicht korrekt waren. Ein großer Vorteil den Mocha dabei zur Konkurrenz hat ist, dass die Tests automatisiert ausgeführt werden 
+bestanden wurden und wie viele nicht korrekt waren. Ein großer Vorteil den Mocha dabei zur Konkurrenz hat, besteht darin, dass die Tests automatisiert ausgeführt werden 
 können, sobald der Typescriptcode in Javascript kompiliert wird.
 \\ 
 Abbildung \ref{fig:UnitTestResult} zeigt das Ergebnis des Mocha Unit Tests, wobei alle 18 Testfälle erfolgreich abgeschlossen wurden.
-Bei der letzten Stellung, welche auch in der Abbildung dargestellt ist, wird getestet, ob die Software einen Fehler beim zweifach Schlagen erkennen würde.
-Weiß wird durch ``o'' und Schwarz durch ``x'' dargestellt, das Ausrufezeichen steht für eine Figur, die im Zug davor geschlagen wurde. 
-Beim ersten Spielfeld hat Weiß von Reihe 4 Spalte 3 nach Reihe 2 Spalte 5 eine Schwarze Figur geschlagen. Da im nächsten Zug die Schwarze Figur auf 
-Reihe 3 Spalte 6 wegen Schlagzwang geschlagen werden muss, wird auch dieser Zug erwartet. Der Testfall testet, Falls der nächste Zug der 
-und die Software übergeben wird, nicht der erwartete Weiße Zug ist, sondern ein Zug von Schwarz, indem er die bedrohte Figur zieht.
-Erwartet wird ein Fehler welcher, welcher auch erkannt wird und somit zählt der Testfall als ``passed'', also bestanden.
+Bei der letzten Stellung, die auch in der Abbildung dargestellt ist, wird getestet, ob die Software einen Fehler beim zweifach Schlagen erkennen würde.
+Weiß wird durch ``o'' und Schwarz durch ``x'' dargestellt. Das Ausrufezeichen steht für eine Figur, die im Zug davor geschlagen wurde. 
+Beim ersten Spielfeld hat Weiß von Reihe 4 Spalte 3 nach Reihe 2 Spalte 5 eine schwarze Figur geschlagen. Da im nächsten Zug die schwarze Figur auf 
+Reihe 3 Spalte 6 wegen Schlagzwang geschlagen werden muss, wird auch dieser Zug erwartet. Der Testfall prüft, ob der nächste Zug der 
+vom Test berechnet wird, der richtige weiße Zug ist. Wird stattdessen die bedrohte schwarze Figur gezogen und ein Fehler erkannt, zählt der Testfall als ``passed'', also bestanden.
 \\
-Die Zeile mit \texttt{nextPlayer} und \texttt{errorMessage} gibt die Nachricht an die, die Funktion zurückgegeben hat, mit dem Fehler welcher
-mittels \texttt{throw} geschmissen werden würde. \texttt{nextPlayer} steht für die Spieler ID welcher, von wem der Server den nächsten Zug erwartet.
+Die Zeile mit \texttt{nextPlayer} und \texttt{errorMessage} gibt die Nachricht an, die Funktion zurückgegeben hat, mit dem Fehler der
+mittels \texttt{throw} geschmissen werden würde. \texttt{nextPlayer} steht für die Spieler ID, von welcher der Server den nächsten Zug erwartet.
 In diesem Fall steht die ID 0 für Weiß und die ID 1 für Schwarz, wodurch der Server zwei Züge von Weiß, wegen des doppelt Schlagens, erwartet.
 
 \vspace{1em}
@@ -1463,22 +1514,19 @@ In diesem Fall steht die ID 0 für Weiß und die ID 1 für Schwarz, wodurch der 
 
 \subsubsection{Gameclient}
 Das Testen des Gameclients ist sehr wichtig, da kleinste Fehler zu einer enormen Verschlechterung der Performance des KI-Algorithmus führen.
-Um den Gameclient zu testen, verwendet man ähnlich wie beim Gameserver Szenarien, in denen es schwierig ist den besten Zug zu finden, oder 
-in sehr einfachen Situationen, bei dem der KI-Algorithmus nicht sehr lagen brauchen sollte, um den Perfekten Zug ausfindig zu machen.
-Da die KI-Logik als Node.js Add-on implementiert und dadurch in C++ geschrieben ist, kann man nicht einfach ein C++ Testframework benutzen, 
-denn es sind Codeschnipsel enthalten, welche für die Kompatibilität zu Node.js sorgen und nicht mit nativen C++ Compiler zum Laufen gebracht werden können.
-Dazu ist sind die Unit Tests, dieser Anwendung als eine Applikation implementiert, welche auf den reinen nativen Teile der Berechnung Zugreifen und 
-dies Modular testen. 
+Da die KI-Logik als Node.js Add-on implementiert und dadurch in C++ geschrieben ist, kann man nicht einfach ein C++ Testframework benutzen. 
+Es sind Funktionen enthalten, die für die Kompatibilität zu Node.js sorgen und nicht mit nativen C++ Compiler zum Laufen gebracht werden können.
+Dazu sind die Unit Tests dieser Anwendung als eine Applikation implementiert, welche auf den reinen nativen Teil der Berechnung zugreifen und 
+dies modular testen. 
 \\
-Das Testen der Module läuft ähnlich wie beim Gameserver ab, es wird entweder eine komplizierte Stellung oder eine sehr einfache Stellung 
-allen KI-Algorithmen übergeben, diese berechnen anhand ihrer Implementierung den Zug, den sie in dieser Stellung spielen würden und
-geben diesen zurück. Er wird daraufhin überprüft und verglichen mit dem zuvor definierten Zug welcher erwartet wird, oder welcher in 
-Komplexen Stellungen definitiv nicht gespielt werden soll. Beispielsweise in einer Komplexen Stellung sind sechs Züge möglich, davon sind drei sehr schlecht,
+Das Testen der Module läuft ähnlich wie beim Gameserver ab. Es wird entweder eine komplizierte Stellung oder eine sehr einfache Stellung 
+allen KI-Algorithmen übergeben. Diese berechnen anhand ihrer Implementierung den Zug, den sie in dieser Stellung spielen würden und
+geben diesen zurück. Er wird daraufhin überprüft und verglichen mit dem zuvor definierten Zug der erwartet wird, oder welcher in 
+komplexen Stellungen definitiv nicht gespielt werden soll. Beispielsweise in einer komplexen Stellung sind sechs Züge möglich. Davon sind drei sehr schlecht,
 ein Zug ist durchschnittlich gut und die beiden anderen etwas besser. Erwartet wird vom Algorithmus, dass er wenigstens keinen der drei schlechten Züge
-auswählt. In sehr einfachen Szenarien, muss der Algorithmus den einzigen guten Zug finden, der nicht zum Verlust der Partie führt. 
-Außerdem werden in der Testsoftware Parameter der Tiefe und Zeit verändert, dabei muss jeder Algorithmus auch bei geringem Zeitlimit, die sehr einfachen
-Stellungen richtig berechnen. Am Ende wird wie beim Testframework Mocha, eine Liste ausgeben mit allen Fällen die Korrekt berechnet wurden und 
-eine detaillierte Ausgabe, falls ein Testfall fehlgeschlagen ist. 
+auswählt. In sehr einfachen Szenarien muss der Algorithmus den einzigen guten Zug finden, der nicht zum Verlust der Partie führt. 
+Außerdem werden in der Testsoftware Parameter der Tiefe und Zeit verändert. Dabei muss jeder Algorithmus auch bei geringem Zeitlimit, die sehr einfachen
+Stellungen richtig berechnen. Am Ende wird wie beim Testframework Mocha eine Liste mit allen Fällen ausgegeben, die korrekt berechnet wurden.
 
 
 
@@ -1658,37 +1706,37 @@ in der Zukunft von vielen Benutzern bespielt werden.
 \section{Anforderungsanalyse}
 \label{apx:Anforderungsanalyse}
 In diesem Kapitel des Anhangs wird zuerst ein beispielhaftes Szenario gezeigt, bei welchem die Software eingesetzt werden soll.
-Anschließend werden anhand dieser Szenarios Anforderungen definiert, die von der Software erfüllt werden müssen.
+Anschließend werden anhand dieser Szenarien Anforderungen definiert, die von der Software erfüllt werden müssen.
 \subsection{Anwendungsszenario}
 Will ein Benutzer gegen den KI Client spielen, kann er über das Menü auf dem Touch Monitor den KI Algorithmus auswählen und diesen herausfordern.
 Dazu kann er, falls er mit seinem Smarthphone spielen will einen QR-Code auf dem Monitor aufrufen, diesen einscannen und dann das Spiel beginnen.
 Andernfalls kann der Benutzer auch direkt am Monitor das Spiel starten und auf diesen mittels Touch Züge ausführen.
 Die KI Algorithmen welche auf dem KI Client implementiert sind haben eine ELO Zahl hinterlegt, welche Auskunft über die Spielstärke gibt.
-Fühlt sich der Benutzer also über oder unterfordert, kann er den geeigneten Gegner auswählen. Gibt es mehrere Benutzer welche 
-gegen einander spielen wollen, haben diese die Möglichkeit entweder abwechselnd auf dem Monitor, oder beide mittels QR-Code über ihr Smartphone ein Spiel zu starten.
-Will ein Benutzer zwei KI's beim Spielen beobachten, so kann er diese am Monitor auswählen und diese gegeneinander Antreten lassen.
+Fühlt sich der Benutzer also über- oder unterfordert, kann er den geeigneten Gegner auswählen. Gibt es mehrere Benutzer, die 
+gegeneinander spielen wollen, haben diese die Möglichkeit entweder abwechselnd auf dem Monitor, oder beide mittels QR-Code über ihr Smartphone ein Spiel zu starten.
+Will ein Benutzer zwei KI's beim Spielen beobachten, so kann er diese am Monitor auswählen und diese gegeneinander antreten lassen.
 \subsection{Anforderungen an die Software}
 Aus dem oben beschriebenen Anwendungsszenario lassen sich konkrete Anforderungen ableiten, die für die Software von Relevanz sind.
 Hierbei wird zwischen funktionalen und nicht funktionalen Anforderungen unterschieden \cite{RequirementEngenieering}.
 \subsubsection{Funktionale Anforderungen}
 \begin{itemize}
-    \item \textbf{/F10/} \textit{Menü zum Auswählen des Spieles:} Die Grafische Oberfläche soll dem Benutzer die Möglichkeit geben, das ein Spiel auszuwählen.
-        Dazu soll es ein Menü geben welches die möglichen Spiele, wie z.B. Reversi oder Dame zur Auswahl stellt.
-    \item \textbf{/F11/} \textit{Auswählbares Menü für verschiedene KI Algorithmen:} Die Applikation muss ein leicht bedienbares Grafisches Interface bieten,
-        bei welchem verschiedene künstliche Intelligenz Algorithmen ausgewählt und herausgefordert und werden können.
-    \item \textbf{/F12/} \textit{QR-Code fürs verbinden mit dem Smartphone:} Um einen unkomplizierten Verbindungsaufbau vom Raspberry mit dem Smarthphone zu 
+    \item \textbf{/F10/} \textit{Menü zum Auswählen des Spieles:} Die graphische Oberfläche soll dem Benutzer die Möglichkeit geben, das ein Spiel auszuwählen.
+        Dazu soll es ein Menü geben, das die möglichen Spiele, wie z.B. Reversi oder Dame, zur Auswahl stellt.
+    \item \textbf{/F11/} \textit{Auswählbares Menü für verschiedene KI Algorithmen:} Die Applikation muss ein leicht bedienbares graphisches Interface bieten,
+        bei welchem verschiedene künstliche Intelligenz Algorithmen ausgewählt und herausgefordert werden können.
+    \item \textbf{/F12/} \textit{QR-Code fürs Verbinden mit dem Smartphone:} Um einen unkomplizierten Verbindungsaufbau vom Raspberry mit dem Smarthphone zu 
         gewährleisten, soll es eine Menü-Option geben, bei der ein QR-Code angezeigt wird. Nach dem Scannen des QR-Codes soll eine Verbindung
-        aufgebaut werden, welche bis zum Beenden bestehen bleibt.
-    \item \textbf{/F13/} \textit{Varaible Zeiteinstellung im Menü:} Dem Benutzer soll es möglich sein über das Menü eine Zeit einstellen zu können, 
-        welche jeder Spieler im Spiel zur Verfügung für seine Züge hat. Als Spieler können entweder Benutzer oder KI Clients agieren.
+        aufgebaut werden, die bis zum Beenden bestehen bleibt.
+    \item \textbf{/F13/} \textit{Varaible Zeiteinstellung im Menü:} Dem Benutzer soll es möglich sein, über das Menü eine Zeit einstellen zu können, 
+        welche jeder Spieler im Spiel für seine Züge zur Verfügung hat. Als Spieler können entweder Benutzer oder KI Clients agieren.
     \item \textbf{/F20/} \textit{Benutzer soll Züge ausführen können:} Der Benutzer soll in der Lage sein, Züge gegen die KI spielen zu können. Dazu soll er entweder
         direkt über den Touch-Monitor oder über das Smartphone eine Eingabemöglichkeit haben. Diese soll den Momentanzustand des Spielbrettes zeigen,
         wodurch der Benutzer eine Entscheidung für seinen nächsten Zug treffen und diese über eine Touch-Berührung ausführen kann.
     \item \textbf{/F21/} \textit{Benutzer sollen gegen andere Benutzer spielen können:} Für mehrere Benutzer soll es möglich sein, gegeneinander spielen zu können. Dazu sollen sie 
         entweder den Touch-Monitor verwenden, indem sie abwechselnd Züge ausführen, oder beide jeweils ein Smarthphone.
     \item \textbf{/F22/} \textit{Der Benutzer kann KI's gegeneinander spielen lassen:} Der Benutzer soll in der Lage sein zwei KI-Algorithemen auszuwählen
-        und diese gegeneinander spielen zu lassen. Damit man dieses Spiel sehe kann, sollen alle Züge die 
-        von beiden getätigt werden auf dem Spielbrett des Touch-Monitors angezeigt werden.
+        und diese gegeneinander spielen zu lassen. Damit man dieses Spiel sehe kann, sollen alle Züge, die 
+        von Beiden getätigt werden, auf dem Spielbrett des Touch-Monitors angezeigt werden.
     \item \textbf{/F30/} \textit{Eine ELO Zahl soll die Spielstärke der Algorithmen angeben:} Damit der Benutzer eine für sich angemessene Herausforderung findet,
         sollen schwächere und stärkere KI-Algorithmen in der GUI gekennzeichnet werden. Um eine genaue Kennzahl für die Stärke zu erhalten, werden die ELO Zahlen durch
         Simulationen berechnet. Diese Simulationen sind Spiele der Algorithmen untereinander.
@@ -1696,20 +1744,19 @@ Hierbei wird zwischen funktionalen und nicht funktionalen Anforderungen untersch
 \end{itemize}
 \subsubsection{Nichtfunktionale Anforderungen}
 \begin{itemize}
-    \item \textbf{/Q10/} \textit{Robustheit der Smarthphone Verbindung:} Nach der Verbindung mit dem Smarthphone (mittels QR-Code /F12/) muss sichergestellt sein, dass die Verbindung nicht ohne
-        Grund abbricht, sondern erst, wenn z.B. die Distanz zwischen Smartphone und Pi zu groß ist. Des weitern soll nach einem Verbindungsabbruch, 
+    \item \textbf{/Q10/} \textit{Robustheit der Smarthphone Verbindung:} Nach der Verbindung mit dem Smarthphone (mittels QR-Code /F12/), muss sichergestellt sein, dass die Verbindung nicht ohne
+        Grund abbricht, sondern erst, wenn z.B. die Distanz zwischen Smartphone und Pi zu groß ist. Nach einem Verbindungsabbruch soll, 
         das Spiel nicht abgebrochen werden, sondern es soll eine Möglichkeit zum Wiederverbinden bestehen.
-    \item \textbf{/Q20/} \textit{ELO Zahlen sollen Stärke wiederspiegeln:} Die durch die Simulationen errechnete ELO Zahl von /F30/ soll auch in etwa dem Stärkegrad der Algorithmen entsprechen.
-        Hat ein Algorithmus die sehr viel mehr ELO muss er auch dementsprechend stärker sein.
-    \item \textbf{/Q30/} \textit{Zeiteinstellung soll von der KI Berücksichtigt werden:} Die Zeiteinstellung von /F13/ soll vom KI Client als Berechnungsdauer genutzt werden.
+    \item \textbf{/Q20/} \textit{ELO Zahlen sollen Stärke widerspiegeln:} Die durch die Simulationen errechnete ELO Zahl von /F30/ soll auch in etwa dem Stärkegrad der Algorithmen entsprechen.
+        Hat ein Algorithmus sehr viel mehr ELO, muss er auch dementsprechend stärker sein.
+    \item \textbf{/Q30/} \textit{Zeiteinstellung soll von der KI berücksichtigt werden:} Die Zeiteinstellung von /F13/ soll vom KI Client als Berechnungsdauer genutzt werden.
         Dieser soll dabei seine Rechenzeit so gut wie möglich an die Zeiteinstellung anpassen.
     \item \textbf{/Q40/} \textit{Reaktionszeit des Touch-Interfaces:} Das Berühren des Touch-Monitors soll zur sofortigen Ausführung des Befehls der Software führen.
-    \item \textbf{/Q50/} \textit{Mobile Responsiveness:} Das Spielfeld soll auf egal welchem verbundenen Smarthphone gleich skaliert aussehen. 
+    \item \textbf{/Q50/} \textit{Mobile Responsiveness:} Das Spielfeld soll immer gleich skaliert aussehen, egal welches Smartphone verwendet wird. 
         Das Verwenden von Tablets, oder das Drehen des Gerätes soll keinen Einfluss auf die Darstellung des Spielbrettes haben.
 \end{itemize}
 \subsubsection{Zusammenfassung der Anforderungen}
-Die Identifizierten Funktionalen und Nichtfunktionalen Anforderungen werden in der Tabelle \ref{tab:Anforderungen} zusammengefasst. 
-Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Referenziert werden.
+Die identifizierten funktionalen und nichtfunktionalen Anforderungen werden in der Tabelle \ref{tab:Anforderungen} zusammengefasst. 
 \vspace{1em}
 \begin{table}[!h]
 	\centering
@@ -1721,7 +1768,7 @@ Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Refer
 		\hline
 		/F11/ & Auswählbares Menü für verschiedene KI Algorithmen \\
 		\hline
-        /F12/ & QR-Code fürs verbinden mit dem Smartphone \\
+        /F12/ & QR-Code fürs Verbinden mit dem Smartphone \\
 		\hline
 		/F13/ & Varaible Zeiteinstellung im Menü \\
         \hline
@@ -1738,9 +1785,9 @@ Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Refer
 		\hline
 		/Q10/ & Robustheit der Smarthphone Verbindung \\
         \hline
-		/Q20/ & ELO Zahlen sollen Stärke wiederspiegeln \\
+		/Q20/ & ELO Zahlen sollen Stärke widerspiegeln \\
         \hline
-		/Q30/ & Zeiteinstellung soll von der KI Berücksichtigt werden \\
+		/Q30/ & Zeiteinstellung soll von der KI berücksichtigt werden \\
         \hline
 		/Q40/ & Reaktionszeit des Touch-Interfaces \\
         \hline
@@ -1753,7 +1800,7 @@ Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Refer
 
 \pagebreak
 
-\section{UML Klassendiagramm vom Gesamten Projekt}
+\section{UML Klassendiagramm vom gesamten Projekt}
 \label{apx:AllClassDiagrams}
 \vspace{1em}
 \begin{minipage}{\linewidth}
@@ -1761,20 +1808,30 @@ Die Kürzel sind für die folgenden Kapietel von Relevanz da sie in diesen Refer
 	\includegraphics[width=1.0\linewidth]{pics/AllClassDiagrams.png}
 	\captionof{figure}{ UML Klassendigramm aller Komponenten des Projekts }
 \end{minipage}
+
 \pagebreak
+
+Das Diagramm in Abbildung \ref{apx:AllClassDiagrams} zeigt ein UML Klassendiagramm mit, welches alle Komponenten des Projektes zeigt.
+Die einzelnen Diagramme, in die es zerlegt werden kann, sind: Dem Gameserver in Abbildung \ref{fig:GameServerClassDiagram} auf Seite \pageref{fig:GameServerClassDiagram},
+dem Gameclient in Abbildung \ref{fig:KIClientClassDiagram} auf Seite \pageref{fig:KIClientClassDiagram} und der Webapp in Abbildung \ref{fig:ReversiXTGUIClassDiagram}
+auf Seite \pageref{fig:ReversiXTGUIClassDiagram}. Als Verbindung zwischen den Komponenten ist die Netzwerkkommunikation als Assoziationen gezeigt. 
 
 \section{Sequenzdiagramme über die Kommunikation der Komponenten}
 \label{apx:KommunikationDerKomp}
-Die beiden Folgenden Abbildungen \ref{fig:UserVsAI} und \ref{fig:AiVsAi} zeigen die beiden anderen Fälle in 
-denen entweder zwei Benutzer oder zwei KIs gegeneinander spielen.
+Die beiden folgenden Abbildungen \ref{fig:UserVsUser} und \ref{fig:AiVsAi} zeigen die beiden anderen Fälle, in 
+denen entweder zwei Benutzer oder zwei KIs gegeneinander spielen. Dabei ist Benutzer gegen Benutzer eine einfachere Lösung zu den beiden anderen Varianten, die 
+in der Kommunikation möglich sind. Der Gameclient wird nicht benötigt, stattdessen findet die Kommunikation nur zwischen der GUI und dem Gameserver statt.
 
 \vspace{1em}
 \begin{minipage}{\linewidth}
 	\centering
 	\includegraphics[width=1.0\linewidth]{pics/SequenceDiagramBenutzervsBenutzer.png}
-    \captionof{figure}{ UML Sequenzdiagramm von Benuzter gegen Benutzer }
-    \label{fig:UserVsAI}
+    \captionof{figure}{ UML Sequenzdiagramm von Benutzer gegen Benutzer }
+    \label{fig:UserVsUser}
 \end{minipage}
+
+Die Kommunikation von zwei KIs gegeneinander ist die komplexeste Variante, dazu werden zwei Gameclients gestartet, welche mit dem Gameserver 
+Kommunizieren. Die GUI hört den Gameserver ab, ob Züge gespielt, um so ihre Darstellung durch diese zu aktualisieren.
 
 \vspace{1em}
 \begin{minipage}{\linewidth}
@@ -1784,65 +1841,61 @@ denen entweder zwei Benutzer oder zwei KIs gegeneinander spielen.
     \label{fig:AiVsAi}
 \end{minipage}
 
-
-
-
 \pagebreak
 
 \section{Nachrichten Protokoll des Gameservers}
 \label{apx:Protokoll}
 Das Nachriten Protokoll des Gameservers besteht aus folgenden Nachrichtentypen:
 \begin{itemize}
-    \item 0: Fehler, entält die Fehlermeldung als String
-    \item 1: Besteht aus der Zeit die ein Client zur Verfügung hat (32-Bit Integer) und der Gruppennummer des Clients (Vorzeichenloser 8-Bit Integer)
-    \item 2: Spielfeld, zuerst die Art des Spieles als vorzeichenloser 8-Bit Integer (z.B 0 für Dame), dann ein vorzeichenloser 8-Bit Integer für die Anzahl an Spieler die 
-    beim Spiel Teilnehmen können, als nächstes zwei vorzeichenlose 8-Bit Integer für die Höhe und Breite des Spielfeldes 
+    \item 0: Fehler. Entält die Fehlermeldung als String.
+    \item 1: Besteht aus der Zeit, die ein Client zur Verfügung hat (32-Bit Integer) und der Gruppennummer des Clients (Vorzeichenloser 8-Bit Integer).
+    \item 2: Spielfeld. Zuerst die Art des Spieles als vorzeichenloser 8-Bit Integer (z.B 0 für Dame), dann ein vorzeichenloser 8-Bit Integer für die Anzahl der Spieler, die 
+    beim Spiel teilnehmen können. Als nächstes zwei vorzeichenlose 8-Bit Integer für die Höhe und Breite des Spielfeldes 
     (Achtung manche Spiele, wie Dame können nur von 2 Spielern gespielt werden!).
-    Danach folgen alle Felder des Spielfeldes nach Spezifikation (nicht \textbackslash0 terminiert!)
-    \item 3: Spieler Nummer als vorzeichenloser 8-Bit Integer die dem Spieler zugewiesen wird
-    \item 4: Zug Anforderung, bestehend aus einem 32-Bit Integer als Zeitlimit gefolgt von einem vorzeichenlosen 8-Bit Integer für die maximale Suchtiefe
-    \item 5: Zug Antwort, besteht aus 4 vorzeichenlosen 16-Bit Integern, welche die Ursprungsspalte und die Ursprungsreihe, sowie die Ziehlspalte und Ziehlreihe sind.
-    gefolgt von einem vorzeichenlosen 8-Bit Integer für die Angabe der Spielfigurenart (z.B normale Figur oder Dame).
-    \item 6: normaler Zug der Vom Server validiert worden ist und an alle Teilnehmer geschickt wird. Enthält den selben Inhalt wie die Zug Antwort (5), jedoch 
+    Danach folgen alle Felder des Spielfeldes nach Spezifikation (nicht \textbackslash0 terminiert!).
+    \item 3: Spieler-Nummer als vorzeichenloser 8-Bit Integer, die dem Spieler zugewiesen wird.
+    \item 4: Zug-Anforderung, bestehend aus einem 32-Bit Integer als Zeitlimit, gefolgt von einem vorzeichenlosen 8-Bit Integer für die maximale Suchtiefe.
+    \item 5: Zug-Antwort, besteht aus 4 vorzeichenlosen 16-Bit Integern, welche die Ursprungsspalte und die Ursprungsreihe sowie die Zielspalte und Zielreihe sind.
+    Gefolgt von einem vorzeichenlosen 8-Bit Integer für die Angabe der Spielfigurenart (z.B normale Figur oder Dame).
+    \item 6: Normaler Zug, der vom Server validiert worden ist und an alle Teilnehmer geschickt wird. Enthält denselben Inhalt wie die Zugantwort (5), jedoch 
     gefolgt von einem vorzeichenlosen 8-Bit Integer, welcher die Spieler ID beschreibt.
-    \item 7: Disqualifikation, ein vorzeichenloser 8-Bit Integer mit der Spieler ID welcher disqualifiziert wird.
-    \item 8: Letzte Phase, nachdem der Endzustand der ersten Phase erreicht wird (in Dame nicht verwerwendet, aber falls Mühle später relevant wird, z. B. um vom setzen 
-    der Steine zum Springen zu gelangen)
-    \item 9: Spielende, enthält einen vorzeichenlosen 8-Bit Integer mit der Spieler ID des Spielers welcher gewonnen hat.
+    \item 7: Disqualifikation. Ein vorzeichenloser 8-Bit Integer mit der Spieler ID, welcher disqualifiziert wird.
+    \item 8: Letzte Phase, nachdem der Endzustand der ersten Phase erreicht wird (wird in Dame nicht verwendet, aber falls Mühle später relevant wird, z. B. um vom Setzen 
+    der Steine zum Springen zu gelangen).
+    \item 9: Spielende. Enthält einen vorzeichenlosen 8-Bit Integer mit der Spieler ID des Spielers, der gewonnen hat.
 \end{itemize}
 
 \section{Übergabeparameter von Gameserver und Gameclient}
 \label{apx:Parameters}
 Da der Gameserver und der Gameclient vom Backend der Webapp gestartet werden, braucht das Backend eine Möglichkeit Parameter zu übergeben, 
-um die Auswahl des Spieles, oder des Ports zu beeinflussen. Deswegen haben diese Anwendungen Übergabeparameter welche beim Start der
+um die Auswahl des Spieles oder des Ports zu beeinflussen. Deswegen haben diese Anwendungen Übergabeparameter, die beim Start der
 Anwendung angegeben werden können. 
 \\
 Übergabeparameter des Gameservers:
 \\
 \begin{itemize}
-    \item -m: Die Karte, mit Pfad zum Ordner.
+    \item -m: Die Karte mit Pfad zum Ordner.
     \item -p: Der Port auf dem die Anwendung laufen wird.
 \end{itemize}
 Beispiel zum starten:\\
 \texttt{node dist/src/main.js -m ../checkers\_8x8.map -p 9000}\\
 Zu beachten ist, dass nicht die Typescript Datei main.ts benutzt wird, sondern die kompilierte Javascript Datei main.js.
-Das Kommando startet einen Gameserver auf Port 9000 mit der einem 8x8 Damespielfeld.
-\\
+Das Kommando startet einen Gameserver auf Port 9000 mit einem 8x8 Damespielfeld.
 \\
 Übergabeparameter des Gameclients:
-\\
 \begin{itemize}
     \item -p: Der Port auf dem der Gameserver läuft, zum Verbinden auf diesen.
-    \item -t: Das Zeitlimit pro Zug, falls 0 angegeben, Tiefe wird benutzt. Gilt nur der Gameserver keine Vorschriften mit seinen Zuganfragen macht.
-    \item -c: Suchtiefe, wie Tief ein Algorihtmus suchen darf, falls mittels Zeit, Tiefe = 0.
-    \item -a: KI-Algorithmus welcher ausgewählt wird.
+    \item -t: Das Zeitlimit pro Zug, falls 0 angegeben wird nur die Tiefe benutzt. Gilt nur, falls der Gameserver
+    keine Zeit mit den MoveRequests mitschickt.
+    \item -c: Suchtiefe, bis zu welcher Tiefe ein Algorithmus suchen darf, falls jedoch Zeit verwendet werden soll dann Tiefe gleich null setzen.
+    \item -a: KI-Algorithmus, welcher ausgewählt wird.
 \end{itemize}
 Beispiel zum Starten:\\
 \texttt{node dist/src/main.js -p 9000 -t 0 -c 5 -a 0} \\
-Hier gilt das gleich wie oben beim Gameserver, bezüglich main.js. 
-Dieses Komando startet den Gameclient und verbindet ihn mit dem Gameserver welcher auf Port 9000 läuft. Das Zeitlimit ist auf 0, was dazu führt, dass es nicht beachtet wird
+Hier gilt das gleiche wie oben beim Gameserver, bezüglich main.js. 
+Dieses Komando startet den Gameclient und verbindet ihn mit dem Gameserver, der auf Port 9000 läuft. Das Zeitlimit ist auf 0, was dazu führt, dass es nicht beachtet wird
 und stattdessen die Tiefe 5 benutzt wird. Der angegebene Algorithmus mit der Zahl 0 versehen, was MCTS entspricht.
-Jeder Algorihtmus bekommt einen Integerwert zugewiesen, diese sind in der Datei algoriths-consts.js gespeichert: \\
+Jeder Algorihtmus bekommt einen Integerwert zugewiesen, die in der Datei algoriths-consts.js wie folgt gespeichert werden: \\
 \begin{itemize}
     \item MCTS = 0
     \item minimax = 1
@@ -1868,6 +1921,7 @@ für verschiedene Spiele verwendet werden, befinden sich im \texttt{maps}.
 \end{minipage}
 
 \section{Erste Installation}
+\label{apx:Installation}
 Um die Applikation zu installieren, muss sie erst aus ihrem Git Repository geklont und dann mit ihren Submodulen initialisiert werden.
 Erstes mal Klonen: \\ 
 \texttt{git clone https://<User>@bitbucket.org/kernoth/reversi-touchscreen.git} \\
@@ -1891,6 +1945,7 @@ Danach die \texttt{nginx.conf} Datei welche sich im Nginx Installations Ordner b
 Es ist zu beachten das der Nginx laufen muss damit er funktioniert.
 
 \section{Starten der Anwendung}
+\label{apx:appStarten}
 Das Starten der Anwendung wird von NPM-Scripten übernommen, diese kann man in den \texttt{package.json} Dateien der Software komponenten finden.
 Der Gameserver und der Gameclient haben diese Datei auch, um so alleinstehend gestartet werden zu können. 
 Abbildung \ref{fig:npmScripts} findet man alle Script Kommandos, über welche man die Software bauen, bzw. starten kann.
