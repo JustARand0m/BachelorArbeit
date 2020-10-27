@@ -1,43 +1,43 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {ngerman}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces DameSpielfeld}}{3}{figure.1}% 
+\contentsline {figure}{\numberline {1}{\ignorespaces Das 10x10 Spielfeld aus der Anwendung \relax }}{4}{figure.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2}{\ignorespaces Das Hauptmen\IeC {\"u} der Anwendung\relax }}{3}{figure.2}% 
+\contentsline {figure}{\numberline {2}{\ignorespaces Das Hauptmen\IeC {\"u} der Anwendung\relax }}{5}{figure.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3}{\ignorespaces Das Auswahlmen\IeC {\"u} eines Reversi Spieles\relax }}{4}{figure.3}% 
+\contentsline {figure}{\numberline {3}{\ignorespaces Das Auswahlmen\IeC {\"u} eines Reversi Spieles\relax }}{5}{figure.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4}{\ignorespaces Ein gestartetes Reversi Spiele \relax }}{4}{figure.4}% 
+\contentsline {figure}{\numberline {4}{\ignorespaces Ein gestartetes Reversi Spiele \relax }}{6}{figure.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5}{\ignorespaces Minimax Baum, links Darstellung der in den Konten gespeicherten Spielfelder, rechts bewertete Knoten\relax }}{6}{figure.caption.1}% 
+\contentsline {figure}{\numberline {5}{\ignorespaces Minimax Baum, links Darstellung der in den Konten gespeicherten Spielfelder, rechts bewertete Knoten\relax }}{7}{figure.caption.5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6}{\ignorespaces Ablauf des Iterativen Deepenings\relax }}{7}{figure.caption.2}% 
+\contentsline {figure}{\numberline {6}{\ignorespaces Ablauf des Iterative Deepening\relax }}{8}{figure.caption.6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {7}{\ignorespaces Gewinn durch Alpha-Beta Pruning\relax }}{8}{figure.caption.3}% 
+\contentsline {figure}{\numberline {7}{\ignorespaces Gewinn durch Alpha-Beta-Pruning\relax }}{9}{figure.caption.7}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {8}{\ignorespaces Beispiel einer Zugsortierung\relax }}{9}{figure.caption.4}% 
+\contentsline {figure}{\numberline {8}{\ignorespaces Beispiel einer Zugsortierung\relax }}{10}{figure.caption.8}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9}{\ignorespaces Minimax-Baum mit Bewertung der Stellungen\relax }}{10}{figure.caption.5}% 
+\contentsline {figure}{\numberline {9}{\ignorespaces Der \ac {MCTS} Baum nach 33 Simulationen\relax }}{11}{figure.caption.10}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {10}{\ignorespaces Die Anwendung als Verteilungsdiagramm\relax }}{12}{figure.10}% 
+\contentsline {figure}{\numberline {10}{\ignorespaces Die Anwendung als Verteilungsdiagramm\relax }}{13}{figure.10}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {11}{\ignorespaces ClassDiagram}}{13}{figure.11}% 
+\contentsline {figure}{\numberline {11}{\ignorespaces Das UML Klassendiagramm des Gameservers \relax }}{14}{figure.11}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {12}{\ignorespaces Das Sequenzdiagramm zum Ablauf der Serververbindung \relax }}{15}{figure.12}% 
+\contentsline {figure}{\numberline {12}{\ignorespaces Das Sequenzdiagramm zum Ablauf der Serververbindung \relax }}{16}{figure.12}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {13}{\ignorespaces ReversiXTGUI}}{17}{figure.13}% 
+\contentsline {figure}{\numberline {13}{\ignorespaces Das UML Klassendiagramm der \ac {ReversiXT} \ac {GUI} \relax }}{17}{figure.13}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {14}{\ignorespaces KIClient}}{21}{figure.14}% 
+\contentsline {figure}{\numberline {14}{\ignorespaces Das UML Klassendiagramm des \ac {KI} Clients \relax }}{21}{figure.14}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {15}{\ignorespaces Das Paket Checkers welches die Spiellogik beeinhaltet \relax }}{23}{figure.15}% 
+\contentsline {figure}{\numberline {15}{\ignorespaces Das Paket Checkers, welches die Spiellogik beeinhaltet \relax }}{23}{figure.15}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {16}{\ignorespaces Auswahlmen\IeC {\"u}}}{24}{figure.16}% 
+\contentsline {figure}{\numberline {16}{\ignorespaces Die gesamte Anwendung im UML Komponentendiagram\relax }}{24}{figure.16}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {17}{\ignorespaces SequenceDiagram}}{26}{figure.17}% 
+\contentsline {figure}{\numberline {17}{\ignorespaces Das UML Sequenzdiagramm der Kommunikation von KI gegen Benutzer\relax }}{26}{figure.17}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {18}{\ignorespaces Das Auswahlmen\IeC {\"u} f\IeC {\"u}r die verschiedenen Spiele \relax }}{32}{figure.18}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {19}{\ignorespaces Auswahlmen\IeC {\"u}}}{32}{figure.19}% 
+\contentsline {figure}{\numberline {19}{\ignorespaces Das Auswahlmen\IeC {\"u} f\IeC {\"u}r ein Damespiel \relax }}{32}{figure.19}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {20}{\ignorespaces Die Seite zur Darstellung des Spielfeldes \relax }}{33}{figure.20}% 
 \defcounter {refsection}{0}\relax 
@@ -47,12 +47,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {23}{\ignorespaces Beispiel aus den Unit Tests des Gameservers \relax }}{45}{figure.23}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {24}{\ignorespaces UML Klassendigramm aller Komponenten des Projekts \relax }}{IV}{figure.24}% 
+\contentsline {figure}{\numberline {24}{\ignorespaces UML Klassendiagramm aller Komponenten des Projektes \relax }}{IV}{figure.24}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {25}{\ignorespaces UML Sequenzdiagramm von Benutzer gegen Benutzer \relax }}{VI}{figure.25}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {26}{\ignorespaces UML Sequenzdiagramm von KI gegen KI \relax }}{VII}{figure.26}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {27}{\ignorespaces Ordnerstruktur des Projektes \relax }}{X}{figure.27}% 
+\contentsline {figure}{\numberline {27}{\ignorespaces Ordnerstruktur des Projektes \relax }}{XI}{figure.27}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {28}{\ignorespaces Die NPM Scripte zum Starten der Applikation \relax }}{XII}{figure.28}% 
+\contentsline {figure}{\numberline {28}{\ignorespaces Die NPM Skripte zum Starten der Applikation \relax }}{XIII}{figure.28}% 
