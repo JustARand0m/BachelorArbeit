@@ -778,7 +778,8 @@ wird die Struktur des Frontendes übernommen und durch weitere Menüs sowie dem 
 und wird aus Sicht der Architektur nicht weiter beschrieben. 
 \\
 Die erste Veränderung ist das Einbauen eines neuen Menüs, über welches das Spiel ausgewählt werden kann. In Abbildung \ref{fig:ReversiXTGUIClassDiagram} 
-handelt es sich hierbei um die Klasse \texttt{GameSelectionScreen}. Vorher wurde über den Menübutton ``Spielen'' direkt das Auswahlmenü \texttt{GameSelectionReversiScreen}
+handelt es sich hierbei um die Klasse \texttt{GameSelectionScreen}. Vorher wurde über den Menübutton ``Spielen'' direkt das Auswahlmenü \\ 
+\texttt{GameSelectionReversiScreen}
 (siehe Abbildung \ref{fig:ReversiMenu} und \ref{fig:ReversiGameSelection} auf Seite \pageref{fig:ReversiMenu}) zum Konfigurieren eines Reversi Spieles erreicht. 
 Nun soll der \texttt{GameSelectionScreen} davor geschaltet sein. Dieses weitere Menü beinhaltet nun Möglichkeiten der Navigation zu allen weiteren Spielen.
 Würde man das Projekt um ein weiteres Spiel erweitern wollen, so müsste man lediglich eine weitere Option zum \texttt{GameSelectionScreen} hinzufügen 
@@ -1437,7 +1438,6 @@ geschrieben. Diese Datei zeigt die Details in den Spielen gegeneinander an, die 
 Da es eventuell von Vorteil sein kann, diese Sessions unabhängig zu bewerten und das Zusammenfügen mehrerer .csv Dateien sehr einfach ist, 
 wird dabei jedes Mal eine eigene Datei angelegt. Ein Problem, welches hier auftreten kann, ist, dass sich Dateien eventuell überschreiben würden, weswegen 
 jede Datei den Namen ``statistics'', gefolgt von einem Universally Unique Identifier (UUID), bekommt.
-\\
 Damit der Benutzer auch weiß, wie stark die Algorithmen in Verhältnis zueinander sind, wird das berechnete Ergebnis der Simulationen im Auswahlmenü der 
 Algorithmen als Elo-Zahl mit angegeben, um somit dem Benutzer eine akkurate Repräsentation der Stärke anzuzeigen.
 
@@ -1519,7 +1519,6 @@ Weiß wird durch ``o'' und Schwarz durch ``x'' dargestellt. Das Ausrufezeichen s
 Beim ersten Spielfeld hat Weiß von Reihe 4 Spalte 3 nach Reihe 2 Spalte 5 eine schwarze Figur geschlagen. Da im nächsten Zug die schwarze Figur auf 
 Reihe 3 Spalte 6 wegen Schlagzwang geschlagen werden muss, wird auch dieser Zug erwartet. Der Testfall prüft, ob der nächste Zug, der 
 vom Test berechnet wird, der richtige weiße Zug ist. Wird stattdessen die bedrohte schwarze Figur gezogen und ein Fehler erkannt, zählt der Testfall als ``passed'', also bestanden.
-\\
 Die Zeile mit \texttt{nextPlayer} und \texttt{errorMessage} gibt die Nachricht an, welche die Funktion zurückgegeben hat, mit dem Fehler der
 mittels \texttt{throw} geschworfen werden würde. \texttt{nextPlayer} steht für die Spieler ID, von welcher der Server den nächsten Zug erwartet.
 In diesem Fall steht die ID 0 für Weiß und die ID 1 für Schwarz, wodurch der Server zwei Züge von Weiß, wegen des doppelt Schlagens, erwartet.
@@ -1538,7 +1537,6 @@ Da die \ac{KI}-Logik als Node.js Add-on implementiert und dadurch in C++ geschri
 Es sind Funktionen enthalten, die für die Kompatibilität zu Node.js sorgen und nicht mit nativem C++ Compiler zum Laufen gebracht werden können.
 Dazu sind die Unit Tests dieser Anwendung als eine Applikation implementiert, welche auf den reinen nativen Teil der Berechnung zugreifen und 
 dies modular testen. 
-\\
 Das Testen der Module läuft ähnlich wie beim Gameserver ab. Es wird entweder allen \ac{KI}-Algorithmen eine komplizierte oder eine sehr einfache Stellung 
 übergeben. Diese berechnen anhand ihrer Implementierung den Zug, den sie in dieser Stellung spielen würden und
 geben diesen zurück. Er wird daraufhin überprüft und mit dem zuvor definierten Zug verglichen, der erwartet wird, oder welcher in 
@@ -1725,6 +1723,7 @@ Die identifizierten funktionalen und nichtfunktionalen Anforderungen werden in d
 	\includegraphics[width=1.0\linewidth]{pics/AllClassDiagrams.png}
 	\captionof{figure}{ \ac{UML} Klassendiagramm aller Komponenten des Projektes }
 \end{minipage}
+\\
 
 Das Diagramm in Abbildung \ref{apx:AllClassDiagrams} zeigt ein \ac{UML} Klassendiagramm, welches alle Komponenten des Projektes zeigt.
 Die einzelnen Diagramme, in die es zerlegt werden kann, sind: Der Gameserver in Abbildung \ref{fig:GameServerClassDiagram} auf Seite \pageref{fig:GameServerClassDiagram},
