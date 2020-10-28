@@ -52,6 +52,9 @@
     \verb{url}
     \verb http://www.usacheckers.com/show_game_start.php
     \endverb
+    \field{urlday}{17}
+    \field{urlmonth}{08}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{C++Node}{online}{}
@@ -65,6 +68,9 @@
     \verb{url}
     \verb https://nodejs.org/api/addons.html
     \endverb
+    \field{urlday}{25}
+    \field{urlmonth}{10}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{DraughtsHistory}{online}{}
@@ -79,6 +85,9 @@
     \verb http://www.mindsports.nl/index.php/arena/draughts/478-the-history-of-
     \verb draughts
     \endverb
+    \field{urlday}{15}
+    \field{urlmonth}{08}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{EloFormulas}{online}{}
@@ -92,6 +101,33 @@
     \verb{url}
     \verb http://www.chessmetrics.com/cm/CM2/Formulas.asp
     \endverb
+    \field{urlday}{15}
+    \field{urlmonth}{08}
+    \field{urlyear}{2020}
+  \endentry
+
+  \entry{DeepLearingGo}{book}{}
+    \name{author}{1}{}{%
+      {{hash=FMPK}{%
+         family={Ferguson},
+         familyi={F\bibinitperiod},
+         given={Max Pumperla{,}\bibnamedelima Kevin},
+         giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim
+  K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Manning}%
+    }
+    \strng{namehash}{FMPK1}
+    \strng{fullhash}{FMPK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Fer19}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{title}{Deep Learning and the Game of Go}
+    \field{year}{2019}
   \endentry
 
   \entry{SpieleDerWelt}{book}{}
@@ -117,29 +153,6 @@
     \field{year}{1985}
   \endentry
 
-  \entry{MiniaxMCTScomparison}{report}{}
-    \name{author}{1}{}{%
-      {{hash=HBMW}{%
-         family={Hendrik\bibnamedelima Baier},
-         familyi={H\bibinitperiod\bibinitdelim B\bibinitperiod},
-         given={Mark\bibnamedelima Winands},
-         giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{HBMW1}
-    \strng{fullhash}{HBMW1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{HB}
-    \field{sortinit}{H}
-    \field{sortinithash}{H}
-    \field{title}{Monte-Carlo Tree Search and Minimax Hybrids}
-    \list{institution}{1}{%
-      {Maastricht University}%
-    }
-    \field{type}{techreport}
-  \endentry
-
   \entry{InternationalCheckersRules}{online}{}
     \keyw{online}
     \field{labeltitlesource}{title}
@@ -151,6 +164,9 @@
     \verb{url}
     \verb http://www.fmjd.org/?p=v-100
     \endverb
+    \field{urlday}{01}
+    \field{urlmonth}{09}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{IterativeDeepening}{report}{}
@@ -178,6 +194,31 @@
     \field{year}{1985}
   \endentry
 
+  \entry{MinimaxComparison}{report}{}
+    \name{author}{1}{}{%
+      {{hash=MMSCTA}{%
+         family={Marsland},
+         familyi={M\bibinitperiod},
+         given={M.\bibnamedelima S. Campbell{,} T.\bibnamedelima A.},
+         giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim
+  C\bibinitperiod\bibinitdelim T\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MMSCTA1}
+    \strng{fullhash}{MMSCTA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Mar82}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{A Comparison of Minimax Tree Search Algorithms}
+    \list{institution}{1}{%
+      {University of Alberta}%
+    }
+    \field{type}{techreport}
+    \field{year}{1982}
+  \endentry
+
   \entry{UnitTestBook}{book}{}
     \name{author}{1}{}{%
       {{hash=MG}{%
@@ -201,55 +242,6 @@
     \field{year}{2009}
   \endentry
 
-  \entry{DeepLearingGo}{book}{}
-    \name{author}{1}{}{%
-      {{hash=MPKF}{%
-         family={Max\bibnamedelima Pumperla},
-         familyi={M\bibinitperiod\bibinitdelim P\bibinitperiod},
-         given={Kevin\bibnamedelima Ferguson},
-         giveni={K\bibinitperiod\bibinitdelim F\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Manning}%
-    }
-    \strng{namehash}{MPKF1}
-    \strng{fullhash}{MPKF1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{MP19}
-    \field{sortinit}{M}
-    \field{sortinithash}{M}
-    \field{title}{Deep Learning and the Game of Go}
-    \field{year}{2019}
-  \endentry
-
-  \entry{MinimaxComparison}{report}{}
-    \name{author}{1}{}{%
-      {{hash=MSCTAM}{%
-         family={M.\bibnamedelima S.\bibnamedelima Campbell},
-         familyi={M\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim
-  C\bibinitperiod},
-         given={T.\bibnamedelima A.\bibnamedelima Marsland},
-         giveni={T\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim
-  M\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{MSCTAM1}
-    \strng{fullhash}{MSCTAM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{MSC82}
-    \field{sortinit}{M}
-    \field{sortinithash}{M}
-    \field{title}{A Comparison of Minimax Tree Search Algorithms}
-    \list{institution}{1}{%
-      {University of Alberta}%
-    }
-    \field{type}{techreport}
-    \field{year}{1982}
-  \endentry
-
   \entry{Node}{online}{}
     \keyw{online}
     \field{labeltitlesource}{title}
@@ -262,6 +254,9 @@
     \verb{url}
     \verb https://nodejs.org
     \endverb
+    \field{urlday}{25}
+    \field{urlmonth}{10}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{NodeC++Performance}{online}{}
@@ -277,6 +272,33 @@
     \verb https://medium.com/the-node-js-collection/speed-up-your-node-js-app-w
     \verb ith-native-addons-5e76a06f4a40
     \endverb
+    \field{urlday}{25}
+    \field{urlmonth}{10}
+    \field{urlyear}{2020}
+  \endentry
+
+  \entry{KuenstlicheIntelligenzNorvig}{book}{}
+    \name{author}{1}{}{%
+      {{hash=NSRP}{%
+         family={Norvig},
+         familyi={N\bibinitperiod},
+         given={Stuart Russell{,}\bibnamedelima Peter},
+         giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim
+  P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Pearson}%
+    }
+    \strng{namehash}{NSRP1}
+    \strng{fullhash}{NSRP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Nor12}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{Künstliche Intelligenz ein moderner Ansatz}
+    \field{year}{2012}
   \endentry
 
   \entry{portfinder}{online}{}
@@ -290,6 +312,9 @@
     \verb{url}
     \verb https://www.npmjs.com/package/portfinder
     \endverb
+    \field{urlday}{05}
+    \field{urlmonth}{10}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{RaspberryPi}{online}{}
@@ -303,6 +328,9 @@
     \verb{url}
     \verb https://www.raspberrypi.org/
     \endverb
+    \field{urlday}{25}
+    \field{urlmonth}{10}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{React.js}{online}{}
@@ -316,23 +344,26 @@
     \verb{url}
     \verb https://reactjs.org/
     \endverb
+    \field{urlday}{25}
+    \field{urlmonth}{10}
+    \field{urlyear}{2020}
   \endentry
 
   \entry{AlphaBeta}{report}{}
     \name{author}{1}{}{%
-      {{hash=SPSMS}{%
-         family={Shubhendra Pal\bibnamedelima Singhal},
-         familyi={S\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim
-  S\bibinitperiod},
-         given={M.\bibnamedelima Sridevi},
-         giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+      {{hash=SSPSM}{%
+         family={Sridevi},
+         familyi={S\bibinitperiod},
+         given={Shubhendra Pal Singhal{,}\bibnamedelima M.},
+         giveni={S\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim
+  S\bibinitperiod\bibinitdelim M\bibinitperiod},
       }}%
     }
-    \strng{namehash}{SPSMS1}
-    \strng{fullhash}{SPSMS1}
+    \strng{namehash}{SSPSM1}
+    \strng{fullhash}{SSPSM1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{labelalpha}{SPS}
+    \field{labelalpha}{Sri}
     \field{sortinit}{S}
     \field{sortinithash}{S}
     \field{title}{Comparative study of performance of parallel Alpha Beta
@@ -343,27 +374,28 @@
     \field{type}{techreport}
   \endentry
 
-  \entry{KuenstlicheIntelligenzNorvig}{book}{}
+  \entry{MiniaxMCTScomparison}{report}{}
     \name{author}{1}{}{%
-      {{hash=SRPN}{%
-         family={Stuart\bibnamedelima Russell},
-         familyi={S\bibinitperiod\bibinitdelim R\bibinitperiod},
-         given={Peter\bibnamedelima Norvig},
-         giveni={P\bibinitperiod\bibinitdelim N\bibinitperiod},
+      {{hash=WHBM}{%
+         family={Winands},
+         familyi={W\bibinitperiod},
+         given={Hendrik Baier{,}\bibnamedelima Mark},
+         giveni={H\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim
+  M\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {Pearson}%
-    }
-    \strng{namehash}{SRPN1}
-    \strng{fullhash}{SRPN1}
+    \strng{namehash}{WHBM1}
+    \strng{fullhash}{WHBM1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{labelalpha}{SR12}
-    \field{sortinit}{S}
-    \field{sortinithash}{S}
-    \field{title}{Künstliche Intelligenz ein moderner Ansatz}
-    \field{year}{2012}
+    \field{labelalpha}{Win}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{Monte-Carlo Tree Search and Minimax Hybrids}
+    \list{institution}{1}{%
+      {Maastricht University}%
+    }
+    \field{type}{techreport}
   \endentry
 \enddatalist
 \endinput
